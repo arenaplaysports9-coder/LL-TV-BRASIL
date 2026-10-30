@@ -50,6 +50,25 @@ if (!fs.existsSync(TOKEN_FILE)) {
 }
 const token = fs.readFileSync(TOKEN_FILE, 'utf8').trim();
 
+// Camada SaaS: contas, planos, assinaturas e registros isolados por organização.
+const SAAS_FILE = path.join(DATA_DIR, 'saas.json');
+const saas = { tenants:[], users:[], plans:[
+  {id:'initial',name:'INICIAL',price:0,currency:'BRL',billingCycle:'monthly',limits:{users:2,monthlyHours:5,storageMB:512,simultaneousDestinations:1},features:{scoreboard:true,central:true,replay:false,var:false,webtv:false,apps:false,ai:false},active:true},
+  {id:'professional',name:'PROFISSIONAL',price:0,currency:'BRL',billingCycle:'monthly',limits:{users:5,monthlyHours:30,storageMB:5120,simultaneousDestinations:2},features:{scoreboard:true,central:true,replay:true,var:false,webtv:true,apps:false,ai:false},active:true},
+  {id:'advanced',name:'AVANÇADO',price:0,currency:'BRL',billingCycle:'monthly',limits:{users:10,monthlyHours:100,storageMB:20480,simultaneousDestinations:4},features:{scoreboard:true,central:true,replay:true,var:true,webtv:true,apps:false,ai:false},active:true},
+  {id:'enterprise',name:'EMPRESARIAL',price:0,currency:'BRL',billingCycle:'monthly',limits:{users:30,monthlyHours:500,storageMB:102400,simultaneousDestinations:8},features:{scoreboard:true,central:true,replay:true,var:true,webtv:true,apps:true,ai:true},active:true}
+],subscriptions:[],payments:[],paymentSettings:{methods:{pix:{enabled:false,key:'',keyType:'',beneficiary:'',institution:'',instructions:''},bankTransfer:{enabled:false,bank:'',agency:'',account:'',accountType:'',holder:'',document:'',instructions:''},boleto:{enabled:false,instructions:''},card:{enabled:false,provider:''}},checkoutEnabled:true,manualApproval:true},records:{matches:[],teams:[],competitions:[],media:[],sponsors:[],broadcasts:[]}};
+try { if(fs.existsSync(SAAS_FILE)){const saved=JSON.parse(fs.readFileSync(SAAS_FILE,'utf8'));for(const k of Object.keys(saas))if(saved[k]!==undefined)saas[k]=saved[k];} } catch(e){console.error('Falha ao ler saas.json:',e.message);}
+saas.payments=Array.isArray(saas.payments)?saas.payments:[];
+saas.paymentSettings=saas.paymentSettings||{methods:{},checkoutEnabled:true,manualApproval:true};
+saas.paymentSettings.methods=saas.paymentSettings.methods||{};
+const sessions=new Map();
+function saveSaas(){const tmp=SAAS_FILE+'.tmp';fs.writeFileSync(tmp,JSON.stringify(saas,null,2),{mode:0o600});fs.renameSync(tmp,SAAS_FILE);}
+function slugify(s){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,50)||'emissora';}
+function hashPassword(password){const salt=crypto.randomBytes(16);const key=crypto.scryptSync(String(password),salt,64);return `${salt.toString('hex')}:${key.toString('hex')}`;}
+function verifyPassword(password,stored){try{const [saltHex,keyHex]=String(stored).split(':');const expected=Buffer.from(keyHex,'hex');const actual=crypto.scryptSync(String(password),Buffer.from(saltHex,'hex'),expected.length);return expected.length===actual.length&&crypto.timingSafeEqual(expected,actual);}catch{return false;}}
+function getSession(req){const auth=String(req.headers.authorization||'');const bearer=auth.startsWith('Bearer ')?auth.slice(7):'';const s=sessions.get(bearer);if(!s||s.expires<Date.now()){if(bearer)sessions.delete(bearer);return null;}const tenant=saas.tenants.find(t=>t.id===s.tenantId);if(!tenant||tenant.status!=='active')return null;return s;}
+
 const initialState = {
   homeName: 'TIME DA CASA', awayName: 'TIME VISITANTE',
   homeShort: 'CASA', awayShort: 'FORA',
@@ -189,7 +208,7 @@ function stopFfmpeg() {
 }
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  if (url.pathname === '/api/health') return send(res, 200, { ok: true, app: 'LLTV BRASIL PLACAR', version: '1.4.0', time: Date.now() });
+  if (url.pathname === '/api/health') return send(res, 200, { ok: true, app: 'LLTV BRASIL PLACAR', version: '1.7.0', time: Date.now() });
   if (url.pathname === '/api/network' && req.method === 'GET') {
     const interfaces = [];
     for (const list of Object.values(os.networkInterfaces())) for (const n of list || []) {
@@ -215,6 +234,88 @@ const server = http.createServer(async (req, res) => {
     if (!isLoopback) return send(res, 403, { error: 'Por segurança, abra o painel pelo link seguro com token exibido no computador que executa o servidor.' });
     return send(res, 200, { ok: true, token });
   }
+  // Loja pública e contratação SaaS (pagamentos manuais com aprovação administrativa).
+  if (url.pathname === '/api/public/plans' && req.method === 'GET') {
+    return send(res,200,{items:saas.plans.filter(p=>p.active!==false).map(({id,name,price,currency,billingCycle,limits,features})=>({id,name,price,currency,billingCycle,limits,features})),checkoutEnabled:saas.paymentSettings.checkoutEnabled!==false});
+  }
+  if (url.pathname === '/api/public/payment-methods' && req.method === 'GET') {
+    const m=saas.paymentSettings.methods||{};
+    return send(res,200,{methods:{pix:m.pix?.enabled?{enabled:true,key:m.pix.key||'',keyType:m.pix.keyType||'',beneficiary:m.pix.beneficiary||'',institution:m.pix.institution||'',instructions:m.pix.instructions||''}:null,bankTransfer:m.bankTransfer?.enabled?{enabled:true,bank:m.bankTransfer.bank||'',agency:m.bankTransfer.agency||'',account:m.bankTransfer.account||'',accountType:m.bankTransfer.accountType||'',holder:m.bankTransfer.holder||'',document:m.bankTransfer.document||'',instructions:m.bankTransfer.instructions||''}:null,boleto:null,card:null}});
+  }
+  if (url.pathname === '/api/public/checkout' && req.method === 'POST') {
+    try {
+      if(saas.paymentSettings.checkoutEnabled===false)return send(res,403,{error:'A contratação online está temporariamente indisponível.'});
+      const b=await readBody(req), name=String(b.companyName||'').trim(), owner=String(b.ownerName||'').trim(), email=String(b.email||'').trim().toLowerCase(), password=String(b.password||''), plan=saas.plans.find(p=>p.id===String(b.planId||'')&&p.active!==false), method=String(b.paymentMethod||'');
+      if(!name||!owner||!email||password.length<10||!plan)return send(res,400,{error:'Preencha os dados obrigatórios, escolha um plano e use senha com pelo menos 10 caracteres.'});
+      if(saas.users.some(u=>u.email===email))return send(res,409,{error:'Este e-mail já possui cadastro.'});
+      const enabled=saas.paymentSettings.methods||{}; if(!['pix','bankTransfer'].includes(method)||!enabled[method]?.enabled)return send(res,400,{error:'Esta forma de pagamento não está disponível ou ainda depende de integração com gateway.'});
+      const id='org_'+crypto.randomBytes(8).toString('hex'), now=new Date().toISOString();
+      const tenant={id,name,slug:slugify(name),status:'pending_payment',planId:plan.id,createdAt:now,storageBytes:0,branding:{name,logo:'',primary:'#102a43',accent:'#e0ad18',domain:''},limits:{...(plan.limits||{})},features:{...(plan.features||{})}};
+      const user={id:'usr_'+crypto.randomBytes(8).toString('hex'),tenantId:id,name:owner,email,role:'owner',passwordHash:hashPassword(password),active:true,createdAt:now};
+      const sub={id:'sub_'+crypto.randomBytes(8).toString('hex'),tenantId:id,planId:plan.id,status:'pending_payment',billingCycle:plan.billingCycle||'monthly',amount:Number(plan.price)||0,currency:plan.currency||'BRL',paymentMethod:method,createdAt:now};
+      const payment={id:'pay_'+crypto.randomBytes(8).toString('hex'),tenantId:id,subscriptionId:sub.id,planId:plan.id,amount:Number(plan.price)||0,currency:'BRL',method,status:'pending',createdAt:now,customerEmail:email,description:`Assinatura ${plan.name}`,instructions:enabled[method].instructions||''};
+      saas.tenants.push(tenant);saas.users.push(user);saas.subscriptions.push(sub);saas.payments.push(payment);saveSaas();
+      return send(res,201,{ok:true,orderId:payment.id,status:'pending',message:'Cadastro realizado. Sua assinatura será liberada após a confirmação do pagamento.',payment:{id:payment.id,amount:payment.amount,method:payment.method,status:payment.status,instructions:payment.instructions},paymentDetails:method==='pix'?{key:enabled.pix.key,keyType:enabled.pix.keyType,beneficiary:enabled.pix.beneficiary,institution:enabled.pix.institution}:method==='bankTransfer'?{bank:enabled.bankTransfer.bank,agency:enabled.bankTransfer.agency,account:enabled.bankTransfer.account,accountType:enabled.bankTransfer.accountType,holder:enabled.bankTransfer.holder,document:enabled.bankTransfer.document,instructions:enabled.bankTransfer.instructions}:null});
+    } catch(e){return send(res,400,{error:e.message});}
+  }
+  // SaaS multi-tenant: persistência independente do estado do placar.
+  if (url.pathname === '/api/saas/login' && req.method === 'POST') {
+    try {
+      const body = await readBody(req); const email = String(body.email || '').trim().toLowerCase(); const password = String(body.password || '');
+      const user = saas.users.find(u => u.email === email && u.active !== false);
+      if (!user || !verifyPassword(password, user.passwordHash)) return send(res, 401, { error: 'E-mail ou senha inválidos.' });
+      const session = crypto.randomBytes(32).toString('hex'); sessions.set(session, { userId: user.id, tenantId: user.tenantId, role: user.role, expires: Date.now() + 12*60*60*1000 });
+      return send(res, 200, { ok: true, token: session, user: { id:user.id, name:user.name, email:user.email, role:user.role, tenantId:user.tenantId } });
+    } catch (e) { return send(res, 400, { error:e.message }); }
+  }
+  if (url.pathname.startsWith('/api/saas/') && url.pathname !== '/api/saas/login') {
+    if (!authorized(req, url)) return send(res, 401, { error:'Acesso exclusivo do Super Admin LL TV BRASIL.' });
+    if (url.pathname === '/api/saas/summary' && req.method === 'GET') {
+      return send(res,200,{ok:true,tenants:saas.tenants.length,activeTenants:saas.tenants.filter(t=>t.status==='active').length,plans:saas.plans.length,users:saas.users.length,subscriptions:saas.subscriptions.length,storageBytes:saas.tenants.reduce((n,t)=>n+(Number(t.storageBytes)||0),0),tenantsList:saas.tenants.map(({id,name,slug,status,planId,createdAt})=>({id,name,slug,status,planId,createdAt}))});
+    }
+    if(url.pathname==='/api/saas/payment-settings'&&req.method==='GET')return send(res,200,{settings:saas.paymentSettings});
+    if(url.pathname==='/api/saas/payment-settings'&&req.method==='PUT'){
+      const b=await readBody(req);saas.paymentSettings={...saas.paymentSettings,...b,methods:{...(saas.paymentSettings.methods||{}),...(b.methods||{})}};
+      // Secret-like gateway fields are encrypted at rest; public payment instructions remain readable.
+      for(const k of ['gatewaySecret','gatewayToken','webhookSecret'])if(saas.paymentSettings[k])saas.paymentSettings[k]=encryptSecret(saas.paymentSettings[k]);
+      saveSaas();return send(res,200,{ok:true,settings:saas.paymentSettings});
+    }
+    if(url.pathname==='/api/saas/payments'&&req.method==='GET')return send(res,200,{items:saas.payments});
+    const paymentMatch=url.pathname.match(/^\/api\/saas\/payments\/([\w-]+)\/approve$/);
+    if(paymentMatch&&req.method==='POST'){
+      const payment=saas.payments.find(x=>x.id===paymentMatch[1]);if(!payment)return send(res,404,{error:'Pagamento não encontrado.'});
+      if(payment.status==='approved')return send(res,200,{ok:true,payment});
+      payment.status='approved';payment.approvedAt=new Date().toISOString();payment.approvedBy='master';
+      const tenant=saas.tenants.find(x=>x.id===payment.tenantId);if(tenant)tenant.status='active';
+      const sub=saas.subscriptions.find(x=>x.id===payment.subscriptionId);if(sub){sub.status='active';sub.activatedAt=new Date().toISOString();const cycle=sub.billingCycle||'monthly';const days=cycle==='yearly'?365:cycle==='semiannual'?180:cycle==='quarterly'?90:30;sub.currentPeriodEnd=new Date(Date.now()+days*86400000).toISOString();}
+      saveSaas();return send(res,200,{ok:true,payment,tenant,subscription:sub});
+    }
+    const paymentReject=url.pathname.match(/^\/api\/saas\/payments\/([\w-]+)\/reject$/);
+    if(paymentReject&&req.method==='POST'){const payment=saas.payments.find(x=>x.id===paymentReject[1]);if(!payment)return send(res,404,{error:'Pagamento não encontrado.'});payment.status='rejected';payment.rejectedAt=new Date().toISOString();const tenant=saas.tenants.find(x=>x.id===payment.tenantId);if(tenant)tenant.status='payment_rejected';saveSaas();return send(res,200,{ok:true,payment});}
+    if (url.pathname === '/api/saas/tenants' && req.method === 'GET') return send(res,200,{items:saas.tenants});
+    if (url.pathname === '/api/saas/tenants' && req.method === 'POST') {
+      try { const b=await readBody(req); const name=String(b.name||'').trim(); const email=String(b.email||'').trim().toLowerCase(); const password=String(b.password||''); if(!name||!email||password.length<10) return send(res,400,{error:'Informe nome, e-mail e senha com pelo menos 10 caracteres.'}); if(saas.users.some(u=>u.email===email)) return send(res,409,{error:'Este e-mail já está cadastrado.'}); const id='org_'+crypto.randomBytes(8).toString('hex'); const tenant={id,name,slug:slugify(name),status:'active',planId:b.planId||null,createdAt:new Date().toISOString(),storageBytes:0,branding:{name,logo:'',primary:'#102a43',accent:'#e0ad18',domain:''},limits:{users:3,monthlyHours:10,storageMB:1024,simultaneousDestinations:1},features:{scoreboard:true,central:true,replay:false,var:false,webtv:false,apps:false,ai:false}}; saas.tenants.push(tenant); saas.users.push({id:'usr_'+crypto.randomBytes(8).toString('hex'),tenantId:id,name:String(b.ownerName||name),email,role:'owner',passwordHash:hashPassword(password),active:true,createdAt:new Date().toISOString()}); saas.subscriptions.push({id:'sub_'+crypto.randomBytes(8).toString('hex'),tenantId:id,planId:tenant.planId,status:'trial',createdAt:new Date().toISOString(),amount:0,currency:'BRL'}); saveSaas(); return send(res,201,{ok:true,tenant}); } catch(e){return send(res,400,{error:e.message});}
+    }
+    const tenantMatch=url.pathname.match(/^\/api\/saas\/tenants\/([\w-]+)$/);
+    if(tenantMatch && req.method==='PATCH'){const t=saas.tenants.find(x=>x.id===tenantMatch[1]);if(!t)return send(res,404,{error:'Cliente não encontrado.'});const b=await readBody(req);for(const k of ['name','status','planId','limits','features','branding'])if(b[k]!==undefined)t[k]=b[k];saveSaas();return send(res,200,{ok:true,tenant:t});}
+    if (url.pathname === '/api/saas/plans' && req.method === 'GET') return send(res,200,{items:saas.plans});
+    if (url.pathname === '/api/saas/plans' && req.method === 'POST') {const b=await readBody(req);if(!String(b.name||'').trim())return send(res,400,{error:'Nome do plano obrigatório.'});const p={id:b.id||'plan_'+crypto.randomBytes(6).toString('hex'),name:String(b.name).slice(0,60),price:Number(b.price)||0,currency:'BRL',billingCycle:b.billingCycle||'monthly',limits:b.limits||{},features:b.features||{},active:b.active!==false};const i=saas.plans.findIndex(x=>x.id===p.id);if(i>=0)saas.plans[i]=p;else saas.plans.push(p);saveSaas();return send(res,200,{ok:true,plan:p});}
+    if (url.pathname === '/api/saas/subscriptions' && req.method === 'GET') return send(res,200,{items:saas.subscriptions});
+    return send(res,404,{error:'Rota SaaS não encontrada.'});
+  }
+  if (url.pathname === '/api/tenant/me' && req.method === 'GET') { const s=getSession(req); if(!s)return send(res,401,{error:'Sessão inválida ou expirada.'}); const user=saas.users.find(u=>u.id===s.userId); const tenant=saas.tenants.find(t=>t.id===s.tenantId); return send(res,200,{user:{id:user.id,name:user.name,email:user.email,role:user.role},tenant}); }
+  if (url.pathname.startsWith('/api/tenant/')) {
+    const session=getSession(req); if(!session)return send(res,401,{error:'Faça login para acessar este ambiente.'});
+    const collection=url.pathname.split('/')[3]; const allowedCollections=new Set(['matches','teams','competitions','media','sponsors','broadcasts']); if(!allowedCollections.has(collection))return send(res,404,{error:'Módulo não encontrado.'});
+    saas.records[collection]=saas.records[collection]||[]; const list=saas.records[collection].filter(r=>r.tenantId===session.tenantId);
+    if(req.method==='GET')return send(res,200,{items:list});
+    if(req.method==='POST'){const b=await readBody(req);const item={...b,id:'rec_'+crypto.randomBytes(8).toString('hex'),tenantId:session.tenantId,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};delete item.password;saas.records[collection].push(item);saveSaas();return send(res,201,{item});}
+    const id=url.pathname.split('/')[4];const index=saas.records[collection].findIndex(r=>r.id===id&&r.tenantId===session.tenantId);if(index<0)return send(res,404,{error:'Registro não encontrado.'});
+    if(req.method==='PATCH'){const b=await readBody(req);const old=saas.records[collection][index];saas.records[collection][index]={...old,...b,id:old.id,tenantId:old.tenantId,updatedAt:new Date().toISOString()};saveSaas();return send(res,200,{item:saas.records[collection][index]});}
+    if(req.method==='DELETE'){saas.records[collection].splice(index,1);saveSaas();return send(res,200,{ok:true});}
+    return send(res,405,{error:'Método não permitido.'});
+  }
+
   if (url.pathname.startsWith('/api/')) {
     if (!authorized(req, url)) return send(res, 401, { error: 'Acesso não autorizado. Abra o painel pelo link seguro exibido no computador.' });
     if (url.pathname === '/api/encoders/discover' && req.method === 'GET') {
@@ -273,7 +374,7 @@ const server = http.createServer(async (req, res) => {
     return send(res, 404, { error: 'Endpoint não encontrado' });
   }
   let pathname = decodeURIComponent(url.pathname);
-  if (pathname === '/') pathname = '/panel.html';
+  if (pathname === '/') pathname = '/subscribe.html';
   const file = path.resolve(PUBLIC, '.' + pathname);
   if (!file.startsWith(PUBLIC + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) return send(res, 404, 'Arquivo não encontrado', 'text/plain; charset=utf-8');
   const ext = path.extname(file).toLowerCase();

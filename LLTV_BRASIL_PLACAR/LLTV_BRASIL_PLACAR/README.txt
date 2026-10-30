@@ -246,3 +246,28 @@ TESTES DESTA ENTREGA
 - Inicialização local do servidor e GET /api/health: HTTP 200.
 - Descoberta real de encoders FFmpeg no ambiente de teste: libx264 e libx265 passaram no teste; NVENC/QSV não foram considerados disponíveis para codificação utilizável neste ambiente. Os resultados podem variar conforme computador, drivers e build do FFmpeg.
 - Não foi realizado envio a destino RTMP real, nem teste com câmera DirectShow física, OBS físico ou serviço Render do usuário.
+
+
+MÓDULO SAAS — FUNDAÇÃO MULTI-TENANT
+===================================
+Abra /saas.html?token=SEU_TOKEN_ADMIN para acessar o Super Admin. O painel permite cadastrar emissoras, criar o usuário proprietário, suspender/reativar contas e configurar planos. O cliente entra em /saas.html sem token administrativo com o e-mail e a senha cadastrados pelo Super Admin.
+
+Cada conta possui registros isolados no backend para partidas, equipes, competições, transmissões, patrocinadores e biblioteca. Os dados SaaS ficam em data/saas.json. Faça backup desse arquivo junto com data/state.json, data/access-token.txt e data/secret.key. As sessões de cliente são mantidas em memória e expiram após 12 horas; após reiniciar o servidor, será necessário entrar novamente.
+
+IMPORTANTE: esta versão implementa a fundação de contas e isolamento SaaS e CRUD básico. Ela ainda não representa a plataforma comercial completa: gateway de pagamento, cobrança automática, storage externo, mixer audiovisual de produção, Replay multicâmera, VAR homologado, apps nativos e relay de mídia não estão implementados. Não habilite vendas nem prometa esses serviços até integração e testes específicos. O upload de mídia e personalização white-label avançada também requerem implementação adicional.
+
+============================================================
+VERSÃO 1.7.0 — CONTRATAÇÃO E PAGAMENTOS SAAS
+============================================================
+A página inicial do site agora apresenta os planos públicos e o fluxo de contratação. O visitante escolhe um plano, cadastra a emissora e seleciona um método de pagamento habilitado pelo Super Admin.
+
+Configuração do recebimento:
+1. Abra /saas.html?token=TOKEN_MASTER usando o token de data/access-token.txt.
+2. Na seção “Formas de recebimento LL TV BRASIL”, configure a chave PIX e/ou os dados bancários.
+3. Ative os métodos que deseja disponibilizar e salve.
+4. Mantenha a contratação pública habilitada para exibir os planos.
+5. Em “Pagamentos e aprovações”, confira o crédito na conta bancária e só então clique em Aprovar. A aprovação ativa a emissora e a assinatura.
+
+O PIX e a transferência são instruções de pagamento com confirmação manual; não existe confirmação bancária automática nesta versão. Não habilite cartão ou boleto sem gateway real integrado. A interface os identifica como dependentes de integração. Não insira dados de cartão no sistema.
+
+A rota /panel.html continua disponível para operação do placar. A raiz / abre a página pública de contratação.

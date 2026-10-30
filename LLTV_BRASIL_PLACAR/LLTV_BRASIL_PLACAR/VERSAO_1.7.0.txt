@@ -1,0 +1,28 @@
+LL TV BRASIL BROADCAST SYSTEM — VERSÃO 1.7.0
+
+Novidades:
+- Página pública de planos e contratação como página inicial do site.
+- Checkout público com cadastro de emissora e usuário proprietário.
+- Configuração administrativa de recebimento via PIX e transferência bancária.
+- Registro de pagamentos e assinaturas pendentes.
+- Aprovação manual de pagamentos pelo Super Admin, com ativação da emissora e assinatura.
+- Painel administrativo de pagamentos e configurações de recebimento.
+- Opção para habilitar/desabilitar contratação pública.
+- Preservados os módulos existentes do placar, painel e central de transmissão.
+
+Limitações transparentes:
+- PIX e transferência funcionam com instruções e conferência/aprovação manual.
+- Cartão e boleto somente podem ser habilitados após integração real com gateway; esta versão não processa cartões nem emite boletos automaticamente.
+- E-mail automático, WhatsApp, recorrência automática e webhooks de gateway ainda não estão conectados.
+- O token master existente continua sendo a credencial de administração global. Proteja data/access-token.txt e data/secret.key.
+
+Instalação:
+1. Faça backup da pasta data da instalação atual.
+2. Extraia o ZIP.
+3. Execute npm install (não há dependências externas obrigatórias nesta versão).
+4. Execute npm start.
+5. A página pública abre em http://localhost:8787/.
+6. O painel master fica em /saas.html?token=TOKEN_MASTER.
+7. Configure PIX/transferência no painel Super Admin antes de abrir a contratação.
+
+ATENÇÃO: antes de substituir a produção, teste em ambiente separado e migre os arquivos de dados com backup. Não publique o token master.

@@ -1,0 +1,14 @@
+ROTEIRO DE TESTE — LL TV BRASIL 1.7.0
+
+1. Inicie com npm start e abra http://localhost:8787/.
+2. Confirme que a página pública mostra os planos.
+3. Abra /saas.html?token=TOKEN_MASTER (use o token local em data/access-token.txt).
+4. Configure e ative PIX e/ou transferência bancária; salve.
+5. Ajuste o preço de um plano no formulário Planos e preços.
+6. Volte à página pública, selecione o plano e conclua o cadastro com um e-mail ainda não utilizado.
+7. Confirme que o pedido aparece como pendente e a conta não consegue entrar no ambiente privado antes da aprovação.
+8. No painel master, localize o pagamento e aprove somente depois de conferir o recebimento real.
+9. Confirme que a emissora passa para ativa e o login do cliente funciona.
+10. Teste também a suspensão da emissora e confirme que o acesso é bloqueado.
+
+A aprovação é manual nesta versão. Não considerar o envio do formulário como confirmação bancária. Cartões e boletos não são oferecidos porque ainda não há gateway real integrado.
