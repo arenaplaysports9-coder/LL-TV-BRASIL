@@ -3,7 +3,7 @@
   const blank='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#15243a" stroke="#66758a" stroke-width="2"/><text x="40" y="51" text-anchor="middle" font-size="32">⚽</text></svg>');
   let state={elapsedSeconds:0,serverNow:Date.now()},localReceipt=Date.now();
   function fmt(sec){sec=Math.max(0,Number(sec)||0);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
-  function render(s){state=s;localReceipt=Date.now();
+  function render(s){state=s;localReceipt=Date.now();$('overlay').style.display=s.overlayEnabled===false?'none':'';if(s.overlayEnabled===false)return;
     $('o-home-name').textContent=s.homeName||'TIME DA CASA';$('o-away-name').textContent=s.awayName||'TIME VISITANTE';
     $('o-home-short').textContent=s.homeShort||'';$('o-away-short').textContent=s.awayShort||'';
     $('o-home-score').textContent=s.homeScore??0;$('o-away-score').textContent=s.awayScore??0;

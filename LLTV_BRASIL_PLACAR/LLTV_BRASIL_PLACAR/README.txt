@@ -256,18 +256,9 @@ Cada conta possui registros isolados no backend para partidas, equipes, competi�
 
 IMPORTANTE: esta versão implementa a fundação de contas e isolamento SaaS e CRUD básico. Ela ainda não representa a plataforma comercial completa: gateway de pagamento, cobrança automática, storage externo, mixer audiovisual de produção, Replay multicâmera, VAR homologado, apps nativos e relay de mídia não estão implementados. Não habilite vendas nem prometa esses serviços até integração e testes específicos. O upload de mídia e personalização white-label avançada também requerem implementação adicional.
 
-============================================================
-VERSÃO 1.7.0 — CONTRATAÇÃO E PAGAMENTOS SAAS
-============================================================
-A página inicial do site agora apresenta os planos públicos e o fluxo de contratação. O visitante escolhe um plano, cadastra a emissora e seleciona um método de pagamento habilitado pelo Super Admin.
 
-Configuração do recebimento:
-1. Abra /saas.html?token=TOKEN_MASTER usando o token de data/access-token.txt.
-2. Na seção “Formas de recebimento LL TV BRASIL”, configure a chave PIX e/ou os dados bancários.
-3. Ative os métodos que deseja disponibilizar e salve.
-4. Mantenha a contratação pública habilitada para exibir os planos.
-5. Em “Pagamentos e aprovações”, confira o crédito na conta bancária e só então clique em Aprovar. A aprovação ativa a emissora e a assinatura.
+VERSÃO 1.7.1 — MELHORIAS DE IMAGEM E OVERLAY
+Consulte VERSAO_1.7.1.txt para os novos recursos e limitações.
 
-O PIX e a transferência são instruções de pagamento com confirmação manual; não existe confirmação bancária automática nesta versão. Não habilite cartão ou boleto sem gateway real integrado. A interface os identifica como dependentes de integração. Não insira dados de cartão no sistema.
 
-A rota /panel.html continua disponível para operação do placar. A raiz / abre a página pública de contratação.
+VERSÃO 1.7.3: retorno PROGRAM abaixo do placar; controles de olho/cadeado nas fontes; planos sem preço R$ 0,00 e contratação personalizada. Consulte VERSAO_1.7.3.txt.

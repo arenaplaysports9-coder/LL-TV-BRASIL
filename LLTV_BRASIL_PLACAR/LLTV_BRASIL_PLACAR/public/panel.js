@@ -33,6 +33,7 @@
   function render(s){
     state=s;
     $('connection').textContent='● Conectado';$('connection').style.color='#85f0bb';
+    const overlayOn=s.overlayEnabled!==false;const overlayBtn=$('toggle-overlay');if(overlayBtn){overlayBtn.textContent=overlayOn?'Desativar overlay':'Ativar overlay';overlayBtn.classList.toggle('primary',overlayOn);overlayBtn.classList.toggle('danger',!overlayOn);overlayBtn.setAttribute('aria-pressed',String(overlayOn));$('overlay-status').textContent=overlayOn?'Overlay ativado e visível no endereço gráfico.':'Overlay desativado: a saída gráfica ficará totalmente oculta.';}
     for(const f of fields)setVal(f,s[f]);
     for(const f of bools)setVal(f,s[f]);
     for(const k of jsonKeys){const el=$('json-'+k);if(el && document.activeElement!==el)el.value=JSON.stringify(s[k]??(k==='sponsors'||k==='events'?[]:{}),null,2);}
@@ -106,6 +107,7 @@
   $('reset-match').addEventListener('click',async()=>{if(!confirm('Zerar os gols, cartões e cronômetro? Os nomes e escudos serão preservados.'))return;try{render(await api('/api/reset','POST',{}));showNotice('Placar e relógio reiniciados.');}catch(e){showNotice(e.message);}});
   $('open-overlay').addEventListener('click',()=>window.open('/overlay.html','lltv-overlay'));
   $('copy-url').addEventListener('click',async()=>{const value=location.origin+'/overlay.html';try{await navigator.clipboard.writeText(value);showNotice('Link do overlay copiado.');}catch{showNotice('Link do overlay: '+value);}});
+  $('toggle-overlay').addEventListener('click',()=>update({overlayEnabled:state.overlayEnabled===false}).then(()=>showNotice(state.overlayEnabled===false?'Overlay ativado.':'Overlay desativado.')));
   function panelShareUrl(){return location.origin+location.pathname+'?token='+encodeURIComponent(token);}
   $('copy-mobile-panel').addEventListener('click',async()=>{const value=panelShareUrl();$('mobile-panel-url').textContent=value;try{await navigator.clipboard.writeText(value);showNotice('Link do painel copiado. Abra-o no celular.');}catch{showNotice('Copie o endereço exibido abaixo do botão.');}});
   $('share-mobile-panel').addEventListener('click',async()=>{const value=panelShareUrl();$('mobile-panel-url').textContent=value;if(navigator.share){try{await navigator.share({title:'Painel LLTV BRASIL',text:'Acesso ao painel de controle LLTV BRASIL',url:value});}catch(e){if(e.name!=='AbortError')showNotice('Não foi possível compartilhar neste dispositivo.');}}else{try{await navigator.clipboard.writeText(value);showNotice('Compartilhamento não disponível; link copiado.');}catch{showNotice('Copie o endereço exibido abaixo.');}}});

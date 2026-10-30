@@ -1,0 +1,17 @@
+LL TV BRASIL — BROADCAST SYSTEM 1.7.3
+
+Atualizações desta versão:
+- Monitor de retorno PROGRAM integrado abaixo do placar, com atualização automática e link para a Central.
+- Persistência do identificador da fonte colocada no ar para permitir o retorno entre páginas.
+- Controles de visibilidade (olho) e bloqueio/desbloqueio (cadeado) nas listas de fontes/camadas.
+- Planos INICIAL, PROFISSIONAL, AVANÇADO, EMPRESARIAL e PERSONALIZADO sem preços zerados; preço opcional configurável pelo Super Admin.
+
+Limitação técnica: câmeras e arquivos locais mantidos apenas na sessão do navegador da Central não são automaticamente transmitidos para outras abas/dispositivos. Para retorno real dessas fontes é necessária uma ponte de mídia/WebRTC/RTMP ou integração OBS WebSocket. Fontes externas de navegador e conteúdo persistido podem ser exibidos quando o site permite incorporação.
+
+
+ATUALIZACAO COMPLEMENTAR - EDITOR VISUAL DE FONTES
+- Arrastar fontes com o mouse para reposicionar no Preview e no Programa.
+- Redimensionar pelas oito alcas (cantos e laterais), mantendo ajuste manual.
+- Contorno e alcas amarelas para indicar a fonte selecionada/editavel.
+- Fonte bloqueada pelo cadeado nao pode ser movida ou redimensionada.
+- Preview e Programa mantem transformacoes independentes.
