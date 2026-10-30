@@ -11,11 +11,6 @@ let ffmpegStartedAt = 0;
 let ffmpegStatus = { state: 'ENCERRADO', encoder: '', error: '', bitrate: '', fps: '', resolution: '' };
 let ffmpegLog = '';
 const FFMPEG_PATH = process.env.FFMPEG_PATH || 'ffmpeg';
-let obsClient = null;
-let obsConnected = false;
-let obsLastError = '';
-let obsAddress = '';
-let obsWebSocket = null;
 
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, 'public');
@@ -261,53 +256,7 @@ const server = http.createServer(async (req, res) => {
         return send(res,200,{ok:true,state:'CONECTANDO',encoder:encoderLabel(encoder),destinations:destinations.length});
       } catch(e) { ffmpegStatus={...ffmpegStatus,state:'ERRO',error:e.message}; return send(res,400,{error:e.message}); }
     }
-    if (url.pathname.startsWith('/api/obs/')) {
-      try {
-        if (url.pathname === '/api/obs/connect' && req.method === 'POST') {
-          const body = await readBody(req);
-          const host = String(body.host || '127.0.0.1').trim();
-          const port = Number(body.port || 4455);
-          const password = String(body.password || '');
-          if (!host || !Number.isInteger(port) || port < 1 || port > 65535) return send(res, 400, { error: 'Endereço ou porta inválidos.' });
-          if (!obsWebSocket) {
-            const { default: OBSWebSocket } = await import('obs-websocket-js');
-            obsWebSocket = new OBSWebSocket();
-            obsWebSocket.on('ConnectionClosed', () => { obsConnected = false; obsClient = null; });
-            obsWebSocket.on('ConnectionError', err => { obsLastError = err?.message || 'Erro de conexão OBS'; });
-          }
-          if (obsConnected) { try { await obsWebSocket.disconnect(); } catch {} obsConnected = false; }
-          obsAddress = `${host}:${port}`;
-          await obsWebSocket.connect(`ws://${host}:${port}`, password || undefined);
-          obsConnected = true; obsLastError = ''; obsClient = obsWebSocket;
-          return send(res, 200, { ok: true, connected: true, address: obsAddress });
-        }
-        if (url.pathname === '/api/obs/disconnect' && req.method === 'POST') {
-          if (obsWebSocket && obsConnected) await obsWebSocket.disconnect();
-          obsConnected = false; obsClient = null;
-          return send(res, 200, { ok: true, connected: false });
-        }
-        if (!obsConnected || !obsClient) return send(res, 503, { error: 'OBS não está conectado.', connected: false, lastError: obsLastError });
-        if (url.pathname === '/api/obs/status' && req.method === 'GET') {
-          const [stream, record, stats, video] = await Promise.allSettled([obsClient.call('GetStreamStatus'), obsClient.call('GetRecordStatus'), obsClient.call('GetStats'), obsClient.call('GetVideoSettings')]);
-          return send(res, 200, { connected: true, address: obsAddress, stream: stream.status === 'fulfilled' ? stream.value : null, record: record.status === 'fulfilled' ? record.value : null, stats: stats.status === 'fulfilled' ? stats.value : null, video: video.status === 'fulfilled' ? video.value : null, lastError: obsLastError });
-        }
-        if (url.pathname === '/api/obs/scenes' && req.method === 'GET') {
-          const result = await obsClient.call('GetSceneList');
-          return send(res, 200, { scenes: result.scenes || [], currentProgramSceneName: result.currentProgramSceneName || '' });
-        }
-        if (url.pathname === '/api/obs/scene' && req.method === 'POST') {
-          const body = await readBody(req); const sceneName = String(body.sceneName || '');
-          if (!sceneName) return send(res, 400, { error: 'Informe a cena.' });
-          await obsClient.call('SetCurrentProgramScene', { sceneName });
-          return send(res, 200, { ok: true, sceneName });
-        }
-        if (url.pathname === '/api/obs/stream/start' && req.method === 'POST') { await obsClient.call('StartStream'); return send(res, 200, { ok: true }); }
-        if (url.pathname === '/api/obs/stream/stop' && req.method === 'POST') { await obsClient.call('StopStream'); return send(res, 200, { ok: true }); }
-        if (url.pathname === '/api/obs/record/start' && req.method === 'POST') { await obsClient.call('StartRecord'); return send(res, 200, { ok: true }); }
-        if (url.pathname === '/api/obs/record/stop' && req.method === 'POST') { await obsClient.call('StopRecord'); return send(res, 200, { ok: true }); }
-        return send(res, 404, { error: 'Comando OBS não encontrado.' });
-      } catch (e) { obsLastError = e.message || String(e); obsConnected = false; return send(res, 502, { error: obsLastError, connected: false }); }
-    }
+    if (url.pathname.startsWith('/api/obs/')) return send(res, 410, { error: 'Integração OBS removida na versão 1.5.0. A LLTV Brasil está migrando para produção independente.' });
     if (url.pathname === '/api/state' && req.method === 'POST') {
       try {
         const patch = validatePatch(await readBody(req));
@@ -333,10 +282,10 @@ const server = http.createServer(async (req, res) => {
 });
 server.listen(PORT, HOST, () => {
   console.log('\n========================================');
-  console.log(' LLTV BRASIL — PLACAR OBS / CENTRAL DE TRANSMISSÃO');
+  console.log(' LLTV BRASIL — BROADCAST SYSTEM / CENTRAL DE TRANSMISSÃO');
   console.log('========================================');
   console.log(`Painel local: http://localhost:${PORT}/panel.html?token=${token}`);
-  console.log(`Overlay OBS:  http://localhost:${PORT}/overlay.html`);
+  console.log(`Overlay gráfico: http://localhost:${PORT}/overlay.html`);
   console.log(`Token de controle: ${token}`);
   console.log('\nNo celular, use o IP local do computador e o mesmo token.');
   for (const list of Object.values(os.networkInterfaces())) for (const n of list || []) {

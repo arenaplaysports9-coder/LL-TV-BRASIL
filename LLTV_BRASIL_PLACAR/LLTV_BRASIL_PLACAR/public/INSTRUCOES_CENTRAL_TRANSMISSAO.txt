@@ -20,9 +20,9 @@ LIMITAÇÕES TÉCNICAS IMPORTANTES
 - A mesa de corte desta versão controla a seleção na interface; ela não substitui um mixer/codificador profissional.
 - Sites podem impedir iframe por políticas X-Frame-Options/CSP. Use captura de janela/OBS quando isso ocorrer.
 - RTSP, NDI, HDMI e câmeras profissionais exigem ponte local/driver/serviço de mídia.
-- Cadastro de URL e chave RTMP não inicia uma transmissão sozinho. É necessário codificador/relay FFmpeg/MediaMTX ou OBS com saída múltipla. Não use Render Free para transcodificação contínua.
+- Cadastro de URL e chave RTMP não inicia uma transmissão sozinho. É necessário codificador/relay FFmpeg/MediaMTX ou outro relay/codificador compatível. Não use Render Free para transcodificação contínua.
 - Gravação e replay do navegador funcionam apenas com faixas de mídia locais compatíveis; não capturam iframe de terceiros por restrições de segurança.
-- Horizontal e vertical estão configuráveis, mas a codificação simultânea independente ainda exige pipeline FFmpeg/OBS local.
+- Horizontal e vertical estão configuráveis, mas a codificação simultânea independente ainda exige pipeline FFmpeg local.
 - Para produção ao vivo, use computador dedicado e teste áudio, vídeo, rede e direitos de retransmissão antes do evento.
 
 SEGURANÇA E ARMAZENAMENTO
@@ -30,19 +30,12 @@ SEGURANÇA E ARMAZENAMENTO
 - O estado atual do servidor usa data/state.json. Para Render, configure PostgreSQL e armazenamento persistente antes de confiar dados de produção. O disco efêmero do plano gratuito não é backup.
 - Não cadastre chaves de transmissão reais até implantar armazenamento seguro/segredos no backend.
 
-INTEGRAÇÃO OBS WEBSOCKET — VERSÃO 1.3.0
-1. Instale as dependências executando npm install na pasta do projeto.
-2. Abra o OBS Studio e habilite o servidor WebSocket em Ferramentas > Configurações do servidor WebSocket.
-3. Utilize a porta configurada (normalmente 4455) e a senha definida no OBS.
-4. Na Central, informe host, porta e senha e clique em CONECTAR OBS.
-5. Após conectar, a Central consulta cenas, status da transmissão/gravação e estatísticas disponíveis; os botões executam comandos no OBS.
-6. A troca de cenas usa as cenas reais do OBS, não cenas fictícias criadas na página.
-
-SEGURANÇA E TOPOLOGIA
-- Não exponha a porta WebSocket do OBS diretamente à internet. Restrinja-a à rede local ou a um túnel/VPN protegido.
-- Se o painel estiver hospedado, instale o servidor/agente de integração no computador local do OBS e estabeleça uma conexão segura; o serviço remoto não consegue alcançar localhost do operador.
-- As chaves RTMP são omitidas das respostas públicas de estado e do fluxo SSE. Proteja a pasta data e não publique state.json no GitHub.
-
+INTEGRAÇÃO OBS WEBSOCKET — DOCUMENTAÇÃO HISTÓRICA
+A integração OBS foi removida na versão 1.5.0 e não faz mais parte da operação da LLTV Brasil.
 
 ATUALIZAÇÃO 1.4.0 — FFmpeg INDEPENDENTE
 Consulte o README.txt na raiz para instalação do FFmpeg, descoberta/teste de encoders, configuração de fontes e uso dos botões INICIAR TRANSMISSÃO e PARAR TRANSMISSÃO. A codificação ocorre no computador que executa o servidor Node.js e não depende do OBS. A captura de câmera do navegador ainda não é ponteada automaticamente ao FFmpeg; use DirectShow, URL compatível ou arquivo local.
+
+
+ATUALIZAÇÃO 1.5.0
+A integração com OBS Studio foi removida. O overlay continua disponível como endpoint gráfico independente para integração futura com o compositor próprio da LLTV Brasil. A seleção Preview/Programa permanece visual e ainda não representa um mixer final de vídeo. A câmera do navegador não é encaminhada automaticamente ao FFmpeg.

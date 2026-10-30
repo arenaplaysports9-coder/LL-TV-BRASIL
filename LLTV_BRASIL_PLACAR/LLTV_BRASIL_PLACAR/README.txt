@@ -1,3 +1,36 @@
+LLTV BRASIL — BROADCAST SYSTEM 1.5.0
+====================================
+
+ATUALIZAÇÃO 1.5.0 — PRIMEIRA ETAPA DA MIGRAÇÃO PARA PRODUÇÃO INDEPENDENTE
+
+Esta versão inicia a preparação da LLTV Brasil para operar sem OBS Studio. A integração OBS WebSocket e a dependência obs-websocket-js foram removidas do produto. As rotas antigas /api/obs/* retornam HTTP 410 para informar que essa integração foi descontinuada.
+
+O que foi atualizado nesta etapa:
+- Removida a dependência npm obs-websocket-js.
+- Removido o painel de conexão e controle do OBS na Central.
+- Atualizados os textos do painel para identificar o overlay como recurso gráfico da LLTV Brasil.
+- Mantido o placar, os dados existentes, o overlay, as estatísticas, a agenda de competições e a multitransmissão FFmpeg já existente.
+- Mantido o endpoint gráfico /overlay.html para futura integração com o compositor próprio.
+- Ampliados os testes de sintaxe dos arquivos JavaScript.
+
+IMPORTANTE — O QUE AINDA NÃO ESTÁ IMPLEMENTADO
+Esta atualização NÃO entrega ainda um mixer audiovisual próprio completo. O Preview/Programa continua sendo seleção visual no navegador; a câmera do navegador não é encaminhada automaticamente ao FFmpeg; ajustes de imagem não são filtros de composição da saída. Replay multicâmera, VAR, melhores momentos automáticos, WEB TV pública, aplicativo nativo e arquitetura SaaS ainda precisam ser desenvolvidos e testados em etapas posteriores. A multitransmissão FFmpeg atual continua aceitando as fontes compatíveis descritas abaixo.
+
+INSTALAÇÃO / ATUALIZAÇÃO
+1. Faça uma cópia de segurança da pasta da versão anterior, especialmente data/state.json, data/access-token.txt e data/secret.key.
+2. Extraia esta versão em uma nova pasta.
+3. Instale Node.js 18 ou superior.
+4. Execute INICIAR_PLACAR.bat.
+5. Abra o endereço do painel exibido no terminal.
+6. Se já possuir dados de uma versão anterior, copie os arquivos de dados preservando os originais e mantenha juntos access-token.txt e secret.key para conseguir descriptografar destinos já armazenados.
+7. Para a multitransmissão, instale FFmpeg e configure FFMPEG_PATH se necessário.
+
+Atenção: não substitua sua pasta de produção sem backup. Teste primeiro esta versão em uma cópia. Esta entrega é uma etapa de migração, não uma plataforma SaaS pronta para comercialização.
+
+----------------------------------------
+DOCUMENTAÇÃO HISTÓRICA DA VERSÃO ANTERIOR
+----------------------------------------
+
 LLTV BRASIL — PLACAR DE FUTEBOL PARA OBS STUDIO
 Versão 1.0.0 | Windows 10/11 | Node.js 18+
 

@@ -1,0 +1,19 @@
+LLTV BRASIL BROADCAST SYSTEM — VERSÃO 1.5.0
+
+Etapa entregue: migração inicial para operação sem OBS Studio.
+
+Alterações:
+- Removida dependência obs-websocket-js.
+- Removidas rotas de integração OBS; rotas antigas retornam HTTP 410.
+- Removido painel OBS da Central de Transmissão.
+- Atualizados textos e instruções para o overlay gráfico LLTV Brasil.
+- Mantidos placar, cronômetro, dados, estatísticas, competições e FFmpeg independente.
+- Testes de sintaxe ampliados para todos os scripts públicos principais.
+
+Limitações mantidas e documentadas:
+- Ainda não há mixer audiovisual próprio completo.
+- Preview/Programa é controle visual no navegador.
+- Câmeras do navegador não são encaminhadas automaticamente ao FFmpeg.
+- Replay avançado, VAR, IA de melhores momentos, WEB TV, aplicativo e SaaS ainda não foram implementados.
+
+Esta versão deve ser testada em cópia antes de substituir qualquer instalação de produção.

@@ -1,17 +1,14 @@
 {
   "name": "lltv-brasil-placar",
-  "version": "1.4.0",
-  "description": "Placar esportivo LLTV Brasil com Central de Transmissão, estatísticas e multitransmissão FFmpeg local",
+  "version": "1.5.0",
+  "description": "LLTV Brasil Broadcast System — placar, central de transmissão independente e multitransmissão FFmpeg",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node --check server.js && node --check public/panel.js && node --check public/central.js && node --check public/overlay.js && node --check public/statistics.js"
+    "test": "node --check server.js && node --check public/panel.js && node --check public/central.js && node --check public/overlay.js && node --check public/statistics.js && node --check public/competitions.js && node --check public/mobile.js && node --check public/narrator.js"
   },
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT",
-  "dependencies": {
-    "obs-websocket-js": "^5.0.6"
-  }
+  "license": "MIT"
 }
