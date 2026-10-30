@@ -162,3 +162,54 @@ PAINEL SEPARADO DE ESTATÍSTICAS
 Acesse /statistics.html?token=SEU_TOKEN para abrir o painel independente de estatísticas.
 O painel usa o mesmo estado da partida, salva os dados em data/state.json e sincroniza via /api/state e /api/events.
 No painel principal há um atalho “Painel de estatísticas”. Os valores são preenchidos manualmente pela equipe de produção; não são dados oficiais automáticos.
+
+
+ATUALIZAÇÃO 1.4.0 — MULTITRANSMISSÃO FFmpeg LOCAL E AJUSTES DE MONITOR
+====================================================================
+
+NOVOS RECURSOS IMPLEMENTADOS
+- A Central possui controles independentes de zoom, largura, altura e posição para o monitor PREVIEW e para o monitor PROGRAMA. Os ajustes de Preview não alteram os valores do Programa. “Ajustar à tela” e “Restaurar original” retornam os parâmetros do respectivo monitor.
+- A Multitransmissão ganhou integração real com FFmpeg executado no mesmo ambiente Node.js: descoberta dos encoders listados e teste prático de codificação com padrão de vídeo; seleção manual/automática; início/parada do processo; status, tempo, bitrate/FPS quando informados pelo FFmpeg e trecho de log técnico.
+- Encoders são apresentados somente quando passaram pelo teste de codificação deste ambiente. A presença de NVENC/QSV/AMF na lista de compilação não significa que a GPU/driver esteja disponível; o teste pode rejeitá-los.
+- O processo FFmpeg não utiliza o OBS. O OBS WebSocket continua disponível separadamente.
+- Destinos RTMP/RTMPS podem ser ativados/desativados individualmente. Chaves são removidas do estado público e criptografadas em repouso pelo mecanismo AES-256-GCM já existente.
+- A parada encerra o processo FFmpeg iniciado pela plataforma.
+
+COMO USAR A MULTITRANSMISSÃO NO WINDOWS 11
+1. Instale FFmpeg com suporte aos codecs desejados e adicione a pasta que contém ffmpeg.exe ao PATH.
+2. Feche e reabra o terminal para atualizar o PATH.
+3. Inicie o projeto com INICIAR_PLACAR.bat ou npm start.
+4. Abra Central de Transmissão e clique em DESCOBRIR ENCODERS. A lista mostra apenas encoders que passaram no teste de codificação do computador atual.
+5. Selecione um encoder e clique em TESTAR ENCODER.
+6. Cadastre um ou mais destinos RTMP/RTMPS, informe a URL base e a chave, e deixe ativados os destinos que receberão o sinal.
+7. Selecione a fonte que o FFmpeg deve capturar: URL HTTP/RTMP/SRT, arquivo local ou dispositivo DirectShow. Para DirectShow, informe o nome exato do dispositivo de vídeo e, se necessário, o nome do dispositivo de áudio.
+8. Configure resolução/FPS na seção de saída e clique INICIAR TRANSMISSÃO. Acompanhe o status e os logs. Use PARAR TRANSMISSÃO para encerrar.
+
+LIMITAÇÕES TÉCNICAS IMPORTANTES DESTA VERSÃO
+- A captura FFmpeg direta aceita URL de mídia compatível, arquivo local e dispositivos DirectShow do Windows. O stream de câmera capturado dentro de outra aba do navegador, arquivo selecionado no browser e conteúdo de iframe não são automaticamente encaminhados ao processo FFmpeg. Para isso é necessário implementar e configurar uma ponte WebRTC/WHIP/SRT/MediaMTX ou agente de captura dedicado.
+- “Ajustes de imagem” nesta entrega controlam os monitores visuais da Central; ainda não são filtros de composição aplicados ao sinal de saída FFmpeg.
+- A descoberta de encoder valida a capacidade de codificar um padrão local, mas não garante a disponibilidade de todos os drivers, a estabilidade em carga prolongada, a largura de banda nem a aceitação do destino RTMP. Faça teste privado antes de uma transmissão pública.
+- A saída multi-destino usa uma codificação e replica o fluxo para os destinos configurados. Destinos com exigências de resolução/formato diferentes podem exigir pipelines separados.
+- O painel principal ainda não recebe uma prévia de vídeo ao vivo compartilhada entre dispositivos. A prévia local permanece no navegador da Central; compartilhar vídeo real entre módulos/dispositivos exige transporte de mídia (WebRTC/MediaMTX), não apenas sincronização de estado.
+- Render pode não ter FFmpeg, dispositivos de captura, GPU ou aceleração de hardware. Esta função deve ser executada em um computador local Windows/Linux com FFmpeg instalado. Em Render, defina FFMPEG_PATH apenas se o binário estiver realmente instalado e acessível no serviço. Não coloque chaves RTMP em variáveis públicas, logs ou repositório.
+
+CONFIGURAÇÃO
+- Consulte .env.example para variáveis opcionais.
+- No Windows, se FFmpeg não estiver no PATH, defina FFMPEG_PATH para o caminho completo, por exemplo C:\ffmpeg\bin\ffmpeg.exe.
+- Em ambiente hospedado, defina LLTV_SECRET_KEY com 64 caracteres hexadecimais aleatórios e preserve o mesmo valor entre deploys. Sem a chave original, destinos já criptografados não podem ser descriptografados.
+- O processo que executa o servidor Node precisa permanecer ligado durante a multitransmissão.
+
+ATUALIZAÇÃO NO RENDER
+1. Faça backup de data/state.json e preserve LLTV_SECRET_KEY. Não envie data/access-token.txt, data/secret.key, chaves RTMP ou arquivos .env reais ao Git.
+2. Atualize o repositório GitHub conectado ao serviço Render com os arquivos desta versão.
+3. No Render, abra o serviço e faça Manual Deploy > Deploy latest commit (ou aguarde o deploy automático da branch conectada).
+4. Configure as variáveis necessárias no Environment e confirme que o build/start command executa npm install e npm start conforme o projeto.
+5. O Render hospeda o painel, mas a codificação deve ficar no computador local se o serviço não tiver FFmpeg e hardware adequados. Não presuma GPU no Render.
+6. Após o deploy, teste /api/health, placar, overlay e painel de estatísticas. A multitransmissão deve ser testada no agente local que possui FFmpeg e as fontes de vídeo.
+
+TESTES DESTA ENTREGA
+- node --check server.js e scripts JS: aprovado.
+- npm test: aprovado.
+- Inicialização local do servidor e GET /api/health: HTTP 200.
+- Descoberta real de encoders FFmpeg no ambiente de teste: libx264 e libx265 passaram no teste; NVENC/QSV não foram considerados disponíveis para codificação utilizável neste ambiente. Os resultados podem variar conforme computador, drivers e build do FFmpeg.
+- Não foi realizado envio a destino RTMP real, nem teste com câmera DirectShow física, OBS físico ou serviço Render do usuário.

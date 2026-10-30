@@ -42,3 +42,7 @@ SEGURANÇA E TOPOLOGIA
 - Não exponha a porta WebSocket do OBS diretamente à internet. Restrinja-a à rede local ou a um túnel/VPN protegido.
 - Se o painel estiver hospedado, instale o servidor/agente de integração no computador local do OBS e estabeleça uma conexão segura; o serviço remoto não consegue alcançar localhost do operador.
 - As chaves RTMP são omitidas das respostas públicas de estado e do fluxo SSE. Proteja a pasta data e não publique state.json no GitHub.
+
+
+ATUALIZAÇÃO 1.4.0 — FFmpeg INDEPENDENTE
+Consulte o README.txt na raiz para instalação do FFmpeg, descoberta/teste de encoders, configuração de fontes e uso dos botões INICIAR TRANSMISSÃO e PARAR TRANSMISSÃO. A codificação ocorre no computador que executa o servidor Node.js e não depende do OBS. A captura de câmera do navegador ainda não é ponteada automaticamente ao FFmpeg; use DirectShow, URL compatível ou arquivo local.

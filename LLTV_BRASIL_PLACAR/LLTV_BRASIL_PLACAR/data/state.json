@@ -124,5 +124,35 @@
     "crew": false,
     "matchInfo": true
   },
-  "updatedAt": 1793228484699
+  "broadcastArt": {
+    "opening": false,
+    "live": false,
+    "halftime": false,
+    "fulltime": false
+  },
+  "gc": {
+    "title": "",
+    "info": "",
+    "enabled": false
+  },
+  "competitionManager": {
+    "competitions": []
+  },
+  "central": {
+    "sources": [],
+    "destinations": [],
+    "activeSourceId": null,
+    "programSourceId": null,
+    "narrator": {
+      "enabled": false,
+      "token": ""
+    },
+    "settings": {
+      "mode": "horizontal",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    }
+  },
+  "updatedAt": 1793371528943
 }

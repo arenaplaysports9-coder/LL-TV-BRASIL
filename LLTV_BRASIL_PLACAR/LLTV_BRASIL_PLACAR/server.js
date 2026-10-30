@@ -3,6 +3,14 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const crypto = require('crypto');
+const { spawn, execFile } = require('child_process');
+const { promisify } = require('util');
+const execFileAsync = promisify(execFile);
+let ffmpegProcess = null;
+let ffmpegStartedAt = 0;
+let ffmpegStatus = { state: 'ENCERRADO', encoder: '', error: '', bitrate: '', fps: '', resolution: '' };
+let ffmpegLog = '';
+const FFMPEG_PATH = process.env.FFMPEG_PATH || 'ffmpeg';
 let obsClient = null;
 let obsConnected = false;
 let obsLastError = '';
@@ -156,9 +164,37 @@ function validatePatch(patch) {
   }
   return out;
 }
+async function ffmpegAvailable() {
+  try { const { stdout } = await execFileAsync(FFMPEG_PATH, ['-hide_banner','-encoders'], { timeout: 12000, windowsHide: true, maxBuffer: 4*1024*1024 }); return stdout; }
+  catch (e) { throw new Error('FFmpeg não encontrado. Instale FFmpeg no computador que executa o servidor ou configure FFMPEG_PATH.'); }
+}
+function parseEncoders(text) {
+  return text.split(/\r?\n/).map(line => {
+    const m = line.match(/^\s*[A-Z\.]{6}\s+([\w_]+)\s+/); return m ? m[1] : null;
+  }).filter(Boolean);
+}
+function encoderLabel(name) { return ({h264_nvenc:'NVIDIA NVENC',h264_qsv:'Intel Quick Sync',h264_amf:'AMD AMF',libx264:'FFmpeg libx264',libx265:'FFmpeg libx265'})[name] || name; }
+function makeInputArgs(body) {
+  const kind = String(body.inputType || 'url');
+  if (kind === 'dshow') {
+    const video = String(body.videoDevice || '').trim(), audio = String(body.audioDevice || '').trim();
+    if (!video) throw new Error('Informe o nome exato do dispositivo de vídeo DirectShow.');
+    return ['-f','dshow','-i',`video=${video}${audio ? ':audio='+audio : ''}`];
+  }
+  if (kind === 'file') { const file = String(body.input || '').trim(); if (!file) throw new Error('Informe o caminho do arquivo de vídeo.'); return ['-re','-i',file]; }
+  const input = String(body.input || '').trim();
+  if (!/^https?:\/\/|^rtmps?:\/\/|^srt:\/\//i.test(input)) throw new Error('A fonte URL deve ser HTTP(S), RTMP(S) ou SRT.');
+  return ['-i', input];
+}
+function stopFfmpeg() {
+  if (!ffmpegProcess) return false;
+  const proc = ffmpegProcess; ffmpegProcess = null; proc.__lltvStopping = true;
+  try { if (process.platform === 'win32') spawn('taskkill',['/pid',String(proc.pid),'/t','/f'],{windowsHide:true,stdio:'ignore'}); else proc.kill('SIGTERM'); } catch {}
+  ffmpegStatus = {...ffmpegStatus,state:'ENCERRADO'}; return true;
+}
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  if (url.pathname === '/api/health') return send(res, 200, { ok: true, app: 'LLTV BRASIL PLACAR', version: '1.3.0', time: Date.now() });
+  if (url.pathname === '/api/health') return send(res, 200, { ok: true, app: 'LLTV BRASIL PLACAR', version: '1.4.0', time: Date.now() });
   if (url.pathname === '/api/network' && req.method === 'GET') {
     const interfaces = [];
     for (const list of Object.values(os.networkInterfaces())) for (const n of list || []) {
@@ -186,6 +222,45 @@ const server = http.createServer(async (req, res) => {
   }
   if (url.pathname.startsWith('/api/')) {
     if (!authorized(req, url)) return send(res, 401, { error: 'Acesso não autorizado. Abra o painel pelo link seguro exibido no computador.' });
+    if (url.pathname === '/api/encoders/discover' && req.method === 'GET') {
+      try {
+        const raw = await ffmpegAvailable(); const encoders = parseEncoders(raw);
+        const candidates = ['h264_nvenc','h264_qsv','h264_amf','libx264','libx265'].filter(x => encoders.includes(x));
+        const verified = []; for (const name of candidates) { try { await execFileAsync(FFMPEG_PATH,['-hide_banner','-loglevel','error','-f','lavfi','-i','testsrc2=size=320x180:rate=15','-t','1','-an','-c:v',name,'-f','null','-'],{timeout:12000,windowsHide:true,maxBuffer:512*1024}); verified.push(name); } catch {} }
+        const cpu = os.cpus();
+        return send(res,200,{ok:true,ffmpeg:FFMPEG_PATH,version:(await execFileAsync(FFMPEG_PATH,['-version'],{timeout:8000,windowsHide:true})).stdout.split(/\r?\n/)[0],encoders:verified.map(name=>({name,label:encoderLabel(name),type:name==='libx264'||name==='libx265'?'software':'hardware',tested:true})),listedEncoders:candidates,allEncoders:encoders,cpu:{model:cpu[0]?.model||'n/d',cores:cpu.length},platform:process.platform,host:os.hostname()});
+      } catch(e) { return send(res,503,{ok:false,error:e.message,encoders:[]}); }
+    }
+    if (url.pathname === '/api/encoders/test' && req.method === 'POST') {
+      try {
+        const body=await readBody(req), name=String(body.encoder||'libx264'); const available=parseEncoders(await ffmpegAvailable());
+        if(!available.includes(name)) return send(res,400,{ok:false,error:`Encoder ${name} não está disponível neste ambiente.`});
+        await execFileAsync(FFMPEG_PATH,['-hide_banner','-loglevel','error','-f','lavfi','-i','testsrc2=size=640x360:rate=25','-t','2','-an','-c:v',name,'-f','null','-'],{timeout:20000,windowsHide:true,maxBuffer:1024*1024});
+        return send(res,200,{ok:true,encoder:name,label:encoderLabel(name),message:'Teste real de codificação concluído.'});
+      } catch(e) { return send(res,422,{ok:false,error:(e.stderr||e.message||'Falha no teste').toString().slice(-1200)}); }
+    }
+    if (url.pathname === '/api/multistream/status' && req.method === 'GET') return send(res,200,{...ffmpegStatus,active:Boolean(ffmpegProcess),elapsedSeconds:ffmpegProcess?Math.floor((Date.now()-ffmpegStartedAt)/1000):0,log:ffmpegLog.slice(-1500)});
+    if (url.pathname === '/api/multistream/stop' && req.method === 'POST') { const stopped=stopFfmpeg(); return send(res,200,{ok:true,stopped,state:'ENCERRADO'}); }
+    if (url.pathname === '/api/multistream/start' && req.method === 'POST') {
+      try {
+        if(ffmpegProcess) return send(res,409,{error:'Já existe uma multitransmissão em execução.'});
+        const body=await readBody(req); const encoder=String(body.encoder||'libx264');
+        const available=parseEncoders(await ffmpegAvailable()); if(!available.includes(encoder)) return send(res,400,{error:`Encoder ${encoder} indisponível no computador/servidor local.`});
+        const destinations=(state.central?.destinations||[]).filter(d=>d.enabled!==false && d.url && d.key);
+        if(!destinations.length) return send(res,400,{error:'Cadastre e ative pelo menos um destino com URL e chave.'});
+        const inputArgs=makeInputArgs(body); const settings=state.central?.settings||{}; const width=Math.max(320,Math.min(3840,Number(settings.width)||1280)),height=Math.max(240,Math.min(2160,Number(settings.height)||720)),fps=Math.max(1,Math.min(60,Number(settings.fps)||30));
+        const args=['-hide_banner','-nostdin','-y',...inputArgs,'-map','0:v:0','-map','0:a?','-c:v',encoder];
+        if(encoder==='libx264'||encoder==='libx265') args.push('-preset','veryfast');
+        args.push('-b:v',String(body.videoBitrate||'4500k'),'-maxrate',String(body.videoBitrate||'4500k'),'-bufsize',String(body.videoBitrate||'4500k'),'-vf',`scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2,fps=${fps}`,'-c:a','aac','-b:a','128k','-ar','48000');
+        for(const d of destinations){const key=decryptSecret(d.key);const target=String(d.url).replace(/\/$/,'')+'/'+key;args.push('-f','flv',target);}
+        ffmpegLog=''; ffmpegStatus={state:'CONECTANDO',encoder,label:encoderLabel(encoder),error:'',resolution:`${width}x${height}`,fps:String(fps),bitrate:String(body.videoBitrate||'4500k')};
+        const child=spawn(FFMPEG_PATH,args,{windowsHide:true,stdio:['ignore','ignore','pipe']}); ffmpegProcess=child; ffmpegStartedAt=Date.now();
+        child.stderr.on('data',buf=>{const line=buf.toString();ffmpegLog=(ffmpegLog+line).slice(-12000);const m=line.match(/frame=\s*(\d+).*?fps=\s*([\d.]+).*?bitrate=\s*([^\s]+)/);if(m){ffmpegStatus.state='AO VIVO';ffmpegStatus.fps=m[2];ffmpegStatus.bitrate=m[3];}});
+        child.on('error',err=>{ffmpegStatus={...ffmpegStatus,state:'ERRO',error:err.message};ffmpegProcess=null;});
+        child.on('exit',(code,signal)=>{const intentional=Boolean(child.__lltvStopping);ffmpegStatus={...ffmpegStatus,state:(code===0||intentional)?'ENCERRADO':'ERRO',error:(code===0||intentional)?'':`FFmpeg encerrou (código ${code}, sinal ${signal||'n/d'}).`};if(ffmpegProcess===child)ffmpegProcess=null;});
+        return send(res,200,{ok:true,state:'CONECTANDO',encoder:encoderLabel(encoder),destinations:destinations.length});
+      } catch(e) { ffmpegStatus={...ffmpegStatus,state:'ERRO',error:e.message}; return send(res,400,{error:e.message}); }
+    }
     if (url.pathname.startsWith('/api/obs/')) {
       try {
         if (url.pathname === '/api/obs/connect' && req.method === 'POST') {
@@ -269,5 +344,5 @@ server.listen(PORT, HOST, () => {
   }
   console.log('Mantenha esta janela aberta durante a transmissão.\n');
 });
-function shutdown(){ try{persist()}catch{} server.close(()=>process.exit(0)); }
+function shutdown(){ try{stopFfmpeg();persist()}catch{} server.close(()=>process.exit(0)); }
 process.on('SIGINT', shutdown); process.on('SIGTERM', shutdown);

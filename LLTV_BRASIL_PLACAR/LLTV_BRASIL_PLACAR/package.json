@@ -1,7 +1,7 @@
 {
   "name": "lltv-brasil-placar",
-  "version": "1.3.0",
-  "description": "Placar esportivo LLTV Brasil com central local e integração OBS WebSocket",
+  "version": "1.4.0",
+  "description": "Placar esportivo LLTV Brasil com Central de Transmissão, estatísticas e multitransmissão FFmpeg local",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
