@@ -1,0 +1,128 @@
+{
+  "homeName": "TIME DA CASA",
+  "awayName": "TIME VISITANTE",
+  "homeShort": "CASA",
+  "awayShort": "FORA",
+  "homeLogo": "",
+  "awayLogo": "",
+  "homeColor": "#d92332",
+  "awayColor": "#2878d0",
+  "homeScore": 0,
+  "awayScore": 0,
+  "homeYellow": 0,
+  "awayYellow": 0,
+  "homeRed": 0,
+  "awayRed": 0,
+  "date": "2026-10-28",
+  "kickoff": "",
+  "competition": "",
+  "round": "",
+  "stadium": "",
+  "city": "",
+  "period": "1º TEMPO",
+  "elapsedSeconds": 0,
+  "running": false,
+  "addedMinutes": 0,
+  "addedTimeEnabled": false,
+  "showDate": true,
+  "showCompetition": true,
+  "showCards": false,
+  "brand": "LLTV BRASIL",
+  "tagline": "A CASA DAS LIGAS ALTERNATIVAS",
+  "lineups": {
+    "home": {
+      "coach": "",
+      "starters": [],
+      "bench": []
+    },
+    "away": {
+      "coach": "",
+      "starters": [],
+      "bench": []
+    }
+  },
+  "substitutions": [],
+  "events": [],
+  "statistics": {
+    "home": {
+      "possession": 50,
+      "shots": 0,
+      "onTarget": 0,
+      "corners": 0,
+      "fouls": 0,
+      "offsides": 0,
+      "attacks": 0,
+      "dangerousAttacks": 0
+    },
+    "away": {
+      "possession": 50,
+      "shots": 0,
+      "onTarget": 0,
+      "corners": 0,
+      "fouls": 0,
+      "offsides": 0,
+      "attacks": 0,
+      "dangerousAttacks": 0
+    }
+  },
+  "sponsors": [],
+  "ads": {
+    "enabled": false,
+    "top": {
+      "enabled": false,
+      "image": "",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 700,
+      "height": 100
+    },
+    "right": {
+      "enabled": false,
+      "image": "",
+      "text": "",
+      "x": 1800,
+      "y": 100,
+      "width": 120,
+      "height": 700
+    },
+    "items": [],
+    "rotationSeconds": 10
+  },
+  "officials": {
+    "main": "",
+    "assistant1": "",
+    "assistant2": "",
+    "fourth": "",
+    "var": "",
+    "avar": "",
+    "others": []
+  },
+  "crew": {
+    "narration": "",
+    "commentary": "",
+    "reporting": "",
+    "presenter": "",
+    "imageGeneration": "",
+    "direction": "",
+    "production": "",
+    "technical": "",
+    "others": []
+  },
+  "visibility": {
+    "scoreboard": true,
+    "clock": true,
+    "addedTime": true,
+    "lineups": false,
+    "bench": false,
+    "substitutions": false,
+    "cards": false,
+    "statistics": false,
+    "sponsors": false,
+    "ads": false,
+    "officials": false,
+    "crew": false,
+    "matchInfo": true
+  },
+  "updatedAt": 1793228484699
+}

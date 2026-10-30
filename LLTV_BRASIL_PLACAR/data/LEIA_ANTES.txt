@@ -1,0 +1,1 @@
+Na primeira execução, o servidor criará um token de acesso em data/access-token.txt. Guarde-o e não compartilhe publicamente.
