@@ -1,0 +1,17 @@
+{
+  "name": "lltv-brasil-placar",
+  "version": "1.3.0",
+  "description": "Placar esportivo LLTV Brasil com central local e integração OBS WebSocket",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --check server.js && node --check public/panel.js && node --check public/central.js && node --check public/overlay.js && node --check public/statistics.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "obs-websocket-js": "^5.0.6"
+  }
+}

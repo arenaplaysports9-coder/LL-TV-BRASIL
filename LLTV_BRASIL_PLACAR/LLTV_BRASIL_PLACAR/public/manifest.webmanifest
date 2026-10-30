@@ -1,0 +1,14 @@
+{
+  "id": "/panel.html",
+  "name": "LLTV BRASIL — Controle de Placar",
+  "short_name": "LLTV Placar",
+  "description": "Controle de placar, cronômetro e publicidade da LLTV BRASIL.",
+  "lang": "pt-BR",
+  "start_url": "/panel.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080808",
+  "theme_color": "#d7ad4b",
+  "icons": [{"src":"/app-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

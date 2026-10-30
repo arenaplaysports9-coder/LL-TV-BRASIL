@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel — LLTV BRASIL</title><link rel="stylesheet" href="/style.css"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#102a43">
+</head>
+<body class="panel-page">
+<header class="topbar"><div><div class="brand">LLTV <span>BRASIL</span></div><div class="tagline">A CASA DAS LIGAS ALTERNATIVAS</div></div><span class="pill" id="connection">Conectando…</span></header>
+<main class="layout">
+<section class="preview-card"><div class="section-head"><h1>Painel de controle</h1><div class="button-row"><a class="button secondary" href="/mobile.html">Acesso pelo celular</a><a class="button secondary" href="/overlay.html" target="_blank">Abrir overlay</a><a class="button primary" id="open-competition-manager" href="/competitions.html">🏆 Configurar competições</a><a class="button secondary" href="/central.html" onclick="this.href='/central.html?token='+encodeURIComponent(new URLSearchParams(location.search).get('token')||'')">🎥 Central de transmissão</a><a class="button secondary" href="/statistics.html" onclick="this.href='/statistics.html?token='+encodeURIComponent(new URLSearchParams(location.search).get('token')||'')">📊 Painel de estatísticas</a></div></div>
+<p class="muted">As alterações são sincronizadas com a fonte de navegador do OBS.</p>
+<div id="mini-score" class="scoreboard"><div class="score-date" id="preview-meta">PARTIDA AO VIVO</div><div class="score-main">
+<div class="team"><img id="prev-home-logo" class="crest" alt=""><strong id="prev-home">TIME DA CASA</strong><small id="prev-home-short">CASA</small></div>
+<div class="score-center"><div id="prev-clock" class="clock">00:00</div><div class="goals"><span id="prev-hs">0</span><i>:</i><span id="prev-as">0</span></div><div id="prev-period" class="period">1º TEMPO</div></div>
+<div class="team"><img id="prev-away-logo" class="crest" alt=""><strong id="prev-away">TIME VISITANTE</strong><small id="prev-away-short">FORA</small></div></div><div class="score-brand" id="prev-brand">LLTV BRASIL</div></div>
+<div class="preview-actions"><button class="button" id="open-overlay">Visualizar overlay transparente</button><button class="button secondary" id="copy-url">Copiar URL do OBS</button></div>
+</section>
+<section class="card" id="mobile-share-card"><h2>📱 Copiar painel para o celular</h2><p class="muted">Copie ou compartilhe o endereço real deste painel para controlar a mesma partida pelo celular.</p><div class="button-row"><button class="button primary" id="copy-mobile-panel">📱 COPIAR PAINEL PARA O CELULAR</button><button class="button secondary" id="share-mobile-panel">Compartilhar painel</button><button class="button secondary" id="show-mobile-qr">Mostrar QR Code</button></div><p id="mobile-panel-url" class="break-all"></p><div id="mobile-qr-wrap" hidden><div id="mobile-qr" aria-label="QR Code para abrir o painel no celular"></div><p class="muted">O QR Code é gerado no navegador. Não envie o token a serviços externos.</p></div><p class="muted">Para acesso fora do Wi-Fi local, o servidor precisa estar publicado por um túnel HTTPS ou hospedagem segura. O endereço localhost não funciona diretamente em outro aparelho.</p></section>
+<section class="card" id="broadcast-art-controls"><h2>🎬 Controle de artes da transmissão</h2><p class="muted">Cada modo possui controle independente. Os dados e o estado do cronômetro são preservados.</p><div class="form-grid">
+<div class="manual-module"><h3>🎞️ Abertura — sem placar</h3><p class="muted">Oculta placar e cronômetro sem apagar os dados.</p><button class="button module-toggle" data-art-toggle="opening">Ativar abertura</button></div>
+<div class="manual-module"><h3>🔴 Ao vivo</h3><p class="muted">Exibe a identificação AO VIVO sem alterar a partida.</p><button class="button module-toggle" data-art-toggle="live">Ativar AO VIVO</button></div>
+<div class="manual-module"><h3>⏸️ Intervalo de jogo</h3><p class="muted">Exibe somente os escudos/identificações e o resultado.</p><button class="button module-toggle" data-art-toggle="halftime">Ativar intervalo</button></div>
+<div class="manual-module"><h3>🏁 Fim de jogo</h3><p class="muted">Exibe a arte de encerramento e preserva o resultado.</p><button class="button module-toggle" data-art-toggle="fulltime">Ativar fim de jogo</button></div>
+</div></section>
+<section class="card" id="gc-controls"><h2>📺 GC — Gerador de Caracteres</h2><p class="muted">O título aparece acima das informações. O painel não será exibido no OBS.</p><div class="form-grid"><label>Título<input id="gc-title" maxlength="100" placeholder="Ex.: ESCALAÇÕES CONFIRMADAS"></label><label>Informações<textarea id="gc-info" rows="3" maxlength="500" placeholder="Digite as informações que aparecerão abaixo do título"></textarea></label></div><div class="button-row"><button class="button primary" id="save-gc">Salvar GC</button><button class="button primary" id="activate-gc">ATIVAR GC</button><button class="button danger" id="deactivate-gc">DESATIVAR GC</button><button class="button secondary" id="clear-gc">Limpar texto</button></div><p id="gc-status" class="muted" aria-live="polite">GC desativado.</p></section>
+<section class="card"><h2>⚽ Placar</h2><div class="score-controls">
+<div class="score-control"><b id="control-home-name">TIME DA CASA</b><div class="stepper"><button data-score="homeScore" data-delta="-1">−</button><strong id="control-home-score">0</strong><button data-score="homeScore" data-delta="1">+</button></div></div>
+<div class="score-control"><b id="control-away-name">TIME VISITANTE</b><div class="stepper"><button data-score="awayScore" data-delta="-1">−</button><strong id="control-away-score">0</strong><button data-score="awayScore" data-delta="1">+</button></div></div>
+</div>
+<h2>⏱️ Cronômetro</h2><div class="timer-display" id="timer-big">00:00</div><div class="button-row"><button class="button primary" id="start">▶ Iniciar</button><button class="button" id="pause">⏸ Pausar</button><button class="button secondary" id="zero">↺ Zerar relógio</button></div>
+<div class="form-grid timer-grid"><label>Definir minutos<input id="set-minutes" type="number" min="0" max="720" value="0"></label><label>Segundos<input id="set-seconds" type="number" min="0" max="59" value="0"></label><button class="button secondary align-end" id="set-time">Aplicar tempo</button></div>
+<label>Período<select id="period-select"><option>PRÉ-JOGO</option><option selected>1º TEMPO</option><option>INTERVALO</option><option>2º TEMPO</option><option>FIM DE JOGO</option><option>1º TEMPO PRORROGAÇÃO</option><option>INTERVALO PRORROGAÇÃO</option><option>2º TEMPO PRORROGAÇÃO</option><option>DISPUTA DE PÊNALTIS</option></select></label>
+<div class="button-row"><button class="button secondary" id="next-period">Próximo período</button></div>
+<div class="added-time-box"><h3>⏱️ Acréscimo manual</h3><p class="muted">Defina os minutos de acréscimo. Ao ativar, a indicação aparecerá automaticamente no overlay do OBS.</p><div class="form-grid timer-grid"><label>Minutos de acréscimo<input id="added-minutes-input" type="number" min="0" max="99" value="0"></label><button class="button secondary align-end" id="save-added">Aplicar minutos</button><button class="button danger align-end" id="toggle-added" aria-pressed="false">Desativado</button></div><p class="muted" id="added-status">O acréscimo está oculto no overlay.</p></div>
+</section>
+<section class="card"><h2>🏟️ Dados da partida</h2><div class="form-grid">
+<label>Nome do mandante<input id="homeName" maxlength="35" value="TIME DA CASA"></label><label>Sigla mandante<input id="homeShort" maxlength="12" value="CASA"></label>
+<label>Nome do visitante<input id="awayName" maxlength="35" value="TIME VISITANTE"></label><label>Sigla visitante<input id="awayShort" maxlength="12" value="FORA"></label>
+<label>Data<input id="date" type="date"></label><label>Horário<input id="kickoff" type="time"></label>
+<label>Competição<input id="competition" maxlength="100" placeholder="Nome da competição"></label><label>Rodada<input id="round" maxlength="50" placeholder="Ex.: 5ª Rodada"></label>
+<label>Estádio<input id="stadium" maxlength="100" placeholder="Nome do estádio"></label><label>Cidade<input id="city" maxlength="100" placeholder="Cidade / país"></label>
+<label>Escudo do mandante<input id="homeLogoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></label><label>Escudo do visitante<input id="awayLogoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></label>
+<label>Cor do mandante (baseada no escudo)<input id="homeColor" type="color" value="#d92332"></label><label>Cor do visitante (baseada no escudo)<input id="awayColor" type="color" value="#2878d0"></label>
+</div><div class="button-row"><button class="button primary" id="save-match">Salvar dados da partida</button><button class="button secondary" id="clear-logos">Remover escudos</button></div></section>
+<section class="card"><h2>🟨 Cartões</h2><div class="cards-grid"><div><b id="cards-home-name">Mandante</b><div class="card-row">🟨 Amarelos <button data-card="homeYellow" data-delta="-1">−</button><strong id="homeYellowValue">0</strong><button data-card="homeYellow" data-delta="1">+</button></div><div class="card-row">🟥 Vermelhos <button data-card="homeRed" data-delta="-1">−</button><strong id="homeRedValue">0</strong><button data-card="homeRed" data-delta="1">+</button></div></div><div><b id="cards-away-name">Visitante</b><div class="card-row">🟨 Amarelos <button data-card="awayYellow" data-delta="-1">−</button><strong id="awayYellowValue">0</strong><button data-card="awayYellow" data-delta="1">+</button></div><div class="card-row">🟥 Vermelhos <button data-card="awayRed" data-delta="-1">−</button><strong id="awayRedValue">0</strong><button data-card="awayRed" data-delta="1">+</button></div></div></div></section>
+<section class="card"><h2>🎨 Exibição</h2><div class="form-grid"><label>Nome da emissora<input id="brand" maxlength="60" value="LLTV BRASIL"></label><label>Slogan<input id="tagline" maxlength="100" value="A CASA DAS LIGAS ALTERNATIVAS"></label></div><div class="checks"><label><input id="showDate" type="checkbox" checked> Mostrar data</label><label><input id="showCompetition" type="checkbox" checked> Mostrar competição</label><label><input id="showCards" type="checkbox"> Mostrar cartões no placar</label></div><div class="button-row"><button class="button primary" id="save-display">Salvar exibição</button><button class="button danger" id="reset-match">Reiniciar placar e relógio</button></div></section>
+<section class="card" id="manual-team-modules"><h2>📝 Cadastro manual dos módulos da transmissão</h2>
+<p class="muted">Escreva ou cole as informações diretamente nos campos. Cada módulo tem seu próprio botão para ativar ou desativar a exibição no overlay. Desativar não apaga o texto cadastrado.</p>
+<div class="manual-module"><div class="manual-module-head"><h3>⚽ Escalação — Mandante</h3><button type="button" class="button module-toggle" data-module-toggle="lineupsHome">Ativar exibição</button></div><label for="manualLineupsHome">Titulares do mandante</label><textarea id="manualLineupsHome" rows="6" placeholder="1 — Nome do goleiro
+2 — Nome do jogador
+3 — Nome do jogador"></textarea><small class="muted">Cadastre somente os jogadores do time da casa, um por linha.</small></div>
+<div class="manual-module"><div class="manual-module-head"><h3>⚽ Escalação — Visitante</h3><button type="button" class="button module-toggle" data-module-toggle="lineupsAway">Ativar exibição</button></div><label for="manualLineupsAway">Titulares do visitante</label><textarea id="manualLineupsAway" rows="6" placeholder="1 — Nome do goleiro
+2 — Nome do jogador
+3 — Nome do jogador"></textarea><small class="muted">Cadastre somente os jogadores do time visitante, um por linha.</small></div>
+<div class="manual-module"><div class="manual-module-head"><h3>🪑 Banco de reservas</h3><button type="button" class="button module-toggle" data-module-toggle="bench">Ativar exibição</button></div><label for="manualBench">Reservas das duas equipes</label><textarea id="manualBench" rows="4" placeholder="MANDANTE — RESERVAS
+12 — Nome do jogador
+13 — Nome do jogador
+
+VISITANTE — RESERVAS
+12 — Nome do jogador"></textarea></div>
+<div class="manual-module"><div class="manual-module-head"><h3>🔄 Substituições — Mandante</h3><button type="button" class="button module-toggle" data-module-toggle="substitutionsHome">Ativar exibição</button></div><label for="manualSubstitutionsHome">Substituições do mandante</label><textarea id="manualSubstitutionsHome" rows="4" placeholder="60' — Sai 9 — Nome do jogador; entra 18 — Nome do jogador
+75' — Sai 10 — Nome do jogador; entra 21 — Nome do jogador"></textarea></div>
+<div class="manual-module"><div class="manual-module-head"><h3>🔄 Substituições — Visitante</h3><button type="button" class="button module-toggle" data-module-toggle="substitutionsAway">Ativar exibição</button></div><label for="manualSubstitutionsAway">Substituições do visitante</label><textarea id="manualSubstitutionsAway" rows="4" placeholder="60' — Sai 7 — Nome do jogador; entra 20 — Nome do jogador
+75' — Sai 11 — Nome do jogador; entra 22 — Nome do jogador"></textarea></div>
+<div class="manual-module"><div class="manual-module-head"><h3>🧑‍⚖️ Equipe de arbitragem</h3><button type="button" class="button module-toggle" data-module-toggle="officials">Ativar exibição</button></div><label for="manualOfficials">Árbitros e assistentes</label><textarea id="manualOfficials" rows="4" placeholder="Árbitro principal: Nome
+Assistente 1: Nome
+Assistente 2: Nome
+Quarto árbitro: Nome
+VAR: Nome
+AVAR: Nome"></textarea></div>
+<div class="manual-module"><div class="manual-module-head"><h3>🎙️ Equipe de transmissão</h3><button type="button" class="button module-toggle" data-module-toggle="crew">Ativar exibição</button></div><label for="manualCrew">Profissionais da transmissão</label><textarea id="manualCrew" rows="4" placeholder="Narração: Nome
+Comentários: Nome
+Reportagem: Nome
+Apresentação: Nome
+Geração de imagens: Nome
+Direção: Nome
+Produção: Nome
+Operação técnica: Nome"></textarea></div>
+<div class="button-row"><button class="button primary" id="save-manual-modules">Salvar informações manuais</button></div><p class="muted" id="manual-module-status" aria-live="polite">Os dados serão salvos no servidor e sincronizados com os overlays conectados.</p>
+</section>
+<section class="card" id="png-graphics"><h2>🖼️ Patrocinadores e anúncio em L — imagens PNG</h2>
+<p class="muted">Envie imagens PNG com fundo transparente. Os patrocinadores podem ser adicionados em quantidade; o anúncio em L usa arquivos separados para a faixa superior e a faixa vertical direita. Use os botões para controlar a exibição sem apagar os arquivos cadastrados.</p>
+<div class="manual-module"><div class="manual-module-head"><h3>🤝 Patrocinadores em PNG</h3><button type="button" class="button module-toggle" id="toggle-png-sponsors">Ativar exibição</button></div>
+<div class="form-grid"><label>Nome do patrocinador<input id="png-sponsor-name" maxlength="80" placeholder="Nome da marca"></label><label>Arquivo PNG<input id="png-sponsor-file" type="file" accept="image/png"></label></div>
+<div class="button-row"><button type="button" class="button primary" id="add-png-sponsor">Adicionar patrocinador PNG</button><button type="button" class="button secondary" id="clear-png-sponsors">Limpar lista</button></div><div id="png-sponsor-list" class="png-list" aria-live="polite"></div>
+</div>
+<div class="manual-module"><div class="manual-module-head"><h3>📢 Anúncio em L invertido — PNG</h3><button type="button" class="button module-toggle" id="toggle-png-ads">Ativar anúncio em L</button></div>
+<p class="muted">Envie um PNG para a faixa horizontal superior e outro para a faixa vertical da lateral direita. A área fora das imagens continuará transparente.</p>
+<div class="form-grid"><label>Faixa superior — PNG<input id="png-ad-top-file" type="file" accept="image/png"></label><label>Faixa lateral direita — PNG<input id="png-ad-right-file" type="file" accept="image/png"></label>
+<label>Largura da faixa superior (px)<input id="png-ad-top-width" type="number" min="100" max="1920" value="900"></label><label>Altura da faixa superior (px)<input id="png-ad-top-height" type="number" min="20" max="400" value="120"></label>
+<label>Largura da faixa direita (px)<input id="png-ad-right-width" type="number" min="20" max="500" value="150"></label><label>Altura da faixa direita (px)<input id="png-ad-right-height" type="number" min="100" max="1080" value="700"></label></div>
+<div class="button-row"><button type="button" class="button primary" id="save-png-ads">Salvar imagens e dimensões</button><button type="button" class="button secondary" id="remove-png-ads">Remover imagens do L</button></div><p class="muted" id="png-ads-status" aria-live="polite">Anúncio em L desativado.</p>
+</div></section>
+<section class="card"><h2>🧩 Módulos avançados</h2><p class="muted">Cadastre dados estruturados em JSON. Os dados ficam salvos no servidor e são enviados em tempo real aos overlays conectados. Os controles de visibilidade preservam os dados quando desligados.</p>
+<div class="checks">
+<label><input type="checkbox" id="vis-scoreboard" checked> Placar</label><label><input type="checkbox" id="vis-clock" checked> Cronômetro</label><label><input type="checkbox" id="vis-addedTime" checked> Acréscimos</label><label><input type="checkbox" id="vis-lineups"> Escalações</label><label><input type="checkbox" id="vis-bench"> Reservas</label><label><input type="checkbox" id="vis-substitutions"> Substituições</label><label><input type="checkbox" id="vis-cards"> Cartões</label><label><input type="checkbox" id="vis-statistics"> Estatísticas</label><label><input type="checkbox" id="vis-sponsors"> Patrocinadores</label><label><input type="checkbox" id="vis-ads"> Anúncio em L</label><label><input type="checkbox" id="vis-officials"> Arbitragem</label><label><input type="checkbox" id="vis-crew"> Equipe de transmissão</label><label><input type="checkbox" id="vis-matchInfo" checked> Informações da partida</label>
+</div>
+<div class="form-grid"><label>Estatísticas mandante/visitante (JSON)<textarea id="json-statistics" rows="6"></textarea></label><label>Patrocinadores (JSON)<textarea id="json-sponsors" rows="6"></textarea></label><label>Anúncio em L invertido: faixas superior/direita (JSON)<textarea id="json-ads" rows="6"></textarea></label><label>Eventos e cartões detalhados (JSON)<textarea id="json-events" rows="6"></textarea></label></div>
+<div class="button-row"><button class="button primary" id="save-modules">Salvar módulos avançados</button></div>
+<p class="muted">Exemplo de jogador: {"number":10,"name":"Nome do jogador","position":"Atacante","captain":false}. Para escalações, use lineups.home e lineups.away; cada uma pode conter coach, starters e bench.</p>
+</section>
+<section class="card"><h2>📺 Instalação no OBS Studio</h2><ol><li>Deixe este programa aberto no computador.</li><li>No OBS, clique em <b>Fontes → + → Navegador</b>.</li><li>Nomeie a fonte como <b>Placar LLTV BRASIL</b>.</li><li>URL: <code id="obs-url"></code></li><li>Defina largura <b>1920</b> e altura <b>1080</b>.</li><li>Confirme. O fundo do overlay é transparente.</li></ol><p class="muted">O overlay é uma página web local; não é um plugin nativo instalado dentro do OBS. Para OBS em outros computadores, configure hospedagem HTTPS ou Cloudflare Tunnel; este ZIP não cria sozinho um endereço público.</p></section>
+<section class="card"><h2>📱 Acesso pelo celular</h2><p>Conecte o celular à mesma rede Wi‑Fi do computador e abra o endereço de rede exibido na janela do servidor, com <code>/panel.html?token=...</code>. Se o Windows perguntar, permita o acesso na rede privada. Não compartilhe o link com pessoas não autorizadas.</p><p class="muted">Se não abrir, verifique a rede Wi‑Fi e o Firewall do Windows. O painel deve permanecer em execução no computador.</p></section>
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
+</main><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="/panel.js"></script></body></html>

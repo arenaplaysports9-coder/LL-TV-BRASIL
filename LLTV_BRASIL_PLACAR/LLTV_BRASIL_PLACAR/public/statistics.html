@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101c2d"><title>Estatísticas — LLTV BRASIL</title>
+<link rel="stylesheet" href="/statistics.css">
+</head>
+<body>
+<header class="top">
+  <div><div class="brand">LLTV <span>BRASIL</span></div><small>PAINEL INDEPENDENTE DE ESTATÍSTICAS</small></div>
+  <div class="right"><span id="connection" class="status">● Conectando...</span><a href="/panel.html" id="back">← Painel principal</a></div>
+</header>
+<main>
+  <section class="match">
+    <div class="eyebrow">PARTIDA EM ACOMPANHAMENTO</div>
+    <div class="teams"><div><strong id="homeName">MANDANTE</strong><small>MANDANTE</small></div><div class="score"><b id="score">0 × 0</b><small id="period">1º TEMPO · 00:00</small></div><div class="away"><strong id="awayName">VISITANTE</strong><small>VISITANTE</small></div></div>
+    <div class="meta"><span id="competition">Competição não informada</span><span id="round"></span><span id="stadium"></span></div>
+  </section>
+  <section class="toolbar">
+    <div><h1>Central de estatísticas</h1><p>Atualize os números durante o jogo. As alterações são salvas no mesmo placar e sincronizadas com os demais painéis.</p></div>
+    <div class="actions"><button id="reset" class="outline">Zerar estatísticas</button><button id="save" class="primary">Salvar alterações</button></div>
+  </section>
+  <div id="notice" role="status"></div>
+  <section class="stats-grid" id="statsGrid"></section>
+  <section class="card">
+    <h2>Indicadores adicionais</h2><p>Dados opcionais para controle da equipe de produção. Não serão inventados: preencha somente quando houver informação confirmada.</p>
+    <div class="extras">
+      <label>Passes tentados — mandante<input type="number" min="0" max="9999" id="home-passes"></label>
+      <label>Passes tentados — visitante<input type="number" min="0" max="9999" id="away-passes"></label>
+      <label>Passes certos — mandante<input type="number" min="0" max="9999" id="home-accuratePasses"></label>
+      <label>Passes certos — visitante<input type="number" min="0" max="9999" id="away-accuratePasses"></label>
+      <label>Defesas — mandante<input type="number" min="0" max="9999" id="home-saves"></label>
+      <label>Defesas — visitante<input type="number" min="0" max="9999" id="away-saves"></label>
+    </div>
+  </section>
+  <footer>LL TV BRASIL · Estatísticas sincronizadas com o PLACAR OBS <span id="updated"></span></footer>
+</main>
+<script src="/statistics.js"></script>
+</body></html>
