@@ -262,3 +262,13 @@ Consulte VERSAO_1.7.1.txt para os novos recursos e limitações.
 
 
 VERSÃO 1.7.3: retorno PROGRAM abaixo do placar; controles de olho/cadeado nas fontes; planos sem preço R$ 0,00 e contratação personalizada. Consulte VERSAO_1.7.3.txt.
+
+
+VERSÃO 1.8.0 — RETORNO REMOTO WEBRTC
+Para transmitir o retorno da Central a outro dispositivo:
+1. Abra a Central no computador transmissor usando o endereço HTTPS e o token de acesso.
+2. Clique em “PUBLICAR RETORNO PARA OUTROS DISPOSITIVOS”.
+3. Escolha no seletor do navegador a janela ou tela que contém o monitor PROGRAMA e autorize o compartilhamento.
+4. No painel ou em outro dispositivo, abra o retorno PROGRAM com o mesmo token.
+5. Para encerrar, volte à Central e clique em “PARAR RETORNO”.
+O Render realiza somente a sinalização WebRTC; o vídeo é enviado diretamente entre os navegadores. A conectividade pode depender da rede e, em redes restritivas, de um servidor TURN. O navegador exige clique explícito para compartilhar a tela.

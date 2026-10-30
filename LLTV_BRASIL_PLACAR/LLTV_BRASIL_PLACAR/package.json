@@ -1,6 +1,6 @@
 {
   "name": "lltv-brasil-placar",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "description": "LLTV Brasil Broadcast System — cenas, fontes, WEB TV fixa, placar e central de transmissão",
   "main": "server.js",
   "scripts": {

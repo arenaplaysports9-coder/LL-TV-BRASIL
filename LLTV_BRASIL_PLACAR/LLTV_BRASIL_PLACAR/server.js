@@ -10,6 +10,9 @@ let ffmpegProcess = null;
 let ffmpegStartedAt = 0;
 let ffmpegStatus = { state: 'ENCERRADO', encoder: '', error: '', bitrate: '', fps: '', resolution: '' };
 let ffmpegLog = '';
+// Sinalização WebRTC em memória: o Render coordena a conexão, mas não transporta o vídeo.
+const returnSignals = new Map();
+function pushReturnSignal(to, message) { const q=returnSignals.get(to)||[]; q.push({...message,at:Date.now()}); returnSignals.set(to,q.slice(-200)); }
 const FFMPEG_PATH = process.env.FFMPEG_PATH || 'ffmpeg';
 
 const ROOT = __dirname;
@@ -155,7 +158,7 @@ const allowed = new Set([
 ]);
 const textFields = new Set(['homeName','awayName','homeShort','awayShort','date','kickoff','competition','round','stadium','city','period','brand','tagline','manualLineups','manualLineupsHome','manualLineupsAway','manualBench','manualSubstitutions','manualSubstitutionsHome','manualSubstitutionsAway','manualOfficials','manualCrew']);
 const numericFields = new Set(['homeScore','awayScore','homeYellow','awayYellow','homeRed','awayRed','elapsedSeconds','addedMinutes']);
-const boolFields = new Set(['running','addedTimeEnabled','showDate','showCompetition','showCards']);
+const boolFields = new Set(['running','addedTimeEnabled','showDate','showCompetition','showCards','overlayEnabled']);
 function validatePatch(patch) {
   const out = {};
   for (const [key, value] of Object.entries(patch)) {
@@ -276,6 +279,10 @@ const server = http.createServer(async (req, res) => {
   if (url.pathname === '/api/public/webtv' && req.method === 'GET') { const webtv=state.central?.webtv||{}; const candidate=String(webtv.streamUrl||''); let streamUrl=''; try { const parsed=new URL(candidate); if(['http:','https:'].includes(parsed.protocol)) streamUrl=parsed.href; } catch {} return send(res,200,{title:String(webtv.title||'LL TV BRASIL — AO VIVO').slice(0,120),streamUrl}); }
   if (url.pathname.startsWith('/api/')) {
     if (!authorized(req, url)) return send(res, 401, { error: 'Acesso não autorizado. Abra o painel pelo link seguro exibido no computador.' });
+    if (url.pathname === '/api/return/signal' && req.method === 'POST') {
+      try { const b=await readBody(req); const to=String(b.to||'').slice(0,100), from=String(b.from||'').slice(0,100), type=String(b.type||''); if(!to||!from||!['offer','answer','candidate','close','heartbeat'].includes(type)) return send(res,400,{error:'Sinal WebRTC inválido.'}); pushReturnSignal(to,{from,type,data:b.data||null}); return send(res,200,{ok:true}); } catch(e){return send(res,400,{error:e.message});}
+    }
+    if (url.pathname === '/api/return/poll' && req.method === 'GET') { const client=String(url.searchParams.get('client')||'').slice(0,100); if(!client)return send(res,400,{error:'Cliente ausente.'}); const items=returnSignals.get(client)||[]; returnSignals.set(client,[]); return send(res,200,{items}); }
     if (url.pathname === '/api/encoders/discover' && req.method === 'GET') {
       try {
         const raw = await ffmpegAvailable(); const encoders = parseEncoders(raw);
