@@ -5,15 +5,15 @@
 
 .adjust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.adjust-grid>div{background:#101b2a;border:1px solid #2a3d55;border-radius:12px;padding:14px}.adjust-grid h3{margin-top:0}.monitor video,.monitor iframe{transform-origin:center center;max-width:none}.monitor{overflow:hidden}@media(max-width:760px){.adjust-grid{grid-template-columns:1fr}}
 
-/* Monitores ampliados em proporção de transmissão 16:9 */
-.central-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-.monitor{height:auto;aspect-ratio:16/9;min-height:300px;width:100%;background:#000;position:relative}
+/* Monitores com quadro 16:9 equivalente a 1280 x 720, responsivo */
+.central-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+.monitor{height:auto;aspect-ratio:16/9;min-height:0;width:100%;background:#000;position:relative;flex:none}
 .monitor iframe,.monitor video{display:block;width:100%!important;height:100%!important;min-width:100%;min-height:100%;border:0}
 .monitor video{object-fit:cover!important}
 .monitor iframe{object-fit:fill!important}
 .zoom-presets{margin-top:10px}
-@media(min-width:1200px){.monitor{min-height:360px}}
-@media(max-width:760px){.central-grid{grid-template-columns:1fr}.monitor{min-height:230px;aspect-ratio:16/9}}
+@media(min-width:1200px){.monitor{min-height:0}}
+@media(max-width:760px){.central-grid{grid-template-columns:1fr}.monitor{min-height:0;aspect-ratio:16/9}}
 
 /* Cenas e fontes estilo mesa de produção */
 #scene-studio .source-item{background:#0b1524;border-left:3px solid #e0ad18}#scene-source-list .source-item{display:grid;grid-template-columns:minmax(160px,1fr) auto;gap:10px}#scene-source-list .button{min-height:34px}#webtv-link{font-weight:700;color:#f2c94c}#interact-browser.is-active{background:#a66b12;color:#fff;border-color:#e8b64b}.monitor iframe{pointer-events:none}.monitor.browser-interactive iframe{pointer-events:auto}.monitor .source-text{font-size:clamp(20px,4vw,52px);font-weight:900;color:#fff;text-align:center;padding:20px;text-shadow:0 2px 5px #000}.monitor .source-color{position:absolute;inset:0}

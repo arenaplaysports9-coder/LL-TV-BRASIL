@@ -15,3 +15,9 @@ ATUALIZACAO COMPLEMENTAR - EDITOR VISUAL DE FONTES
 - Contorno e alcas amarelas para indicar a fonte selecionada/editavel.
 - Fonte bloqueada pelo cadeado nao pode ser movida ou redimensionada.
 - Preview e Programa mantem transformacoes independentes.
+
+
+AJUSTE DE MONITORES 1280x720
+- Pré-visualização e Programa ajustados para proporção 16:9 (referência 1280x720).
+- Removidas alturas mínimas que deformavam a proporção em telas menores.
+- Layout responsivo: dois monitores lado a lado em telas largas e empilhados em telas estreitas.
