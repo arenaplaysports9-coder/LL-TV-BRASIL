@@ -1,0 +1,35 @@
+LL TV BRASIL — VERSÃO 2.8.0
+CENTRAL DE INTEGRAÇÕES MULTIPLATAFORMA
+
+Plataformas contempladas na Central:
+- YouTube / Google
+- Facebook / Meta
+- Instagram / Meta
+- TikTok
+- Twitch
+- X (Twitter)
+- LinkedIn
+- Kick
+
+Implementações desta atualização:
+- Cadastro individual de credenciais por provedor, com segredos cifrados no servidor.
+- Diagnóstico de identidade usando endpoints oficiais para Facebook, Instagram, TikTok, Twitch, X, LinkedIn e Kick, quando houver token e credenciais/escopos válidos.
+- Registro da conta validada e exibição no seletor de destinos.
+- Mensagens de erro da API e status de credenciais/permissões.
+- Preservação da integração OAuth e criação de eventos YouTube já existentes.
+- Todas as oito plataformas permanecem selecionáveis no agendamento.
+
+IMPORTANTE — LIMITAÇÕES HONESTAS:
+A validação de identidade não garante permissão de LIVE, criação de evento ou agendamento nativo. Esses recursos dependem de elegibilidade da conta, aprovação do aplicativo, escopos, plano contratado e endpoints liberados por cada plataforma. Para destinos sem criação/agendamento nativo implementado, utilizar RTMP oficial/manual quando permitido; não serão marcados como agendamento confirmado pela plataforma.
+
+Ainda exigem configuração externa:
+- Criar aplicações nos portais oficiais e cadastrar Redirect URIs.
+- Concluir OAuth/fornecer tokens válidos e escopos adequados.
+- Aprovações e permissões específicas de LIVE.
+- Configuração de servidores/chaves RTMP para destinos compatíveis.
+- Testes com contas reais de cada plataforma.
+
+Segurança:
+- Não inserir segredos reais no repositório.
+- Manter LLTV_SECRET_KEY estável entre deploys.
+- Usar HTTPS e URLs de callback cadastradas nos portais oficiais.

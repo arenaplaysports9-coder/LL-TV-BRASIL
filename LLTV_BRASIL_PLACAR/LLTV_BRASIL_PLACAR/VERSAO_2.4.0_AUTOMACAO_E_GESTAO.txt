@@ -1,0 +1,31 @@
+LL TV BRASIL — VERSÃO 2.4.0
+Automação de comunicação e gestão administrativa
+
+NOVO NESTA VERSÃO
+- Fila persistente de mensagens WhatsApp com agendamento, tentativas e status.
+- Agendamento restrito a modelos aprovados na plataforma Meta e confirmação de opt-in.
+- Worker no servidor para processar a fila enquanto a aplicação estiver ativa.
+- Endpoint de verificação GET do webhook Meta por token de verificação.
+- Atualização dos status de mensagens recebidos no webhook.
+- Resumo financeiro administrativo com totais recebidos, pendentes e vencidos, baseado no histórico armazenado.
+- Exportação JSON de backup dos dados SaaS e do estado do placar, protegida pelo token administrativo.
+- Consulta dos registros de auditoria administrativos.
+- Versão da aplicação atualizada para 2.4.0.
+
+ROTAS ADMINISTRATIVAS NOVAS
+GET/POST /api/admin/whatsapp/queue
+DELETE /api/admin/whatsapp/queue/:id
+GET /api/admin/finance/summary
+GET /api/admin/security/audit
+GET /api/admin/backup/export
+GET/POST /api/admin/whatsapp/webhook
+
+CONFIGURAÇÃO
+- Defina WHATSAPP_WEBHOOK_VERIFY_TOKEN no ambiente ou configure o token no painel.
+- Cadastre a URL /api/admin/whatsapp/webhook no painel de desenvolvedor Meta.
+- Use somente o nome exato de modelos aprovados pela Meta para mensagens agendadas.
+- A fila depende do processo Node permanecer ativo. Hospedagem que suspende a aplicação não executa tarefas durante a suspensão.
+- O backup é uma exportação JSON sob demanda; armazenamento externo automático e teste de restauração ainda precisam ser configurados.
+
+LIMITAÇÕES IMPORTANTES
+Esta versão é uma atualização incremental, não declara concluído todo o escopo solicitado. Permanecem pendentes: autenticação 2FA completa, gestão granular de papéis e permissões em todas as rotas, área de atendimento do cliente, campanhas com segmentação/opt-out integrado, lembretes automáticos de vencimento ligados ao consentimento e aos modelos Meta, despesas e conciliação financeira, backup externo automático com restauração testada, e revisão de isolamento multiempresa. Não utilizar em produção com dados sensíveis antes de concluir essa revisão de segurança.

@@ -25,3 +25,6 @@
 .monitor .scoreboard-overlay-frame{position:absolute;inset:0;width:100%!important;height:100%!important;border:0;z-index:20;pointer-events:none;background:transparent!important}
 .destination-live-controls{margin-top:18px;padding-top:14px;border-top:1px solid #34465e}
 .destination-live-controls .button{min-width:190px}
+
+/* Controles de tamanho e posição do overlay do placar */
+.card-inner{margin-top:18px;padding:16px;background:#0b1523;border:1px solid #34465e;border-radius:10px}.score-adjust-controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}.score-size-controls,.score-position-controls{display:flex;align-items:center;gap:8px}.score-size-controls strong{font-size:13px;letter-spacing:.06em}.score-position-controls{flex-direction:column;gap:5px}.score-position-controls>div{display:flex;gap:5px}.score-adjust-controls .button{min-width:46px;min-height:44px;font-size:20px}.score-adjust-controls #score-reset-position{font-size:13px;min-width:190px}@media(max-width:520px){.score-adjust-controls{align-items:flex-start}.score-adjust-controls #score-reset-position{width:100%}}

@@ -1,0 +1,13 @@
+LL TV BRASIL — VERSÃO 1.9.0 | INTEGRAÇÃO ASAAS
+
+- Cadastro público com nome, organização, e-mail, telefone, CPF/CNPJ, senha e plano.
+- Planos mensais: INICIAL R$ 40, INTERMEDIÁRIO R$ 80 e AVANÇADO R$ 100.
+- Integração com API Asaas para cliente e assinatura mensal recorrente.
+- Link da primeira cobrança exibido ao concluir o cadastro.
+- Acesso permanece bloqueado até evento de pagamento confirmado/recebido.
+- Webhook autenticado por token próprio e deduplicação pelo ID do evento.
+- Suspensão do acesso em eventos de inadimplência, estorno ou chargeback.
+- Variáveis ASAAS_API_URL, ASAAS_API_KEY e ASAAS_WEBHOOK_TOKEN documentadas.
+- Nenhuma chave real ou dado de cliente incluído no pacote.
+
+IMPORTANTE: configurar credenciais e webhook no Asaas/Render antes de receber pagamentos reais.

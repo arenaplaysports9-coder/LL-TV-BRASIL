@@ -1,0 +1,14 @@
+LL TV BRASIL — VERSÃO 2.2.0
+Ciclo de assinatura e renovação
+
+Inclui: login de cliente mesmo com assinatura vencida para acesso à área de cobrança; endpoint de consulta da assinatura; geração de nova cobrança PIX/cartão/boleto pelo Asaas; histórico de pagamentos; bloqueio dos módulos pagos até confirmação do webhook; renovação automática do prazo após confirmação; cancelamento ao fim do período; aprovação manual pelo Super Admin com registro.
+
+Planos: INICIAL R$ 40/30 dias; INTERMEDIÁRIO R$ 80/6 meses; AVANÇADO R$ 100/12 meses.
+
+O proprietário/Super Admin acessa a administração pelo token principal, sem assinatura. Clientes não recebem privilégios administrativos.
+
+NOTIFICAÇÕES: as cobranças são criadas com notificationDisabled=false para que o Asaas envie os avisos de cobrança conforme as configurações e canais habilitados na conta. A aplicação registra os eventos recebidos pelo webhook. Não há promessa de envio por WhatsApp: isso exige provedor e credenciais próprios.
+
+CONFIGURAÇÃO OBRIGATÓRIA: configurar API Key e token de webhook no painel Asaas; cadastrar no Asaas a URL exibida em Painel Asaas > Webhook; usar HTTPS público; manter LLTV_SECRET_KEY estável no ambiente do servidor. Não colocar segredos no GitHub.
+
+Sem credenciais válidas e webhook configurado, não existe confirmação automática real. O sistema não simula pagamentos.

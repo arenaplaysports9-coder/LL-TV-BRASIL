@@ -1,0 +1,29 @@
+LL TV BRASIL — VERSÃO 2.7.0
+CENTRAL DE AGENDAMENTO MULTIPLATAFORMA
+
+Implementado nesta versão:
+- Nova Central de Agendamento integrada ao painel atual.
+- Cadastro de integrações e credenciais com criptografia AES-256-GCM no servidor.
+- Cadastro de capas PNG/JPG/WebP por arquivo local, pré-visualização e limite de 5 MB.
+- Cadastro persistente de título, descrição, tags, categoria, idioma, visibilidade, data, fuso, destinos e dados de produção OBS.
+- Gestão de rascunhos, edição de título/data, duplicação, cancelamento e exclusão lógica.
+- OAuth 2.0 Google/YouTube com consulta dos canais autorizados.
+- Criação real de evento YouTube Live, criação de entrada RTMP e vinculação do evento à entrada quando a API, canal e credenciais permitirem.
+- Renovação de token YouTube com refresh token, quando concedido.
+- Registro de resultado individual por destino; integrações sem adaptador/API/permissão confirmados permanecem identificadas como pendentes, sem falsa confirmação.
+- Worker persistente para lembretes de 30 e 10 minutos e atualização do estado para pronto/atenção. O worker não finge iniciar OBS nem sinal de vídeo.
+- Link de acesso à central no Painel do Placar.
+
+CONFIGURAÇÃO EXTERNA NECESSÁRIA:
+1. Configure LLTV_SECRET_KEY com a mesma chave persistente usada no ambiente de produção.
+2. Cadastre no Google Cloud a YouTube Data API v3, tela de consentimento OAuth e URI de redirecionamento HTTPS: https://SEU-DOMINIO/api/admin/broadcast/youtube/callback.
+3. Cadastre Client ID, Client Secret e Redirect URI na Central de APIs.
+4. Autorize a conta Google que possui canal elegível para transmissões ao vivo.
+5. Para Facebook, Instagram, TikTok, Twitch, X, LinkedIn e Kick, cadastre as credenciais oficiais correspondentes; o agendamento nativo só será habilitado após implementação/aprovação do adaptador específico e permissões da plataforma. Destinos não validados ficam como pendentes.
+6. Para OBS automático, o computador de produção precisa de agente local/integração OBS WebSocket e permanecer ligado. Um servidor remoto hospedado não pode iniciar diretamente o OBS do computador do usuário.
+
+LIMITAÇÕES DECLARADAS:
+- Não foi possível testar chamadas reais sem credenciais Google e canal autorizado do operador.
+- A criação de evento YouTube depende de cota, permissões, elegibilidade do canal e política do Google.
+- A central registra as demais redes e destinos RTMP, mas não declara APIs nativas implementadas/confirmadas sem validação técnica específica.
+- O worker executa enquanto o processo Node permanece ativo; hospedagem que suspende processos requer worker/cron sempre ativo.

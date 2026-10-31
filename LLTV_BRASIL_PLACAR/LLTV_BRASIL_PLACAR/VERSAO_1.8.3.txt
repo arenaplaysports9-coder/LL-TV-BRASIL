@@ -1,0 +1,13 @@
+LL TV BRASIL — VERSÃO 1.8.3
+
+Ajuste da ordem das colunas da tabela de classificação:
+- Jogos (J)
+- Pontos
+- Vitórias (V)
+- Empates (E)
+- Derrotas (D)
+- Gols Pró (GP)
+- Gols Contra (GC)
+- Saldo de Gols (SG)
+
+O campo Pontos também aparece imediatamente após Jogos (J) na área de ajuste manual por equipe. Nenhuma regra de cálculo ou armazenamento dos resultados foi alterada.

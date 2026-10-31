@@ -1,0 +1,15 @@
+LL TV BRASIL — VERSÃO 2.1.0
+CADASTRO E LOGIN DE CLIENTES
+
+- Cadastro público agora solicita nome de usuário exclusivo, além do e-mail.
+- Confirmação de senha no formulário de cadastro.
+- Validação de nome de usuário no servidor (3 a 30 caracteres: letras, números, ponto, hífen e sublinhado).
+- Bloqueio de duplicidade por e-mail ou nome de usuário.
+- Login de clientes aceita e-mail ou nome de usuário.
+- Senhas continuam armazenadas com hash scrypt e salt individual.
+- O acesso do Super Administrador/Proprietário permanece separado e protegido pelo token administrativo do servidor; não é criado por cadastro público e não exige assinatura.
+
+ATENÇÃO
+- Configure o token administrativo com segurança e não o compartilhe.
+- A confirmação de pagamentos continua dependente do webhook real do Asaas ou da aprovação administrativa.
+- Não coloque API Keys ou segredos no GitHub.

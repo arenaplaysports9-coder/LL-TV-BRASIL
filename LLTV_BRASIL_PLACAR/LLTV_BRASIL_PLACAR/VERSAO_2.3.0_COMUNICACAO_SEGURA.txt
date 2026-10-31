@@ -1,0 +1,27 @@
+LL TV BRASIL — VERSÃO 2.3.0
+
+NOVO NESTA VERSÃO
+- Central administrativa de WhatsApp Business Platform (API oficial da Meta).
+- Armazenamento criptografado do Access Token no servidor.
+- Configuração de Phone Number ID, WABA ID, versão Graph API e idioma.
+- Envio real de teste e envio individual com confirmação de consentimento.
+- Histórico de mensagens e estrutura inicial de registro de status (a publicação do webhook Meta com verificação de assinatura fica pendente de configuração).
+- Cadastro interno de modelos de mensagem (não equivale à aprovação pela Meta).
+- Base inicial para central de atendimento com chamados e histórico de respostas via API.
+- Identidade visual SaaS atualizada para preto e dourado.
+- Mantidas as funcionalidades anteriores de placar, transmissão, SaaS e Asaas.
+
+CONFIGURAÇÃO
+1. Acesse o painel SaaS com o token administrativo.
+2. Abra Central WhatsApp Business.
+3. Configure Access Token, Phone Number ID e demais dados obtidos no Meta for Developers.
+4. Faça um teste com um número autorizado e dentro das regras da Meta.
+5. Configure webhook no aplicativo Meta para receber atualizações de status.
+
+IMPORTANTE
+- Não há envio automático de lembretes de vencimento em produção nesta versão.
+- O cadastro de modelos interno não cria nem aprova templates na Meta.
+- Para mensagens iniciadas pela empresa fora da janela de atendimento, utilize templates aprovados pela Meta.
+- A hospedagem precisa permanecer ativa para executar tarefas agendadas; instâncias que dormem não garantem execução pontual.
+- Configure LLTV_SECRET_KEY persistente no ambiente de hospedagem. Não troque essa chave após gravar credenciais criptografadas.
+- A integração Asaas continua dependente de credenciais e webhook reais.

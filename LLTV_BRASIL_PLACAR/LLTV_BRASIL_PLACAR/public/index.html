@@ -1,26 +1,9 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101827">
-  <title>LLTV BRASIL — Placar Esportivo</title>
-  <meta http-equiv="refresh" content="0;url=panel.html">
-  <script>
-    (function () {
-      var destination = new URL('panel.html', window.location.href);
-      destination.search = window.location.search;
-      destination.hash = window.location.hash;
-      window.location.replace(destination.toString());
-    })();
-  </script>
-</head>
-<body style="margin:0;background:#101827;color:#fff;font:16px Arial,sans-serif;display:grid;min-height:100vh;place-items:center">
-  <main style="text-align:center;padding:24px">
-    <h1>LLTV BRASIL</h1>
-    <p>A CASA DAS LIGAS ALTERNATIVAS</p>
-    <p>Entrando no painel…</p>
-    <p><a style="color:#70b7ff" href="panel.html">Clique aqui se o painel não abrir automaticamente.</a></p>
-  </main>
-</body>
-</html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071522"><title>LL TV BRASIL — Assinaturas</title><link rel="stylesheet" href="/public-site.css"></head>
+<body><header><a class="brand" href="/"><img src="/lltv-logo.png" alt="LL TV BRASIL" style="height:48px;vertical-align:middle"> <b>BRASIL</b></a><a class="login" href="/saas.html">Já sou assinante</a></header>
+<main><section class="hero"><span class="eyebrow">A CASA DAS LIGAS ALTERNATIVAS</span><h1>Sua operação esportiva em um só lugar.</h1><p>Placar, central de transmissão e ferramentas para organizar sua produção esportiva.</p><a class="cta" href="#planos">Conheça os planos</a></section>
+<section id="planos" class="plans"><h2>Escolha sua assinatura</h2><p class="muted">Valores mensais. O acesso é liberado após a confirmação do pagamento.</p><div class="grid"><article class="plan"><h3>INICIAL</h3><strong>R$ 40,00<small>/mês</small></strong><p>Para começar sua operação esportiva.</p><button data-plan="initial">Assinar Inicial</button></article><article class="plan featured"><span class="tag">MAIS ESCOLHIDO</span><h3>INTERMEDIÁRIO</h3><strong>R$ 80,00<small>/mês</small></strong><p>Mais recursos para sua produção.</p><button data-plan="professional">Assinar Intermediário</button></article><article class="plan"><h3>AVANÇADO</h3><strong>R$ 100,00<small>/mês</small></strong><p>Para operações com necessidades avançadas.</p><button data-plan="advanced">Assinar Avançado</button></article></div></section>
+<section id="cadastro" class="signup"><div><h2>Solicitar assinatura</h2><p class="muted">Preencha seus dados e conclua o pagamento seguro pelo Asaas. O acesso é liberado após a confirmação.</p></div><form id="signup-form"><label>Nome do responsável<input name="name" required maxlength="100"></label><label>Nome da emissora / organização<input name="company" required maxlength="100"></label><label>E-mail<input name="email" type="email" required></label><label>Nome de usuário<input name="username" required minlength="3" maxlength="30" pattern="[a-zA-Z0-9._-]+" autocomplete="username"></label><label>Telefone / WhatsApp<input name="phone" type="tel" required minlength="10" placeholder="27999999999"></label><label>CPF ou CNPJ<input name="cpfCnpj" inputmode="numeric" required minlength="11" maxlength="18" placeholder="Somente para identificação da cobrança"></label><label>Crie uma senha (mínimo 10 caracteres)<input name="password" type="password" minlength="10" required autocomplete="new-password"></label><label>Confirme a senha<input name="passwordConfirm" type="password" minlength="10" required autocomplete="new-password"></label><label>Plano<select name="planId" id="plan-select" required><option value="">Selecione um plano</option><option value="initial">INICIAL — R$ 40,00/mês</option><option value="professional">INTERMEDIÁRIO — R$ 80,00 / 6 meses</option><option value="advanced">AVANÇADO — R$ 100,00 / ano</option></select></label><label>Forma de pagamento<select name="billingType" required><option value="PIX">PIX</option><option value="CREDIT_CARD">Cartão de crédito</option><option value="BOLETO">Boleto bancário</option></select></label><button class="cta" type="submit">Ir para pagamento</button><p id="signup-result" aria-live="polite"></p></form></section>
+<section class="contact"><h2>Precisa de ajuda?</h2><p>Fale com o atendimento pelo WhatsApp.</p><a class="whatsapp" href="https://wa.me/5527998663622" target="_blank" rel="noopener">◉ WhatsApp (27) 99866-3622</a></section></main>
+<button class="chat-launch" id="chat-launch" aria-label="Abrir atendimento pelo WhatsApp">◉</button><aside class="chat" id="chat" hidden><div class="chat-head">Atendimento LL TV BRASIL <button id="chat-close" aria-label="Fechar">×</button></div><div class="chat-body" id="chat-body"><p class="bot">Olá! Bem-vindo à LL TV BRASIL. Deseja com quem falar?<br><br>1 — Informações sobre planos e assinaturas<br>2 — Falar com atendimento</p></div><form id="chat-form"><input id="chat-input" inputmode="numeric" placeholder="Digite 1 ou 2" aria-label="Digite 1 ou 2" maxlength="1"><button>Enviar</button></form></aside>
+<script src="/public-site.js"></script></body></html>

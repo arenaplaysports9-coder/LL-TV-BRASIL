@@ -1,0 +1,8 @@
+LL TV BRASIL — VERSÃO 1.8.2
+
+AJUSTE MANUAL COMPLETO DA CLASSIFICAÇÃO
+- Ajuste individual por equipe de Jogos, Vitórias, Empates, Derrotas, Gols Pró, Gols Contra e Pontos.
+- Valores positivos acrescentam e valores negativos retiram quantidades.
+- Saldo de gols recalculado automaticamente.
+- Ajustes ficam registrados separadamente dos resultados confirmados.
+- Compatibilidade mantida com ajustes antigos de pontos.

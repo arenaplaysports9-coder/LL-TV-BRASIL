@@ -1,0 +1,18 @@
+LL TV BRASIL — VERSÃO 2.0.0
+ASSINATURAS, PLANOS E PAINEL ASAAS
+
+- Painel administrativo separado para conexão e gerenciamento da conta Asaas.
+- API Key e token do webhook criptografados com AES-256-GCM no servidor.
+- Ambientes Produção e Sandbox.
+- Teste de conexão e configuração dos métodos PIX, cartão e boleto.
+- Página pública com escolha da forma de pagamento.
+- Planos: INICIAL R$ 40/mês; INTERMEDIÁRIO R$ 80/6 meses; AVANÇADO R$ 100/ano.
+- Cobranças PIX e boleto via API de pagamentos; QR Code e copia e cola PIX quando retornados pelo Asaas.
+- Cartão: cobrança criada no modo de checkout do Asaas (UNDEFINED), para o cliente concluir no ambiente seguro e escolher cartão; a LLTV não captura nem armazena dados do cartão.
+- Webhook protegido por token, com liberação após confirmação válida e controle de validade da assinatura.
+- Dados do titular e chave PIX configuráveis no painel como referência de recebimento.
+
+CONFIGURAÇÃO
+Abra /saas.html com o token administrativo e entre em “Painel separado de conexão ASAAS”.
+Configure API Key, ambiente e token do webhook. Cadastre no Asaas a URL exibida pelo painel.
+Use Sandbox antes de Produção. Configure LLTV_SECRET_KEY persistente no servidor para manter a criptografia após reinicializações/deploys.

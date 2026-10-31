@@ -1,0 +1,15 @@
+LL TV BRASIL — VERSÃO 1.8.4
+ASSINATURAS E ATENDIMENTO
+
+- Página pública inicial com apresentação dos planos.
+- Planos mensais: INICIAL R$ 40,00; INTERMEDIÁRIO R$ 80,00; AVANÇADO R$ 100,00.
+- Formulário público de solicitação de assinatura.
+- Novas solicitações ficam pendentes; login bloqueado até a aprovação administrativa.
+- Área SaaS do Super Admin exibe solicitações pendentes e permite liberar após confirmar o pagamento.
+- Botão e símbolo de WhatsApp para (27) 99866-3622.
+- Chatbot no próprio site responde automaticamente: 1 para informações dos planos; 2 para encaminhar ao WhatsApp de atendimento.
+
+IMPORTANTE
+A confirmação de pagamento é manual nesta versão. Para cobrança e liberação automática, é necessário configurar um gateway (ex.: Asaas ou Mercado Pago) e suas credenciais/webhooks.
+O chatbot incluído responde no site. Respostas automáticas dentro do WhatsApp exigem WhatsApp Business Platform/API oficial, número habilitado e credenciais da Meta; o link wa.me apenas encaminha o visitante ao atendimento.
+A aprovação libera a conta SaaS. A integração dessa conta com o painel operacional principal e isolamento completo de dados por assinante ainda requer etapa própria antes de comercializar o acesso multiempresa.
