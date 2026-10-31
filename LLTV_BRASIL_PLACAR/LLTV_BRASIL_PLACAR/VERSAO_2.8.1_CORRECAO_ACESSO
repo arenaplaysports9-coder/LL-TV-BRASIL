@@ -1,0 +1,14 @@
+{
+  "name": "lltv-brasil-placar",
+  "version": "2.8.1",
+  "description": "LL TV Brasil — Central multiplataforma de agendamento e integrações sociais",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --check server.js && node --check public/program-return.js && node --check public/saas.js && node --check public/panel.js && node --check public/central.js && node --check public/webtv.js && node --check public/overlay.js && node --check public/statistics.js && node --check public/competitions.js && node --check public/mobile.js && node --check public/narrator.js && node --check public/public-site.js && node --check public/asaas-admin.js && node --check public/billing.js && node --check public/whatsapp-admin.js && node --check public/gestao-admin.js && node --check public/atendimento.js && node --check public/seguranca-automacao.js && node --check public/agendamento.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
