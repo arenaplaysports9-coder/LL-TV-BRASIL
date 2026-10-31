@@ -1,0 +1,522 @@
+[
+  {
+    "id": 1,
+    "category": "Site público",
+    "name": "Página Inicial",
+    "slug": "modulo-01",
+    "status": "Estrutura inicial",
+    "description": "Módulo Página Inicial: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 2,
+    "category": "Site público",
+    "name": "TV ao Vivo",
+    "slug": "modulo-02",
+    "status": "Estrutura inicial",
+    "description": "Módulo TV ao Vivo: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 3,
+    "category": "Site público",
+    "name": "Programação",
+    "slug": "modulo-03",
+    "status": "Estrutura inicial",
+    "description": "Módulo Programação: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 4,
+    "category": "Site público",
+    "name": "Canais",
+    "slug": "modulo-04",
+    "status": "Estrutura inicial",
+    "description": "Módulo Canais: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 5,
+    "category": "Site público",
+    "name": "Futebol",
+    "slug": "modulo-05",
+    "status": "Estrutura inicial",
+    "description": "Módulo Futebol: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 6,
+    "category": "Site público",
+    "name": "Outros Esportes",
+    "slug": "modulo-06",
+    "status": "Estrutura inicial",
+    "description": "Módulo Outros Esportes: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 7,
+    "category": "Site público",
+    "name": "Notícias",
+    "slug": "modulo-07",
+    "status": "Estrutura inicial",
+    "description": "Módulo Notícias: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 8,
+    "category": "Site público",
+    "name": "Reprises",
+    "slug": "modulo-08",
+    "status": "Estrutura inicial",
+    "description": "Módulo Reprises: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 9,
+    "category": "Site público",
+    "name": "Programas",
+    "slug": "modulo-09",
+    "status": "Estrutura inicial",
+    "description": "Módulo Programas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 10,
+    "category": "Site público",
+    "name": "Sobre a LLTV",
+    "slug": "modulo-10",
+    "status": "Estrutura inicial",
+    "description": "Módulo Sobre a LLTV: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 11,
+    "category": "Site público",
+    "name": "Contato",
+    "slug": "modulo-11",
+    "status": "Estrutura inicial",
+    "description": "Módulo Contato: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 12,
+    "category": "Transmissão",
+    "name": "Central de Transmissão",
+    "slug": "modulo-12",
+    "status": "Estrutura inicial",
+    "description": "Módulo Central de Transmissão: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 13,
+    "category": "Transmissão",
+    "name": "Integração OBS Studio",
+    "slug": "modulo-13",
+    "status": "Estrutura inicial",
+    "description": "Módulo Integração OBS Studio: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 14,
+    "category": "Transmissão",
+    "name": "Gerenciador de URL e Chaves",
+    "slug": "modulo-14",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de URL e Chaves: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 15,
+    "category": "Transmissão",
+    "name": "Monitoramento de Sinal",
+    "slug": "modulo-15",
+    "status": "Estrutura inicial",
+    "description": "Módulo Monitoramento de Sinal: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 16,
+    "category": "Transmissão",
+    "name": "Player de Transmissão",
+    "slug": "modulo-16",
+    "status": "Estrutura inicial",
+    "description": "Módulo Player de Transmissão: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 17,
+    "category": "Transmissão",
+    "name": "Servidor de Streaming",
+    "slug": "modulo-17",
+    "status": "Estrutura inicial",
+    "description": "Módulo Servidor de Streaming: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 18,
+    "category": "Transmissão",
+    "name": "Transmissão Multicanal",
+    "slug": "modulo-18",
+    "status": "Estrutura inicial",
+    "description": "Módulo Transmissão Multicanal: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 19,
+    "category": "Programação",
+    "name": "Agendamento de Transmissões",
+    "slug": "modulo-19",
+    "status": "Estrutura inicial",
+    "description": "Módulo Agendamento de Transmissões: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 20,
+    "category": "Programação",
+    "name": "Automação 24 Horas",
+    "slug": "modulo-20",
+    "status": "Estrutura inicial",
+    "description": "Módulo Automação 24 Horas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 21,
+    "category": "Programação",
+    "name": "Grade de Programação",
+    "slug": "modulo-21",
+    "status": "Estrutura inicial",
+    "description": "Módulo Grade de Programação: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 22,
+    "category": "Programação",
+    "name": "Gerenciador de Playlists",
+    "slug": "modulo-22",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de Playlists: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 23,
+    "category": "Programação",
+    "name": "Controle de Reprises",
+    "slug": "modulo-23",
+    "status": "Estrutura inicial",
+    "description": "Módulo Controle de Reprises: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 24,
+    "category": "Programação",
+    "name": "Gerenciador de Conteúdo",
+    "slug": "modulo-24",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de Conteúdo: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 25,
+    "category": "Esportivo",
+    "name": "Competições",
+    "slug": "modulo-25",
+    "status": "Estrutura inicial",
+    "description": "Módulo Competições: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 26,
+    "category": "Esportivo",
+    "name": "Temporadas",
+    "slug": "modulo-26",
+    "status": "Estrutura inicial",
+    "description": "Módulo Temporadas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 27,
+    "category": "Esportivo",
+    "name": "Rodadas",
+    "slug": "modulo-27",
+    "status": "Estrutura inicial",
+    "description": "Módulo Rodadas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 28,
+    "category": "Esportivo",
+    "name": "Partidas",
+    "slug": "modulo-28",
+    "status": "Estrutura inicial",
+    "description": "Módulo Partidas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 29,
+    "category": "Esportivo",
+    "name": "Equipes",
+    "slug": "modulo-29",
+    "status": "Estrutura inicial",
+    "description": "Módulo Equipes: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 30,
+    "category": "Esportivo",
+    "name": "Estádios",
+    "slug": "modulo-30",
+    "status": "Estrutura inicial",
+    "description": "Módulo Estádios: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 31,
+    "category": "Esportivo",
+    "name": "Equipe de Transmissão",
+    "slug": "modulo-31",
+    "status": "Estrutura inicial",
+    "description": "Módulo Equipe de Transmissão: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 32,
+    "category": "Esportivo",
+    "name": "Calendário Esportivo",
+    "slug": "modulo-32",
+    "status": "Estrutura inicial",
+    "description": "Módulo Calendário Esportivo: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 33,
+    "category": "Jornalístico",
+    "name": "Gerenciador de Notícias",
+    "slug": "modulo-33",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de Notícias: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 34,
+    "category": "Jornalístico",
+    "name": "Editor de Reportagens",
+    "slug": "modulo-34",
+    "status": "Estrutura inicial",
+    "description": "Módulo Editor de Reportagens: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 35,
+    "category": "Jornalístico",
+    "name": "Categorias",
+    "slug": "modulo-35",
+    "status": "Estrutura inicial",
+    "description": "Módulo Categorias: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 36,
+    "category": "Jornalístico",
+    "name": "Galeria de Imagens",
+    "slug": "modulo-36",
+    "status": "Estrutura inicial",
+    "description": "Módulo Galeria de Imagens: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 37,
+    "category": "Jornalístico",
+    "name": "Entrevistas",
+    "slug": "modulo-37",
+    "status": "Estrutura inicial",
+    "description": "Módulo Entrevistas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 38,
+    "category": "Jornalístico",
+    "name": "Melhores Momentos",
+    "slug": "modulo-38",
+    "status": "Estrutura inicial",
+    "description": "Módulo Melhores Momentos: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 39,
+    "category": "Audiovisual",
+    "name": "Biblioteca Digital",
+    "slug": "modulo-39",
+    "status": "Estrutura inicial",
+    "description": "Módulo Biblioteca Digital: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 40,
+    "category": "Audiovisual",
+    "name": "Upload de Vídeos",
+    "slug": "modulo-40",
+    "status": "Estrutura inicial",
+    "description": "Módulo Upload de Vídeos: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 41,
+    "category": "Audiovisual",
+    "name": "Gerenciador de Capas",
+    "slug": "modulo-41",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de Capas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 42,
+    "category": "Audiovisual",
+    "name": "Programas e Episódios",
+    "slug": "modulo-42",
+    "status": "Estrutura inicial",
+    "description": "Módulo Programas e Episódios: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 43,
+    "category": "Audiovisual",
+    "name": "Documentários",
+    "slug": "modulo-43",
+    "status": "Estrutura inicial",
+    "description": "Módulo Documentários: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 44,
+    "category": "Audiovisual",
+    "name": "Gerenciador de Áudio",
+    "slug": "modulo-44",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de Áudio: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 45,
+    "category": "Comercial",
+    "name": "Patrocinadores",
+    "slug": "modulo-45",
+    "status": "Estrutura inicial",
+    "description": "Módulo Patrocinadores: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 46,
+    "category": "Comercial",
+    "name": "Publicidade",
+    "slug": "modulo-46",
+    "status": "Estrutura inicial",
+    "description": "Módulo Publicidade: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 47,
+    "category": "Comercial",
+    "name": "Banners",
+    "slug": "modulo-47",
+    "status": "Estrutura inicial",
+    "description": "Módulo Banners: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 48,
+    "category": "Comercial",
+    "name": "Campanhas Comerciais",
+    "slug": "modulo-48",
+    "status": "Estrutura inicial",
+    "description": "Módulo Campanhas Comerciais: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 49,
+    "category": "Comercial",
+    "name": "Relatórios Comerciais",
+    "slug": "modulo-49",
+    "status": "Estrutura inicial",
+    "description": "Módulo Relatórios Comerciais: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 50,
+    "category": "Administrativo",
+    "name": "Painel Administrativo",
+    "slug": "modulo-50",
+    "status": "Estrutura inicial",
+    "description": "Módulo Painel Administrativo: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 51,
+    "category": "Administrativo",
+    "name": "Usuários",
+    "slug": "modulo-51",
+    "status": "Estrutura inicial",
+    "description": "Módulo Usuários: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 52,
+    "category": "Administrativo",
+    "name": "Permissões",
+    "slug": "modulo-52",
+    "status": "Estrutura inicial",
+    "description": "Módulo Permissões: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 53,
+    "category": "Administrativo",
+    "name": "Configurações Gerais",
+    "slug": "modulo-53",
+    "status": "Estrutura inicial",
+    "description": "Módulo Configurações Gerais: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 54,
+    "category": "Administrativo",
+    "name": "Identidade Visual",
+    "slug": "modulo-54",
+    "status": "Estrutura inicial",
+    "description": "Módulo Identidade Visual: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 55,
+    "category": "Administrativo",
+    "name": "Banco de Dados",
+    "slug": "modulo-55",
+    "status": "Estrutura inicial",
+    "description": "Módulo Banco de Dados: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 56,
+    "category": "Administrativo",
+    "name": "Backup",
+    "slug": "modulo-56",
+    "status": "Estrutura inicial",
+    "description": "Módulo Backup: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 57,
+    "category": "Administrativo",
+    "name": "Segurança",
+    "slug": "modulo-57",
+    "status": "Estrutura inicial",
+    "description": "Módulo Segurança: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 58,
+    "category": "Administrativo",
+    "name": "Auditoria",
+    "slug": "modulo-58",
+    "status": "Estrutura inicial",
+    "description": "Módulo Auditoria: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 59,
+    "category": "Audiência e tecnologia",
+    "name": "Audiência ao Vivo",
+    "slug": "modulo-59",
+    "status": "Estrutura inicial",
+    "description": "Módulo Audiência ao Vivo: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 60,
+    "category": "Audiência e tecnologia",
+    "name": "Estatísticas",
+    "slug": "modulo-60",
+    "status": "Estrutura inicial",
+    "description": "Módulo Estatísticas: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 61,
+    "category": "Audiência e tecnologia",
+    "name": "Relatórios",
+    "slug": "modulo-61",
+    "status": "Estrutura inicial",
+    "description": "Módulo Relatórios: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 62,
+    "category": "Audiência e tecnologia",
+    "name": "Monitoramento de Servidores",
+    "slug": "modulo-62",
+    "status": "Estrutura inicial",
+    "description": "Módulo Monitoramento de Servidores: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 63,
+    "category": "Audiência e tecnologia",
+    "name": "Gerenciador de CDN",
+    "slug": "modulo-63",
+    "status": "Estrutura inicial",
+    "description": "Módulo Gerenciador de CDN: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 64,
+    "category": "Audiência e tecnologia",
+    "name": "Notificações",
+    "slug": "modulo-64",
+    "status": "Estrutura inicial",
+    "description": "Módulo Notificações: interface de acesso e requisitos funcionais previstos no projeto."
+  },
+  {
+    "id": 65,
+    "category": "Audiência e tecnologia",
+    "name": "Suporte Técnico",
+    "slug": "modulo-65",
+    "status": "Estrutura inicial",
+    "description": "Módulo Suporte Técnico: interface de acesso e requisitos funcionais previstos no projeto."
+  }
+]

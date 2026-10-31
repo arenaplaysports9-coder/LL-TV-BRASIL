@@ -1,0 +1,8 @@
+{
+  "name": "lltv-brasil-web-tv",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "docker compose up -d"
+  }
+}
