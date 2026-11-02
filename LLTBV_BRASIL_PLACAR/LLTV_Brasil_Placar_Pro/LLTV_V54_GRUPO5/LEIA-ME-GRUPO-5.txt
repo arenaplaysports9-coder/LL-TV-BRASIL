@@ -1,0 +1,30 @@
+LLTV BRASIL PLACAR PRO – V5.4 – GRUPO 5
+FUNÇÃO: EXIBIR NO PLACAR + VÍNCULO DO RESULTADO COM O JOGO CADASTRADO
+
+PRÉ--REQUISITO
+Este grupo complementa a base dos Grupos 1, 2, 3 e 4. Aplique-o no mesmo repositório GitHub LL-TV-BRASIL, mantendo a pasta LLTV_Brasil_Placar_Pro.
+
+ARQUIVOS DESTE GRUPO
+1. LLTV_Brasil_Placar_Pro/public/app.js
+2. LLTV_Brasil_Placar_Pro/public/style.css
+
+INSTALAÇÃO PELO SITE DO GITHUB
+1. Abra o repositório LL-TV-BRASIL.
+2. Entre em LLTV_Brasil_Placar_Pro/public/.
+3. Abra app.js e substitua o conteúdo pelo app.js deste grupo. Faça o mesmo com style.css.
+4. Salve cada arquivo com Commit changes.
+5. Aguarde o Render concluir a publicação automática, se o serviço estiver conectado ao repositório.
+
+O QUE FOI IMPLEMENTADO
+- Botão individual EXIBIR NO PLACAR ao lado de cada jogo cadastrado.
+- O botão também aparece na listagem filtrada e na lista geral de jogos (mesma listagem).
+- Ao selecionar, carrega a partida, equipes, escudos, cores, competição, fase/rodada, estádio, data e resultado salvo.
+- A partida carregada fica destacada na lista com a indicação EXIBIDO NO PLACAR.
+- Quando os gols são alterados pelos botões +/− do placar, o resultado é sincronizado com o mesmo registro da partida cadastrada.
+- Quando o placar do jogo ativo é salvo pela edição na lista, o painel do placar também recebe os gols atualizados.
+- Não cria uma cópia da partida; usa o ID do jogo cadastrado.
+
+IMPORTANTE
+- Não substitua server.js, package.json, data/match.json nem outros arquivos neste grupo.
+- A alteração dos gols no placar é sincronizada automaticamente com o jogo ativo. O encerramento oficial da partida e a atualização da classificação continuam dependendo da definição do status como Encerrado no controle de resultado.
+- Validação realizada: sintaxe JavaScript (node --check). Não foi realizado deploy real no Render nem teste visual no OBS nesta sessão.
