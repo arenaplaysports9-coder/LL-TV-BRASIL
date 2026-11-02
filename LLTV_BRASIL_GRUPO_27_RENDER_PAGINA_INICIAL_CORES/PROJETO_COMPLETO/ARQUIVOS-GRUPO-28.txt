@@ -1,0 +1,8 @@
+Grupo 28 — alterações principais:
+public/index.html
+public/app.js
+public/overlay.html
+public/overlay.js
+public/overlay.css
+LEIA-ME-GRUPO-28.txt
+Todos os demais arquivos do Grupo 27 foram preservados.
