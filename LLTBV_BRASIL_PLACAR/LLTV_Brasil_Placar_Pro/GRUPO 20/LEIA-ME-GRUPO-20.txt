@@ -1,0 +1,22 @@
+LLTV BRASIL PLACAR PRO — GRUPO 20 (ATUALIZADO)
+JOGOS DA RODADA E JOGOS CLASSIFICATÓRIOS DA TAÇA DAS FAVELAS
+
+O que foi acrescentado:
+1) Cadastro manual de jogos da rodada usando equipes já cadastradas na Taça.
+2) Cadastro manual de jogos classificatórios: você escolhe mandante, visitante, categoria, fase, rodada, grupo, data, horário e estádio.
+3) Edição e exclusão individual dos jogos classificatórios; exclusão individual dos jogos da rodada.
+4) Os dois módulos usam exclusivamente as equipes ativas cadastradas na categoria selecionada.
+5) Os jogos permanecem em state.taca.fixtures, separados das competições gerais, e podem ser carregados no placar.
+6) Não existe geração automática de confrontos classificatórios. Você define todos os jogos.
+7) A classificação da Taça continua calculada pelos resultados das partidas finalizadas.
+
+INSTALAÇÃO:
+- Faça backup do projeto e dos dados atuais.
+- Extraia mantendo os caminhos.
+- Substitua somente public/index.html e public/app.js pelos arquivos deste grupo.
+- Preserve server.js, package.json, public/style.css, overlays e a pasta data.
+- Envie os arquivos ao repositório GitHub existente e aguarde o deploy do Render.
+
+VALIDAÇÃO:
+- Verificação sintática do JavaScript e integridade do ZIP.
+- Não foi realizado teste de navegador, OBS ou deploy no Render.
