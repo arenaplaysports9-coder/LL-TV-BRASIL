@@ -34,3 +34,12 @@
 .mini-middle{flex:0 0 108px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#24252a;border-left:1px solid #444;border-right:1px solid #444}
 .mini-middle small{font-size:10px;color:var(--accent,#e4c16a);font-weight:800;white-space:nowrap}.mini-middle time{font-size:var(--mini-clock-size,22px);font-weight:900}
 @media(max-width:800px){.mini-scorebar{width:98%;height:60px}.mini-brand,.mini-round{min-width:0;padding:0 6px;font-size:8px}.mini-team{gap:4px;padding:0 4px}.mini-team span{font-size:clamp(10px,var(--mini-name-size,22px),18px)}.mini-team b{font-size:20px;min-width:20px}.mini-middle{flex-basis:68px}.mini-middle small{font-size:7px}.mini-middle time{font-size:15px}}
+
+/* GRUPO 28 — faixas coloridas sem barras pretas, nomes completos no principal e siglas no mini */
+.scorebar{background:transparent!important;border:0!important;box-shadow:none!important;overflow:hidden}
+.scorebar .side{height:100%;align-self:stretch}
+.scorebar .side.home{background:var(--home-team-bg,#174a2b)!important}
+.scorebar .side.away{background:var(--away-team-bg,#243b70)!important}
+.scorebar .middle{height:100%;align-self:stretch;flex:0 0 108px}
+.scorebar .comp,.scorebar .round{height:100%;align-self:stretch}
+#miniAdded{font-size:9px;font-style:normal;color:#fff;font-weight:800;line-height:1.1}

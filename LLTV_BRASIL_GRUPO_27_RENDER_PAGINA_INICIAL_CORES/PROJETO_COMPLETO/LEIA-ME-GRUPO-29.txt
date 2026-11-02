@@ -1,0 +1,27 @@
+LLTV BRASIL PLACAR PRO — GRUPO 29
+MINI PLACAR SINCRONIZADO E POSICIONAMENTO
+
+ATUALIZAÇÕES
+1. Central de Transmissão: botões para ativar e desativar o Mini Placar.
+2. O Mini Placar substitui o placar principal; os dois não aparecem juntos.
+3. Ambos usam a mesma partida, placar, período, acréscimos e cronômetro.
+4. Painel Partida: posição independente do placar principal e do Mini Placar.
+5. Nove posições predefinidas e ajustes finos horizontal/vertical em pixels.
+6. As posições ficam salvas no estado do sistema e sincronizam com o OBS em tempo real.
+7. Botão para restaurar as posições padrão.
+
+INSTALAÇÃO / GITHUB
+- Este ZIP contém os arquivos diretamente na raiz; extraia e envie o CONTEÚDO para a raiz do repositório, sem criar uma pasta externa.
+- A raiz precisa conter package.json e server.js.
+- Render: Root Directory vazio; Build Command: npm install; Start Command: npm start.
+- Depois do deploy, abra o painel e adicione/atualize a fonte de navegador do OBS para /overlay.html se necessário.
+
+OBS
+- Resolução recomendada: 1280 x 720.
+- Fundo transparente mantido.
+- A posição escolhida é aplicada ao overlay em tempo real.
+
+VALIDAÇÃO EXECUTADA
+- Verificação de sintaxe JavaScript com node --check em app.js, overlay.js e server.js.
+- Integridade do ZIP verificada após a geração.
+- Não foi realizado deploy externo no Render nem teste dentro do OBS nesta sessão.
