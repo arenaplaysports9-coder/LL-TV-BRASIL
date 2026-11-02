@@ -1,0 +1,51 @@
+LLTV BRASIL PLACAR PRO — GRUPO 10
+INTEGRAÇÃO, BACKUP, RESTAURAÇÃO E DIAGNÓSTICO
+
+OBJETIVO
+Este grupo fecha a etapa de integração dos Grupos 7, 8 e 9 e acrescenta ferramentas de segurança dos dados e diagnóstico básico do servidor. Não cria um novo repositório nem uma nova aplicação.
+
+ARQUIVOS DE CÓDIGO DESTE PACOTE
+1. LLTV_Brasil_Placar_Pro/server.js
+2. LLTV_Brasil_Placar_Pro/public/index.html
+3. LLTV_Brasil_Placar_Pro/public/app.js
+
+INSTALAÇÃO NO REPOSITÓRIO LL-TV-BRASIL
+1. Faça download do backup atual do projeto e, se possível, copie também a pasta data.
+2. Abra o mesmo repositório LL-TV-BRASIL no GitHub.
+3. Substitua os três arquivos listados acima, mantendo os caminhos exatamente iguais.
+4. NÃO apague nem substitua package.json, package-lock.json, public/style.css, overlay.html, overlay.css, overlay.js ou a pasta data.
+5. Faça commit das alterações e aguarde o deploy no Render.
+6. Abra o painel, entre em Controles gerais e localize “Backup, restauração e diagnóstico”.
+
+RECURSOS ADICIONADOS
+- Criar backup manual do estado atual.
+- Baixar uma cópia JSON para o computador.
+- Listar backups existentes, tamanho e data.
+- Criar automaticamente um ponto de restauração diário quando o estado é salvo pela primeira vez naquele dia.
+- Retenção padrão de 14 arquivos, configurável pela variável de ambiente BACKUP_RETENTION (limites aceitos: 3 a 60).
+- Criar backup de segurança antes de restaurar outro arquivo.
+- Restaurar backup JSON com validação básica e confirmação.
+- Endpoint /health com versão, armazenamento, quantidade de backups e última atualização.
+- Gravação do estado por arquivo temporário e renomeação atômica para reduzir o risco de arquivo parcialmente gravado.
+- Preserva os dados de competições, times, jogos, rodadas, classificação, ajustes e Taça das Favelas no estado já utilizado pelo projeto.
+
+ENDPOINTS
+GET  /health
+GET  /api/backup/list
+POST /api/backup/create
+GET  /api/backup/download
+POST /api/backup/restore
+
+ATENÇÃO SOBRE HOSPEDAGEM E SEGURANÇA
+- Os backups são gravados em LLTV_Brasil_Placar_Pro/data/backups.
+- Em hospedagem com sistema de arquivos temporário, os backups locais podem desaparecer em reinicializações ou novos deploys. Para retenção real no Render, configure um Persistent Disk e direcione a pasta de dados para ele conforme a configuração do serviço. Baixe também cópias JSON para o computador.
+- A restauração substitui o estado atual. O sistema cria uma cópia de segurança antes da restauração, mas mantenha sempre uma cópia externa.
+- Os endpoints de estado e backup deste projeto não possuem autenticação própria. Não exponha o painel/API diretamente à internet pública sem adicionar autenticação e HTTPS/regras de acesso. Use apenas em ambiente controlado.
+- O backup JSON contém dados cadastrados, nomes, contatos e imagens armazenadas como texto. Proteja o arquivo e não o compartilhe publicamente.
+
+VERIFICAÇÕES FEITAS NESTA ENTREGA
+- node --check server.js: aprovado.
+- node --check public/app.js: aprovado.
+- Conferência estática dos IDs HTML usados pelo JavaScript: sem referências inexistentes.
+- Integridade do arquivo ZIP: verificada.
+- Não foi realizado teste funcional em navegador, OBS ou Render nesta geração. Após o deploy, confira /health, crie um backup, baixe-o e faça teste de restauração com uma cópia, nunca com o único arquivo original.

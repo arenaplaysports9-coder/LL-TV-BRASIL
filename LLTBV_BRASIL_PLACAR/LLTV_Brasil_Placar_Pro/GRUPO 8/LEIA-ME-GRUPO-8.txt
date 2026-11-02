@@ -1,0 +1,42 @@
+LLTV BRASIL PLACAR PRO — GRUPO 8
+CLASSIFICAÇÃO, CRITÉRIOS DE DESEMPATE E AJUSTES ADMINISTRATIVOS
+
+CONTEÚDO
+- LLTV_Brasil_Placar_Pro/public/index.html
+- LLTV_Brasil_Placar_Pro/public/app.js
+
+INSTALAÇÃO
+1. Faça backup do projeto atual e do arquivo de dados data/match.json.
+2. Extraia este ZIP mantendo a pasta LLTV_Brasil_Placar_Pro.
+3. No repositório LL-TV-BRASIL, substitua somente public/index.html e public/app.js pelos arquivos deste grupo.
+4. Preserve server.js, package.json, data/, overlay.html, overlay.css, overlay.js e os demais arquivos já existentes.
+5. Faça commit/push e aguarde a implantação no Render.
+6. Abra o painel, acesse Classificação e confira as regras, tabela e ajustes.
+
+RECURSOS
+- Tabela calculada a partir de partidas encerradas e WO.
+- Filtros por competição, fase e grupo.
+- Configuração da pontuação por vitória, empate e derrota.
+- Ordem configurável dos critérios de desempate: points, wins, draws, losses, gd, gf, ga, percent, name.
+- Ajustes administrativos separados dos resultados das partidas.
+- Ajustes por equipe, competição e, opcionalmente, fase/grupo.
+- Histórico de auditoria para ajustes aplicados e removidos.
+- Exclusão de ajuste exige confirmação e preserva o registro no histórico.
+
+OBSERVAÇÕES IMPORTANTES
+- O Grupo 8 é um patch para a estrutura do Grupo 7. Não é um projeto independente.
+- Os dados continuam sendo gravados pelo mecanismo de estado existente do servidor em data/match.json. Em hospedagem Render, confirme que o serviço possui disco persistente ou banco de dados configurado; o filesystem efêmero não garante dados após novo deploy/reinicialização.
+- A classificação considera somente partidas com status finished, wo_home ou wo_away.
+- Os critérios de desempate devem ser configurados conforme o regulamento de cada competição.
+
+TESTES EXECUTADOS NESTA ENTREGA
+- node --check em public/app.js: aprovado.
+- node --check em server.js: aprovado (arquivo preservado do Grupo 7).
+- Verificação dos IDs de interface referenciados pelo Grupo 8: realizada.
+- Integridade do ZIP: verificada após compactação.
+
+NÃO TESTADO NESTA ENTREGA
+- Teste visual em navegador/telefone.
+- Teste de transmissão no OBS.
+- Deploy real no Render.
+- Persistência real após reinício no ambiente de produção.

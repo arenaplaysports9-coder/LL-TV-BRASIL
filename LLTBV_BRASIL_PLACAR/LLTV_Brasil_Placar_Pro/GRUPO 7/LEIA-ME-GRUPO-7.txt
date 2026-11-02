@@ -1,0 +1,50 @@
+LLTV BRASIL PLACAR PRO — GRUPO 7
+Rodadas, partidas e classificatórias
+
+CONTEÚDO
+Este pacote atualiza a base V5.1 e incorpora a implementação do Grupo 5 (botão individual EXIBIR NO PLACAR) junto com os recursos do Grupo 7:
+- cadastro, edição e exclusão de rodadas, com competição, fase, grupo, data e situação;
+- edição de partidas existentes sem gerar novo registro;
+- duplicação de partidas;
+- manutenção da lista de jogos e do botão EXIBIR NO PLACAR por partida;
+- criação de confrontos de uma fase eliminatória a partir de equipes selecionadas manualmente;
+- opção de jogo único ou ida e volta;
+- persistência dos cadastros de rodadas e configurações de fases no arquivo de estado existente.
+
+DEPENDÊNCIA
+O módulo utiliza os cadastros de competições e equipes já existentes no projeto (Grupo 6). Se o Grupo 6 ainda não tiver sido instalado, as listas dependerão dos cadastros atualmente disponíveis na versão instalada. O pacote não cria outro repositório nem outra aplicação.
+
+ARQUIVOS DO PACOTE — SUBSTITUIR NO MESMO CAMINHO
+1. LLTV_Brasil_Placar_Pro/server.js
+2. LLTV_Brasil_Placar_Pro/public/index.html
+3. LLTV_Brasil_Placar_Pro/public/app.js
+4. LLTV_Brasil_Placar_Pro/public/style.css
+
+O arquivo LEIA-ME-GRUPO-7.txt é apenas instrucional e pode ficar fora da pasta do projeto.
+
+INSTALAÇÃO PELO SITE DO GITHUB
+1. Faça uma cópia de segurança do projeto atual.
+2. Abra o repositório LL-TV-BRASIL.
+3. Entre na pasta LLTV_Brasil_Placar_Pro.
+4. Substitua os quatro arquivos acima, respeitando exatamente os caminhos.
+5. Faça commit das alterações.
+6. Aguarde o Render concluir o deploy.
+7. Abra o painel e acesse Jogos e rodadas.
+
+PERSISTÊNCIA
+Os novos dados são gravados no estado JSON já utilizado pelo servidor, nas propriedades rounds e phaseConfigs. Em hospedagens com sistema de arquivos efêmero, como configurações padrão de algumas instâncias do Render, os dados locais podem não sobreviver a uma recriação da instância. Para persistência durável na nuvem é necessário disco persistente ou banco de dados externo configurado.
+
+TESTES REALIZADOS NESTE PACOTE
+- verificação sintática de server.js com node --check;
+- verificação sintática de public/app.js com node --check;
+- conferência dos arquivos e caminhos do pacote;
+- validação de integridade do ZIP.
+
+NÃO TESTADO NESTA ENTREGA
+- interação visual em navegador real;
+- transmissão ao vivo e Browser Source em OBS;
+- deploy efetivo no Render;
+- persistência após reinicialização em ambiente hospedado.
+
+OBSERVAÇÃO
+A geração automática cria os confrontos na ordem em que as equipes forem selecionadas. Ela não presume classificação por regulamento nem decide automaticamente os classificados. Confira e valide os confrontos antes de utilizar na competição.

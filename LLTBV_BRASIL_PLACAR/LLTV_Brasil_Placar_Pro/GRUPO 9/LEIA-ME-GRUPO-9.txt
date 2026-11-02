@@ -1,0 +1,31 @@
+LLTV BRASIL PLACAR PRO — GRUPO 9
+PAINEL INDEPENDENTE DA TAÇA DAS FAVELAS
+
+CONTEÚDO DO PACOTE
+- LLTV_Brasil_Placar_Pro/public/index.html
+- LLTV_Brasil_Placar_Pro/public/app.js
+
+INSTALAÇÃO
+1. Faça backup da versão atual do repositório LL-TV-BRASIL.
+2. Extraia este ZIP.
+3. No repositório, substitua somente public/index.html e public/app.js pelos arquivos deste pacote, mantendo os caminhos.
+4. Não substitua server.js, package.json, overlay.html, overlay.css ou overlay.js.
+5. Faça commit e aguarde o deploy do Render.
+
+RECURSOS DO GRUPO 9
+- Painel Taça das Favelas separado dos arrays de competições gerais.
+- Categorias masculina, feminina e outra configurável.
+- Parâmetros de idade mínima/máxima e limites de elenco configuráveis por edição.
+- Cadastro de comunidades/equipes, atletas e comissão técnica.
+- Arquivamento de edições e seleção de edição arquivada.
+- Cadastro independente de partidas da Taça: fase, rodada, grupo, equipes, data, hora e estádio.
+- Botão EXIBIR NO PLACAR para cada partida da Taça.
+- Atualização do resultado na partida original da Taça quando o placar é alterado.
+- Classificação por categoria/grupo com pontos, jogos, vitórias, empates, derrotas, gols pró/contra e saldo.
+
+OBSERVAÇÕES IMPORTANTES
+- O pacote contém 2 arquivos de código e 1 instrução, abaixo de 100 arquivos.
+- A atualização preserva o formato de estado já utilizado pelo projeto (Socket.IO patch). Ela depende do servidor atual continuar aceitando e persistindo o objeto state.taca.
+- O arquivo de edições é um snapshot de segurança/arquivo dentro do módulo; ao selecionar uma edição arquivada, a edição atualmente aberta é arquivada antes de carregar a selecionada.
+- A tabela computa os jogos marcados como encerrados. WO deve ser registrado como resultado encerrado na partida; regras especiais de WO podem exigir configuração adicional no regulamento.
+- Não foi possível testar visualmente em navegador, OBS ou Render nesta geração. Foram feitas verificações estáticas e de integridade do pacote.
