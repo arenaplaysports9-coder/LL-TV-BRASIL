@@ -1,0 +1,40 @@
+LLTV BRASIL STUDIO 3.0.1
+========================
+
+PACOTE CONSOLIDADO
+Esta entrega utiliza como base integral a versão cumulativa 2.14.0 (interface de estúdio OBS) e mantém os módulos, arquivos e dados de exemplo já presentes nessa base. As notas de versões anteriores incluídas no pacote documentam a evolução do projeto; elas não significam que cada recurso anunciado esteja conectado a uma API externa ou validado em hardware real.
+
+MÓDULOS PRESENTES NA BASE
+- Central de transmissão/estúdio, fontes, retorno e integração com FFmpeg.
+- Placar, overlay, construtor de placar e saída para navegador.
+- Gerenciador de mídia/escudos e elencos.
+- Competições e Taça das Favelas.
+- Estatísticas, Web TV, narrador e painel móvel.
+- Agendamento e integrações administrativas.
+- Gestão, SaaS, cobrança/Asaas, atendimento e WhatsApp.
+- Segurança administrativa e autenticação TOTP de dois fatores.
+
+MELHORIA 3.0.1 — CONFIGURAÇÃO 2FA
+- O QR Code é gerado para o cadastro inicial do autenticador.
+- Se a configuração inicial estiver pendente e a página for reaberta, o servidor reutiliza o mesmo segredo pendente; não cria outro QR/segredo.
+- Depois de ativado, o endpoint de configuração recusa novo cadastro e não substitui o segredo ativo.
+- O autenticador instalado no celular gera novos códigos TOTP automaticamente (janela padrão de 30 segundos). Não é necessário escanear novamente em cada login.
+- O segredo é mantido criptografado pelo mecanismo AES-256-GCM já existente no servidor.
+
+INSTALAÇÃO
+1. Extraia a pasta do ZIP para um local permanente.
+2. Instale Node.js 18 ou superior.
+3. Execute INSTALAR_DEPENDENCIAS.bat (ou abra um terminal na pasta e rode npm install).
+4. Execute INICIAR_PLACAR.bat.
+5. Abra o painel pelo atalho/arquivo ABRIR_PAINEL.bat, conforme a configuração incluída.
+6. Faça backup da pasta data antes de substituir uma instalação existente. Não sobrescreva data/secret.key nem data/access-token.txt sem compreender o impacto: isso pode invalidar credenciais e dados criptografados.
+
+TESTES EXECUTADOS NESTA ENTREGA
+- npm test: verificações de sintaxe JavaScript de todos os arquivos listados no script passaram.
+- Integridade do ZIP: verificada após empacotamento.
+
+LIMITAÇÕES DE VALIDAÇÃO
+Não foi possível executar teste real de câmeras DirectShow, Iriun, OBS, codificação FFmpeg, transmissão RTMP, APIs externas, cobrança Asaas ou fluxo TOTP em celular neste ambiente. Esses recursos dependem do Windows, hardware, credenciais e serviços externos. Não considere essas integrações homologadas apenas pela presença dos módulos.
+
+VERSÃO: 3.0.1
+Base funcional: 2.14.0

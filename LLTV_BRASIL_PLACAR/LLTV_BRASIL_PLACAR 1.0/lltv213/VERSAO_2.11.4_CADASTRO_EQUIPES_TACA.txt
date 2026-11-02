@@ -1,0 +1,10 @@
+LL TV BRASIL — VERSÃO 2.11.4
+Atualização da Taça das Favelas:
+- Formulário de equipe simplificado: nome e escudo/logotipo opcional.
+- Removidos os campos Favela/Comunidade e Treinador.
+- Mandante e visitante continuam sendo selecionados exclusivamente entre equipes cadastradas na edição ativa.
+- Escudos selecionados do computador, com pré-visualização e limite de 1 MB.
+- Exclusão de equipe bloqueada quando houver confrontos vinculados, preservando histórico e resultados.
+- Mantidos os cadastros, edições, equipes e partidas existentes.
+Verificações: sintaxe JavaScript validada com node --check.
+Não realizado: deploy no Render nem teste autenticado no ambiente publicado.

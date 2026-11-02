@@ -1,0 +1,13 @@
+LL TV BRASIL — VERSÃO 1.8.0
+
+RETORNO REMOTO DA CENTRAL
+- Adicionada ponte WebRTC para publicar a captura da janela/tela PROGRAM e visualizar o retorno em outra aba/dispositivo.
+- O servidor Render atua como sinalizador; o vídeo trafega diretamente entre navegador publicador e visualizadores via WebRTC.
+- O operador precisa clicar em PUBLICAR RETORNO e selecionar a janela/tela correta.
+- O navegador exige HTTPS e permissão explícita de compartilhamento.
+
+LIMITAÇÕES IMPORTANTES
+- A conexão depende de NAT/firewall e STUN; redes restritivas podem exigir servidor TURN.
+- O retorno remoto compartilha a tela/janela escolhida, não captura automaticamente a composição interna de todas as fontes da Central.
+- Para melhor resultado, selecione a janela que exibe o monitor PROGRAM em tela cheia.
+- O processo não inicia sozinho: o navegador exige ação humana para compartilhar a tela.

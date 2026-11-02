@@ -1,0 +1,31 @@
+LL TV BRASIL — VERSÃO 2.5.0
+Atualização de gestão administrativa e atendimento
+
+IMPLEMENTADO NESTA VERSÃO
+- Inclusão da logo oficial LL TV BRASIL nos pontos principais da interface.
+- Central administrativa com indicadores financeiros, despesas, chamados, auditoria e exportação de backup.
+- Cadastro e exclusão de despesas, com cálculo de resultado líquido sobre os pagamentos registrados.
+- Central de atendimento do cliente com abertura, listagem e resposta de chamados vinculados à própria organização.
+- Painel administrativo para responder e alterar status dos chamados.
+- Exportação de backup JSON com omissão de chaves externas e credenciais de transmissão.
+- Validação HMAC SHA-256 da assinatura do webhook do WhatsApp via WHATSAPP_APP_SECRET.
+- Exemplo de variáveis de ambiente para Render/X10.
+- Versão 2.5.0.
+
+CONFIGURAÇÃO OBRIGATÓRIA
+- Configure LLTV_SECRET_KEY persistente (64 caracteres hexadecimais) em produção.
+- Configure WHATSAPP_APP_SECRET junto com WHATSAPP_WEBHOOK_VERIFY_TOKEN para receber webhooks Meta.
+- Configure credenciais reais do Asaas e Meta no painel/ambiente; não incluídas no ZIP.
+- O processo de fila e lembretes depende de worker sempre ativo e armazenamento persistente.
+
+LIMITAÇÕES / ITENS QUE NÃO DEVEM SER CONSIDERADOS PRONTOS PARA PRODUÇÃO
+- 2FA obrigatório para todos os administradores ainda requer fluxo de ativação, recuperação e enforcement em todas as sessões.
+- Backup externo automático e restauração ponta a ponta requerem provedor de armazenamento e credenciais configuradas.
+- Conciliação financeira depende dos eventos e dados reais do Asaas; a tela não substitui conciliação bancária.
+- Campanhas segmentadas e opt-out automatizado completo ainda não estão integrados ao fluxo de contatos.
+- Lembretes automáticos de vencimento precisam de dados de contato/consentimento e templates aprovados cadastrados, além de worker contínuo.
+- Revisão independente de segurança, isolamento multiempresa e testes de carga são necessários antes de uso com dados sensíveis.
+- Não há credenciais reais de Meta/Asaas neste pacote; integração externa só poderá ser validada após configuração.
+
+SEGURANÇA DO PACOTE
+- Arquivos de segredo local e token administrativo não devem ser distribuídos. O servidor os gera no primeiro início ou usa variáveis persistentes do ambiente.

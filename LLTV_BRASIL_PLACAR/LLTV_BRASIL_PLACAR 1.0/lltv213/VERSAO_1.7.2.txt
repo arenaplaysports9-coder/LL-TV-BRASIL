@@ -1,0 +1,13 @@
+LL TV BRASIL BROADCAST SYSTEM — VERSÃO 1.7.2
+
+Novidades:
+- Gerenciamento de cenas com criação, renomeação e exclusão.
+- Fontes por cena e organização de camadas (mostrar/ocultar e reordenar).
+- Fontes de navegador, câmera, vídeo, imagem, texto e fundo de cor.
+- Botão para interagir com fontes de navegador nos monitores.
+- Endereço fixo público da WEB TV: /webtv.html.
+- Configuração de título e URL pública do player no painel da Central.
+
+Limitações técnicas: sites externos podem bloquear iframe; a interação depende das permissões do site.
+A página WEB TV exibe um player HLS direto ou um player externo incorporável.
+Fontes locais de câmera/arquivo não são publicadas automaticamente na internet; para isso é necessário um encoder/servidor de mídia com ingestão e distribuição.

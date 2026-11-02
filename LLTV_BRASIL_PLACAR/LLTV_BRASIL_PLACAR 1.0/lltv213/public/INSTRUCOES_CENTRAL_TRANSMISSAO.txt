@@ -1,0 +1,41 @@
+CENTRAL DE TRANSMISSÃO AO VIVO — LLTV BRASIL
+
+ACESSO
+1. Inicie o sistema normalmente pelo INICIAR_PLACAR.bat.
+2. Abra o Painel pelo endereço seguro exibido no terminal (com ?token=...).
+3. Clique em “Central de transmissão” no topo do painel.
+4. Para câmeras, use localhost ou HTTPS e autorize câmera/microfone no navegador.
+
+RECURSOS IMPLEMENTADOS NESTA VERSÃO
+- Nova central integrada ao painel existente.
+- Cadastro de fontes URL/browser, webcam e vídeo local.
+- Pré-visualização e seleção de programa (corte lógico na interface).
+- Link temporário/revogável de monitor do narrador, com dados do placar em leitura.
+- Cadastro de destinos RTMP/RTMPS e formato desejado.
+- Gravação local no navegador para uma fonte de câmera capturada localmente.
+- Buffer básico de replay durante gravação local.
+- Configuração de saída horizontal/vertical.
+
+LIMITAÇÕES TÉCNICAS IMPORTANTES
+- A mesa de corte desta versão controla a seleção na interface; ela não substitui um mixer/codificador profissional.
+- Sites podem impedir iframe por políticas X-Frame-Options/CSP. Use captura de janela/OBS quando isso ocorrer.
+- RTSP, NDI, HDMI e câmeras profissionais exigem ponte local/driver/serviço de mídia.
+- Cadastro de URL e chave RTMP não inicia uma transmissão sozinho. É necessário codificador/relay FFmpeg/MediaMTX ou outro relay/codificador compatível. Não use Render Free para transcodificação contínua.
+- Gravação e replay do navegador funcionam apenas com faixas de mídia locais compatíveis; não capturam iframe de terceiros por restrições de segurança.
+- Horizontal e vertical estão configuráveis, mas a codificação simultânea independente ainda exige pipeline FFmpeg local.
+- Para produção ao vivo, use computador dedicado e teste áudio, vídeo, rede e direitos de retransmissão antes do evento.
+
+SEGURANÇA E ARMAZENAMENTO
+- Não compartilhe o link administrativo com token.
+- O estado atual do servidor usa data/state.json. Para Render, configure PostgreSQL e armazenamento persistente antes de confiar dados de produção. O disco efêmero do plano gratuito não é backup.
+- Não cadastre chaves de transmissão reais até implantar armazenamento seguro/segredos no backend.
+
+INTEGRAÇÃO OBS WEBSOCKET — DOCUMENTAÇÃO HISTÓRICA
+A integração OBS foi removida na versão 1.5.0 e não faz mais parte da operação da LLTV Brasil.
+
+ATUALIZAÇÃO 1.4.0 — FFmpeg INDEPENDENTE
+Consulte o README.txt na raiz para instalação do FFmpeg, descoberta/teste de encoders, configuração de fontes e uso dos botões INICIAR TRANSMISSÃO e PARAR TRANSMISSÃO. A codificação ocorre no computador que executa o servidor Node.js e não depende do OBS. A captura de câmera do navegador ainda não é ponteada automaticamente ao FFmpeg; use DirectShow, URL compatível ou arquivo local.
+
+
+ATUALIZAÇÃO 1.5.0
+A integração com OBS Studio foi removida. O overlay continua disponível como endpoint gráfico independente para integração futura com o compositor próprio da LLTV Brasil. A seleção Preview/Programa permanece visual e ainda não representa um mixer final de vídeo. A câmera do navegador não é encaminhada automaticamente ao FFmpeg.

@@ -1,0 +1,14 @@
+LL TV BRASIL — VERSÃO 2.10.0
+
+ATUALIZAÇÃO DO MÓDULO DE COMPETIÇÕES
+- Adicionada área independente Taça das Favelas.
+- Cadastro dos 26 estados e Distrito Federal com siglas oficiais.
+- Cadastro manual de cidades por estado.
+- Cadastro de edições por cidade, estado, ano e categoria.
+- Cadastro separado de equipes/comunidades por edição.
+- Cadastro manual de jogos por fase, incluindo classificatória, grupos, oitavas, quartas, semifinal, disputa de terceiro lugar e final.
+- Inclusão de área de mata-mata nas competições tradicionais, usando as equipes já cadastradas.
+- Persistência no objeto competitionManager já armazenado pelo projeto; dados existentes são preservados.
+
+OBSERVAÇÃO
+As cidades, edições e equipes da Taça das Favelas devem ser cadastradas manualmente pelo administrador. Não há sorteio nem criação automática de confrontos.
