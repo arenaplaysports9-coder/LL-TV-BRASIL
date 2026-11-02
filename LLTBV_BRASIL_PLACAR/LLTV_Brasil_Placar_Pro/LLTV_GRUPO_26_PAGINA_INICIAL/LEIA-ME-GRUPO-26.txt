@@ -1,0 +1,30 @@
+LLTV BRASIL PLACAR PRO — GRUPO 26
+PACOTE EXCLUSIVO DA PÁGINA INICIAL COMERCIAL
+
+CONTEÚDO
+public/apresentacao.html       Página inicial comercial
+public/apresentacao.css        Estilo visual responsivo
+public/apresentacao.js         Menu, FAQ, checkout e assistente virtual
+public/checkout-asaas.css      Estilos da janela de contratação
+INTEGRACAO/ROTA-PAGINA-INICIAL.js.txt  Rota necessária no servidor
+
+INSTALAÇÃO NO WINDOWS
+1. Faça uma cópia de segurança da pasta do seu projeto.
+2. Abra a pasta principal do projeto LLTV_Brasil_Placar_Pro.
+3. Entre na pasta public.
+4. Copie para ela os quatro arquivos da pasta public deste pacote, substituindo os arquivos de mesmo nome.
+5. Abra o server.js e confirme que existe, ANTES de app.use(express.static(...)), a rota:
+   app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'public', 'apresentacao.html')));
+   Se não existir, copie a rota do arquivo em INTEGRACAO.
+6. Salve, reinicie o servidor e acesse http://localhost:8787/ .
+
+IMPORTANTE
+Este é um pacote somente da página inicial; não contém o painel do placar nem substitui o projeto completo.
+A página usa /api/billing/checkout e /api/assistant/chat do servidor principal. O checkout depende da configuração válida do Asaas. A assistente pode usar as respostas de FAQ como alternativa quando a IA não estiver configurada.
+Os links /index.html e /area-cliente.html dependem dos arquivos correspondentes já existentes no projeto principal.
+
+CONTEÚDO COMERCIAL
+Inicial: R$ 40,00/mês
+Intermediário: R$ 80,00/6 meses
+Avançado: R$ 100,00/ano
+WhatsApp: (27) 99866-3622 — https://wa.me/5527998663622

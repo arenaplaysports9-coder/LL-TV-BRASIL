@@ -1,0 +1,8 @@
+// Adicione esta rota no server.js ANTES de app.use(express.static(...)):
+app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'public', 'apresentacao.html')));
+
+// Dependências da página:
+// - /api/billing/checkout (checkout Asaas)
+// - /api/assistant/chat (assistente IA/FAQ)
+// - /area-cliente.html e /index.html (links para área do cliente e placar)
+// Esses endpoints precisam existir no servidor principal. Este pacote não substitui server.js.
