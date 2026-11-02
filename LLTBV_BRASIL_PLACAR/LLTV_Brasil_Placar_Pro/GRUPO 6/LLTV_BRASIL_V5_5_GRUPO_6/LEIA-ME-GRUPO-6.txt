@@ -1,0 +1,21 @@
+LLTV BRASIL PLACAR PRO – V5.5 – GRUPO 6
+GERENCIAMENTO DAS COMPETIÇÕES E CADASTRO CENTRAL DE TIMES
+
+Este pacote atualiza somente:
+- LLTV_Brasil_Placar_Pro/public/app.js
+- LLTV_Brasil_Placar_Pro/public/style.css
+
+Instalação: no repositório LL-TV-BRASIL, substitua os dois arquivos correspondentes pelos arquivos deste pacote e faça Commit changes. Aguarde o deploy.
+
+Implementado:
+- Painel central de competições: nome, temporada, organizador, estado/país, categoria, modalidade, regulamento, formato, datas, logotipo e situação ativa/encerrada/suspensa.
+- Cadastro central de times: nome completo/abreviado, cidade, estado, comunidade, categoria, escudo enviado do computador, cores principal/secundária e informações adicionais.
+- Editar, excluir com confirmação, pesquisar e listar cadastros.
+- Times podem ser associados a várias competições pelo mesmo cadastro (IDs de competição), sem duplicar o registro central.
+- Escudos e logotipos ficam guardados como dados de imagem no estado persistido do sistema e podem ser usados pelos painéis que consultam o cadastro do time.
+
+Compatibilidade:
+- Mantém os campos legados usados pelo cadastro de jogos e placar.
+- Não substitui server.js, package.json, banco/arquivo de estado, HTML nem overlay.
+- O armazenamento de imagens depende do limite e da persistência já configurados no servidor. Para muitos escudos ou arquivos grandes, recomenda-se migrar para armazenamento de arquivos dedicado.
+Validação: pacote preparado a partir da V5.4 Grupo 5. Faça teste no ambiente publicado antes de usar em transmissão oficial.
