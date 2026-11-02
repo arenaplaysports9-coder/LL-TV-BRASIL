@@ -172,3 +172,8 @@ Para aplicar no repositório existente, envie os arquivos deste Grupo 3 mantendo
 ## Grupo 24 — Página comercial, atendimento e WhatsApp
 
 A página pública agora abre na rota `/`. O painel operacional permanece em `/index.html`, a área do cliente em `/area-cliente.html` e o overlay OBS em `/overlay.html`. Foram montadas as rotas `/api/billing`, `/api/customer` e `/api/assistant`. Consulte `LEIA-ME-GRUPO-24.txt` para configuração do Asaas e da IA.
+
+
+## Grupo 30 — Cores dos times sincronizadas com o overlay
+
+Ao alterar a cor do mandante ou visitante no Painel Partida, o estado da equipe é atualizado pelo mecanismo de patch em tempo real e o overlay recebe a nova cor automaticamente. Com `teamColorsEnabled` ativo (padrão), a cor definida em `home.color` e `away.color` tem prioridade sobre cores antigas salvas em `customScoreboard.homeBg` e `customScoreboard.awayBg`. Isso evita que uma configuração antiga sobrescreva a escolha atual do operador. Para usar cores personalizadas fixas do placar, desative a opção de cores dos times.

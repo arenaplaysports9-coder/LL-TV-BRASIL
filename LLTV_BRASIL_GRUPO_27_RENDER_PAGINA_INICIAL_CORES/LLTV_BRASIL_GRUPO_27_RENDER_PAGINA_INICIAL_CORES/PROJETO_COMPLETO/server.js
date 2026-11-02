@@ -126,7 +126,7 @@ app.post("/api/backup/restore",(req,res)=>{
     res.json({ok:true,message:"Backup restaurado com sucesso."});
   }catch(e){res.status(400).json({error:"Falha ao restaurar o backup.",detail:e.message});}
 });
-app.get("/health",(_,res)=>res.json({ok:true,app:"LLTV Placar Pro",version:"5.24-grupo24",storage:"filesystem",backupRetention:BACKUP_RETENTION,backupCount:fs.readdirSync(BACKUP_DIR).filter(n=>n.endsWith(".json")).length,updatedAt:state.updatedAt||null}));
+app.get("/health",(_,res)=>res.json({ok:true,app:"LLTV Placar Pro",version:"5.29-grupo29",storage:"filesystem",backupRetention:BACKUP_RETENTION,backupCount:fs.readdirSync(BACKUP_DIR).filter(n=>n.endsWith(".json")).length,updatedAt:state.updatedAt||null}));
 io.on("connection",socket=>{
   socket.emit("state",snapshot());
   socket.on("patch",patch=>{if(!patch||typeof patch!=="object")return;state=mergeDefaults({...state,...patch});broadcast();});
@@ -154,7 +154,7 @@ io.on("connection",socket=>{
 });
 function ips(){const out=[];for(const list of Object.values(os.networkInterfaces()))for(const n of list||[])if(n.family==="IPv4"&&!n.internal)out.push(n.address);return out;}
 server.listen(PORT,"0.0.0.0",()=>{
- console.log("\\nLLTV BRASIL – PLACAR ESPORTIVO PRO v5.0");
+ console.log("\\nLLTV BRASIL – PLACAR ESPORTIVO PRO v5.29");
  console.log(`Painel: http://localhost:${PORT}`);
  ips().forEach(ip=>console.log(`Celular (mesmo Wi-Fi): http://${ip}:${PORT}`));
  console.log(`Overlay OBS: http://localhost:${PORT}/overlay.html\\n`);
