@@ -13,3 +13,12 @@
 .scorebar .side span:not(.crest-fallback){min-width:0;flex:1 1 auto}
 .crest-fallback{display:none;flex:0 0 43px;width:43px;height:43px;align-items:center;justify-content:center;border:1px solid #ffffff80;border-radius:4px;background:#1118;color:#fff;font-size:9px;font-weight:900;letter-spacing:.4px;text-shadow:0 1px 2px #000}
 @media(max-width:800px){.scorebar .side{gap:5px;padding:0 5px}.scorebar .side img,.crest-fallback{flex-basis:30px;width:30px;height:30px}.crest-fallback{font-size:7px}}
+
+
+/* V5.3 - cores das equipes ocupam toda a altura, eliminando as faixas pretas superior e inferior. */
+.scorebar{align-items:stretch}
+.scorebar .side{align-self:stretch;height:auto;min-height:0;margin:0;border:0;border-radius:0;box-sizing:border-box}
+.scorebar .side:not(.away){background:var(--home-team-bg,#174a2b)!important}
+.scorebar .side.away{background:var(--away-team-bg,#243b70)!important}
+.scorebar .middle,.scorebar .comp,.scorebar .round{align-self:stretch;height:auto}
+.scorebar .middle{justify-content:center}

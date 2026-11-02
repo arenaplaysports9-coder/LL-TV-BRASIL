@@ -1,0 +1,20 @@
+LLTV BRASIL PLACAR PRO - V5.3 - GRUPO 4
+
+OBJETIVO
+Preencher integralmente com as cores configuradas para cada equipe as áreas superior e inferior que apareciam pretas acima e abaixo das faixas coloridas do mandante e visitante.
+
+ARQUIVO PARA SUBSTITUIR
+LLTV_Brasil_Placar_Pro/public/overlay.css
+
+COMO ATUALIZAR NO GITHUB
+1. Abra o repositório existente LL-TV-BRASIL.
+2. Entre em LLTV_Brasil_Placar_Pro/public/.
+3. Substitua somente o arquivo overlay.css pelo deste Grupo 4.
+4. Faça Commit changes.
+5. Aguarde o Render concluir o deploy. Depois atualize a fonte de navegador do OBS (recarregar página/cache).
+
+IMPORTANTE
+- Não é um repositório novo.
+- Não substitua server.js, package.json, overlay.html ou overlay.js.
+- O cronômetro central e os blocos dourados de competição/rodada continuam separados.
+- As cores continuam vindo das configurações CSS das equipes (variáveis --home-team-bg e --away-team-bg).
