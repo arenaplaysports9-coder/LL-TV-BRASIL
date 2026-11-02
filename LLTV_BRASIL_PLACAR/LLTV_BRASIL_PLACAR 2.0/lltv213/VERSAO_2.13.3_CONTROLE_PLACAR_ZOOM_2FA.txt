@@ -1,0 +1,13 @@
+LL TV BRASIL — VERSÃO 2.13.3
+
+Atualizações:
+- Controle explícito de ativação/desativação do overlay do placar na Central.
+- Instruções e controles de zoom esportivo destacados.
+- Zoom por Ctrl + roda do mouse nos monitores Preview e Programa.
+- Arraste da imagem continua disponível para reenquadramento; Preview e Programa mantêm ajustes independentes.
+- Sessão administrativa 2FA de até 12 horas após validação TOTP, evitando exigir um código novo a cada salvamento.
+- Painel independente de QR Code/2FA preservado.
+
+Observações:
+- A saída OBS externa depende da integração/ponte de mídia configurada; o zoom nos monitores da Central não equivale, por si só, a controle remoto do OBS.
+- O zoom inteligente é experimental e depende de câmera/vídeo local ativo.

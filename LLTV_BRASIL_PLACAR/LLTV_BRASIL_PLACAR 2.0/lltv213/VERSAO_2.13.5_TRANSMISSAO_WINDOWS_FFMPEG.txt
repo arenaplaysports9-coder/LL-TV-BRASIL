@@ -1,0 +1,11 @@
+LLTV BRASIL — VERSÃO 2.13.5
+TRANSMISSÃO LOCAL WINDOWS / FFMPEG
+
+- Detecção automática de FFmpeg em caminhos comuns do Windows e variável FFMPEG_PATH.
+- Botão para localizar câmeras e microfones DirectShow.
+- Mensagem de erro mais orientativa quando FFmpeg não está instalado.
+- Script INSTALAR_FFMPEG_WINDOWS.bat usando winget.
+- Perfil inicial de bitrate ajustado para 2500 kbps e preset ultrafast para reduzir carga de CPU.
+- Entrada DirectShow com nomes de dispositivos escapados corretamente.
+
+IMPORTANTE: o processo de transmissão captura diretamente uma fonte DirectShow, arquivo ou URL informada. Fontes exclusivas da prévia do navegador não são automaticamente encaminhadas ao FFmpeg. Testar em computador Windows com FFmpeg, câmera, microfone e destinos RTMP reais.

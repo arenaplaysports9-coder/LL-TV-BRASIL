@@ -1,0 +1,6 @@
+LL TV BRASIL – VERSÃO 2.11.1
+Correção da exibição do nome dos estados na gestão da Taça das Favelas.
+- Normalização de nomes de estados em cadastros existentes.
+- Exibição explícita do nome e da sigla UF.
+- Texto orientativo corrigido para cadastro manual.
+- Cache-busting do JavaScript da gestão de competições.

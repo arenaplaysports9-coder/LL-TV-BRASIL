@@ -1,0 +1,11 @@
+LLTV BRASIL - VERSAO 2.13.6
+CORRECAO DO INSTALADOR FFmpeg PARA WINDOWS
+
+- Corrigida a instalacao que dependia exclusivamente do winget.
+- O instalador tenta winget e, se falhar, baixa automaticamente o pacote Essentials do mantenedor Gyan.
+- Instala os executaveis em tools\\ffmpeg\\bin dentro da pasta do projeto.
+- Verifica a execucao do ffmpeg.exe antes de informar sucesso.
+- Nao exige alteracao manual do PATH para o LLTV, pois o servidor ja procura tools\\ffmpeg\\bin\\ffmpeg.exe.
+- Mantidos os demais arquivos e modulos da versao recebida.
+
+Requer Windows 10 ou 11, internet e permissao de escrita na pasta do projeto.

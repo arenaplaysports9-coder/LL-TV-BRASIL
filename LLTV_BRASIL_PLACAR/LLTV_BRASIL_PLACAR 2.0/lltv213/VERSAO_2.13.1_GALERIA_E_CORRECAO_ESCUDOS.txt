@@ -1,0 +1,11 @@
+LL TV BRASIL — VERSÃO 2.13.1
+GALERIA DE ESCUDOS E CORREÇÃO DA SELEÇÃO NO PLACAR
+
+- Galeria visual de escudos abaixo da importação, com pesquisa, miniaturas e metadados.
+- Seleção do mandante e visitante ligada ao identificador real da biblioteca.
+- Pré-visualização individual dos escudos selecionados na configuração da partida.
+- Atualização do placar após selecionar o escudo e persistência no estado da partida.
+- Cache de imagens alterado para revalidar substituições.
+- Corrigido o fluxo de substituição de foto de jogador no banco de reservas.
+
+Armazenamento: data/media-library. Em hospedagem, configure volume persistente para preservar os arquivos entre deploys.

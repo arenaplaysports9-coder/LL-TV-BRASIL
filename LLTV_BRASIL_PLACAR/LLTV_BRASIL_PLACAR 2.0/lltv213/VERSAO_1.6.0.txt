@@ -1,0 +1,17 @@
+LLTV BRASIL — BROADCAST SYSTEM 1.6.0
+====================================
+Base preservada: versão 1.5.0 recebida do usuário.
+
+Implementado nesta atualização:
+- Fundação SaaS multi-tenant persistente em data/saas.json.
+- Cadastro de emissoras pelo Super Admin.
+- Criação de usuário proprietário com senha derivada por scrypt.
+- Login de clientes e sessão Bearer com expiração.
+- Isolamento no backend dos registros por tenant.
+- CRUD de registros de partidas, equipes, competições, transmissões, patrocinadores e biblioteca.
+- Gestão inicial de planos e suspensão/reativação de clientes.
+- Painel web em /saas.html.
+- Atalho SaaS adicionado ao painel principal.
+- Endpoint de saúde atualizado para versão 1.6.0.
+
+Limitações conhecidas: pagamentos recorrentes, mixer audiovisual completo, Replay multicâmera, VAR oficial, WEB TV pública de streaming, aplicativos nativos, upload de mídia em storage externo, domínios white-label automatizados e relay RTMP não estão implementados nesta versão. OBS WebSocket foi descontinuado na base 1.5.0 e permanece desativado. A Central e FFmpeg continuam sujeitos às limitações descritas no README.

@@ -1,0 +1,15 @@
+LL TV BRASIL BROADCAST SYSTEM — VERSÃO 1.7.1
+
+Atualizações:
+- Monitores de pré-visualização e programa ampliados em proporção 16:9.
+- Vídeos locais usam preenchimento do monitor para evitar imagem reduzida com bordas.
+- Controle global para ativar/desativar o overlay junto ao botão de copiar link.
+- Zoom esportivo central (recorte digital central de 1,35x).
+- Zoom inteligente experimental por análise de movimento em câmeras e vídeos locais.
+
+Limitações do zoom inteligente:
+- Requer câmera ou vídeo local reproduzido no monitor.
+- Não analisa iframe/páginas externas por restrições de segurança do navegador.
+- É um enquadramento automático simples por movimento, não rastreamento profissional de bola/jogadores por IA.
+
+Instalação: faça backup, extraia o ZIP, execute npm install e npm start.

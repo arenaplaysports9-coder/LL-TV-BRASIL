@@ -1,0 +1,7 @@
+LL TV BRASIL — VERSÃO 2.13.2
+
+NOVO: painel de segurança separado na Central de Transmissão, com geração de QR Code TOTP, chave manual, ativação e validação do código de seis dígitos para a sessão.
+
+CORREÇÃO: a Central passa a enviar o código 2FA no cabeçalho X-LLTV-OTP nas chamadas administrativas, permitindo salvar câmeras e demais fontes quando a autenticação em duas etapas está ativada.
+
+O QR Code é gerado pelo servidor. Requer dependência qrcode instalada (npm install).

@@ -1,0 +1,17 @@
+LLTV BRASIL PLACAR — VERSÃO 2.13.9
+CONTROLE DE VOLUME, MUTE DOS ESPECTADORES E MONITORAMENTO LOCAL
+
+- Controle de volume enviado aos espectadores: 0% a 200%.
+- Botão para mutar/reativar o áudio da transmissão.
+- Volume local independente para ouvir no fone ou alto-falantes padrão do Windows.
+- Botão para mutar/reativar somente o monitoramento local.
+- Monitoramento local reproduz o microfone selecionado no dispositivo de saída padrão do Windows.
+- O volume local não altera o áudio enviado aos espectadores.
+- A mixagem de volume da transmissão é aplicada no FFmpeg para entrada DirectShow com microfone selecionado.
+- Quando nenhum microfone DirectShow for selecionado, a transmissão permanece sem áudio da câmera/microfone.
+
+NOTAS:
+- O monitoramento local pode causar eco/microfonia se o som sair pelos alto-falantes e voltar ao microfone; recomenda-se fone de ouvido.
+- A saída de monitoramento usa a saída padrão configurada no Windows; escolha fone ou alto-falantes em Configurações > Sistema > Som.
+- Alterações no volume dos espectadores são aplicadas ao iniciar a transmissão; para alterar durante uma transmissão, pare e inicie novamente.
+- A execução real deve ser validada no Windows com o Iriun e o microfone selecionados.

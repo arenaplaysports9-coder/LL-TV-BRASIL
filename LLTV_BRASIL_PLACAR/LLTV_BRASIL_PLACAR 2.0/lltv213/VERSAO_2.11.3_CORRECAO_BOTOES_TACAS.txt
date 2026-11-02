@@ -1,0 +1,2 @@
+LL TV BRASIL — Versão 2.11.3
+Correções na Taça das Favelas: normalização de edições/cidades/equipes/jogos legados; seleção automática da edição recém-cadastrada; mensagens claras quando uma edição precisa ser selecionada; atualização de cache do JavaScript.

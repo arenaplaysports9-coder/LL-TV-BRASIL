@@ -1,0 +1,9 @@
+VERSÃO 2.11.2 — ESTADO PREENCHIDO MANUALMENTE NA TAÇA DAS FAVELAS
+
+- O campo Estado no cadastro de cidades agora aceita digitação manual.
+- O campo Estado no cadastro de edições agora aceita digitação manual.
+- O campo Cidade da edição também aceita digitação manual, sem depender de uma lista cadastrada.
+- A seleção de edição, equipes e confrontos permanece integrada ao sistema.
+- Cache do arquivo competitions.js atualizado para evitar carregar a versão anterior.
+
+Observação: esta atualização foi verificada com node --check no arquivo competitions.js. Ainda precisa ser enviada ao GitHub/Render para entrar no site publicado.

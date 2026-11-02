@@ -1,0 +1,8 @@
+LL TV BRASIL — VERSÃO 2.8.1
+CORREÇÃO DE ACESSO ADMINISTRATIVO
+
+Corrigida a validação de autenticação em duas etapas que podia bloquear operações administrativas mesmo quando o administrador ainda não havia configurado o recurso.
+
+O token administrativo continua obrigatório. Quando a autenticação de dois fatores estiver ativada, o código OTP continua obrigatório. Para exigir a configuração de 2FA desde a inicialização, configure LLTV_ADMIN_2FA_REQUIRED=true.
+
+Nenhuma funcionalidade de câmeras, fontes, placar ou módulos existentes foi removida.

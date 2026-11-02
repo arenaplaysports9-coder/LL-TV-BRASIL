@@ -1,0 +1,29 @@
+LL TV BRASIL — VERSÃO 2.9.0
+NOVOS PAINÉIS: AUTENTICAÇÃO 2FA E CENTRAL DE APIs
+
+NOVO PAINEL 2FA
+- Página administrativa exclusiva /seguranca-2fa.html.
+- Geração de segredo TOTP e URI otpauth compatível.
+- QR Code gerado no servidor pela dependência qrcode.
+- Chave manual para cadastro em aplicativo autenticador.
+- Confirmação do código antes da ativação.
+- Segredo armazenado criptografado com LLTV_SECRET_KEY.
+- Códigos de recuperação de uso único (hash SHA-256), com regeneração mediante TOTP.
+- Desativação exige código válido.
+- Validação administrativa usa o segredo descriptografado somente no servidor.
+
+CENTRAL DE APIs
+- Página administrativa exclusiva /apis-admin.html.
+- Cadastro por plataforma: Google, YouTube, Meta, Facebook, Instagram, TikTok, Twitch, X, LinkedIn, Kick e Outra.
+- Campos dinâmicos/optativos para Client ID/Secret, API Key, tokens, App ID/Secret, Redirect URI, Webhooks e RTMP.
+- Segredos criptografados no armazenamento; listagem retorna apenas indicadores, nunca valores secretos.
+- Edição, ativação/desativação e exclusão.
+- Registro em auditoria.
+- O botão de teste não simula conexão: informa que o adaptador oficial ainda é necessário.
+
+IMPORTANTE
+- Esta versão entrega os painéis de cadastro e proteção descritos acima, não declara implementados adaptadores OAuth/API completos para todas as redes sociais.
+- Cada plataforma ainda exige adaptador oficial, permissões, credenciais válidas e testes com conta real para conexão, publicação ou agendamento.
+- A dependência qrcode será instalada pelo comando npm install durante o deploy.
+- Preserve LLTV_SECRET_KEY existente e o armazenamento persistente data/saas.json.
+- Após deploy, abra Gestão Administrativa e utilize os links dos novos painéis.

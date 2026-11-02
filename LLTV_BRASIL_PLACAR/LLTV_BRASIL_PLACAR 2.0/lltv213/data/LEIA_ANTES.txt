@@ -1,0 +1,4 @@
+A pasta data guarda arquivos locais e credenciais geradas pelo servidor.
+O servidor criará os arquivos necessários na primeira inicialização.
+Não publique secret.key, access-token.txt, state.json ou saas.json.
+Em hospedagem, configure LLTV_SECRET_KEY persistente no ambiente.

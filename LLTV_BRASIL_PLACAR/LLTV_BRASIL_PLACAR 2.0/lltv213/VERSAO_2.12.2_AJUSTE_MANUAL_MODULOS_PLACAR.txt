@@ -1,0 +1,10 @@
+LL TV BRASIL — VERSÃO 2.12.2
+
+Ajustes nos módulos inferiores do placar:
+- Banco de reservas separado.
+- Substituições do mandante e visitante em blocos independentes.
+- Arbitragem e equipe de transmissão em blocos separados.
+- Controles manuais independentes para mover para cima/baixo/esquerda/direita e aumentar/diminuir cada bloco.
+- Posições e dimensões salvas no estado do servidor e aplicadas no overlay.
+
+Arquivos alterados: public/panel.html, public/panel.js, public/overlay.html, public/overlay.js e public/style.css.

@@ -1,0 +1,11 @@
+LL TV BRASIL — VERSÃO 2.12.1
+INTEGRAÇÃO DOS CONFRONTOS DA TAÇA DAS FAVELAS AO PLACAR
+
+- Adicionado o botão “Exibir no Placar” em cada confronto cadastrado na edição ativa da Taça das Favelas.
+- Ao selecionar, carrega equipes, escudos, competição, fase/rodada, data, horário, estádio/cidade e placar atual no placar principal.
+- O confronto fica vinculado pelo identificador da edição e da partida.
+- Ao alterar os gols pelos controles do placar, o resultado é sincronizado no confronto original da Taça das Favelas e salvo no servidor.
+- Mantidos os cadastros e os recursos existentes.
+
+Validações realizadas nesta preparação: sintaxe JavaScript (Node.js) e integridade do ZIP.
+Não foi realizado teste de navegador/produção nem deploy automático. Após publicar no servidor, validar a seleção de um confronto real e a atualização dos gols.

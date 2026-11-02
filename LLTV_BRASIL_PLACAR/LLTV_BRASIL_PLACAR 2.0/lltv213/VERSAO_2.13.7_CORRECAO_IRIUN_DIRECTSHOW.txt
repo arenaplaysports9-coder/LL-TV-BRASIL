@@ -1,0 +1,12 @@
+LLTV BRASIL PLACAR — VERSÃO 2.13.7
+CORREÇÃO DE CAPTURA IRIUN / DIRECTSHOW
+
+- Aumentado o buffer DirectShow para 128 MB e mantida fila de captura de 512 quadros.
+- Captura DirectShow passa a receber resolução e FPS configurados no painel.
+- Ao iniciar a transmissão por DirectShow, o painel libera as faixas de câmera abertas pela prévia do navegador, evitando disputa de acesso com o FFmpeg.
+- Ao parar a transmissão ou quando o FFmpeg encerra, o painel tenta reabrir a câmera usada na prévia/PROGRAM.
+- O painel passa a exibir até 5.000 caracteres do log do FFmpeg e a mensagem final inclui as últimas linhas para facilitar diagnóstico.
+
+IMPORTANTE: enquanto o FFmpeg utiliza a câmera Iriun diretamente pelo DirectShow, a prévia da câmera no navegador pode ficar pausada. Ela será reaberta quando a transmissão parar. Esta versão mantém o envio RTMP pelo FFmpeg local; não transforma o navegador em uma ponte de vídeo para o FFmpeg.
+
+Teste realizado nesta preparação: verificações de sintaxe Node.js e teste automatizado do projeto. A execução real do Iriun/FFmpeg deve ser confirmada no computador Windows do usuário.

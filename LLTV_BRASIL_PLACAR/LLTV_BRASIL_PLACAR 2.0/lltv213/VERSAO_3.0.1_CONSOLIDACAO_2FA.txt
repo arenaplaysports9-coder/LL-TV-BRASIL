@@ -1,0 +1,6 @@
+LLTV BRASIL STUDIO 3.0.1
+Consolidação da base cumulativa 2.14.0 e correção da configuração TOTP.
+
+A rota de configuração 2FA agora é idempotente: reutiliza um segredo pendente e impede gerar outro QR quando o 2FA já está ativo. O painel indica que o QR é apenas para o cadastro inicial. O código temporário continua sendo renovado automaticamente pelo aplicativo autenticador.
+
+Preservados os módulos e arquivos da base 2.14.0. Ver LEIA-ME-LLTV-BRASIL-STUDIO-3.0.1.txt para escopo e limitações.

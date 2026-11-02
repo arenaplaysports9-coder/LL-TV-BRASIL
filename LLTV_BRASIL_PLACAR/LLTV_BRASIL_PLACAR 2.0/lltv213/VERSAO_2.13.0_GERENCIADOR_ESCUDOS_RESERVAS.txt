@@ -1,0 +1,13 @@
+LL TV BRASIL — VERSÃO 2.13.0
+GERENCIADOR DE ESCUDOS E BANCOS DE RESERVAS
+
+- Biblioteca de escudos PNG, JPG e WebP importados do computador.
+- Cadastro de nome, país e competição; edição e exclusão.
+- Seleção dos escudos do mandante e visitante pela biblioteca.
+- Banco de reservas independente por equipe, com número, nome, foto, visibilidade e ordenação.
+- Imagens servidas pelo próprio servidor para o overlay/OBS.
+- Arquivos armazenados em data/media-library/ESCUDOS e data/media-library/JOGADORES/{MANDANTE,VISITANTE}.
+
+PERSISTÊNCIA: em hospedagem com disco efêmero, configure um disco persistente montado em data (Render) ou armazenamento persistente equivalente no x10. Sem disco persistente, os arquivos podem ser perdidos em novo deploy/reinicialização do serviço.
+
+OBS: o overlay usa URLs locais do próprio serviço, não caminhos C:\ do computador. Para armazenamento estritamente no PC operador enquanto o painel está hospedado, ainda será necessário instalar um agente local; esta versão armazena no volume persistente do servidor.

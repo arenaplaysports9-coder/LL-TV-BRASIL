@@ -1,0 +1,11 @@
+LLTV BRASIL PLACAR — VERSÃO 2.13.8
+SELEÇÃO MANUAL DE DISPOSITIVOS DIRECTSHOW
+
+- Os campos de vídeo e áudio DirectShow agora são listas de seleção manual.
+- O botão LOCALIZAR CÂMERAS E MICROFONES carrega os nomes detectados pelo FFmpeg.
+- Nenhuma câmera ou microfone é selecionado automaticamente.
+- O áudio pode ficar sem seleção (opcional).
+- A transmissão exige que o operador escolha explicitamente a câmera.
+- O nome escolhido é enviado sem substituição ao FFmpeg.
+
+Para usar: clique em LOCALIZAR CÂMERAS E MICROFONES, escolha a câmera e, se desejar, o microfone. Depois inicie a transmissão.

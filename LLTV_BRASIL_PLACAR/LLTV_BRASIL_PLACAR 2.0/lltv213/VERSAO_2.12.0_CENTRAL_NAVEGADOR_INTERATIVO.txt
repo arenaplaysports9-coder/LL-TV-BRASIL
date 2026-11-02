@@ -1,0 +1,9 @@
+LL TV BRASIL — VERSÃO 2.12.0
+Central de Transmissão: painel integrado de interação com fonte de navegador.
+
+- Botão abre/fecha painel interno do operador.
+- Seleção de fontes de navegador cadastradas.
+- Carregamento de URL HTTP/HTTPS, recarga, voltar/avançar quando permitido e tela ampliada.
+- Interação por mouse/teclado diretamente no iframe quando o site permite incorporação.
+
+Limitação técnica: sites que bloqueiam iframe por X-Frame-Options ou Content-Security-Policy não podem ser incorporados por este painel web. Esta versão não inclui agente desktop/local nem integração completa com OBS WebSocket. Não considerar essas funções implementadas.

@@ -1,0 +1,14 @@
+LL TV BRASIL — VERSÃO 2.14.0
+INTERFACE DE ESTÚDIO INSPIRADA NO OBS STUDIO
+
+Atualização visual da Central de Transmissão:
+- Prévia e Programa lado a lado.
+- Painel central de transições rápidas e duração configurável.
+- Áreas de Cenas, Fontes e Mixer de Áudio destacadas como docks de produção.
+- Tema escuro cinza inspirado na organização visual do OBS Studio, com detalhes dourados LLTV.
+- Mantidos os módulos anteriores de fontes, cenas, zoom, placar, áudio, gravação, replay, FFmpeg e destinos RTMP.
+
+NOTA TÉCNICA:
+Esta atualização reorganiza a interface e conecta os botões visuais aos controles já existentes. Não transforma a aplicação em uma cópia funcional integral do OBS; a codificação/RTMP continua dependente do FFmpeg e das fontes suportadas pelo projeto.
+
+Validação: verificação de sintaxe e integridade do pacote executada no ambiente de desenvolvimento. Teste real de câmera, áudio e transmissão no Windows ainda necessário.

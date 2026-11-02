@@ -1,0 +1,9 @@
+
+
+ATUALIZAÇÃO DE DESENVOLVIMENTO — SAAS FOUNDATION
+- Adicionada persistência SaaS separada em data/saas.json.
+- Adicionado cadastro administrativo de emissoras com usuário proprietário e senha protegida por scrypt.
+- Adicionado login de clientes com sessões Bearer e expiração.
+- Adicionado isolamento por tenant para registros de partidas, equipes, competições, transmissões, patrocinadores e biblioteca.
+- Adicionado gerenciamento inicial de planos e status de clientes no painel SaaS.
+- Adicionado painel web em /saas.html.

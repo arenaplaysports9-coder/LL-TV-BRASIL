@@ -1,0 +1,26 @@
+LL TV BRASIL — VERSÃO 2.6.0
+
+NOVOS MÓDULOS
+- Autenticação administrativa TOTP (compatível com aplicativos autenticadores): geração de segredo, confirmação, ativação e desativação com código válido. Quando ativada, todas as rotas administrativas que usam o token principal também exigem x-lltv-otp.
+- Página public/seguranca-automacao.html para configuração do 2FA, campanhas e backups.
+- Backup externo automático diário via WebDAV, com histórico, envio manual, leitura de arquivo remoto e restauração com confirmação explícita.
+- Backups preservam dados e segredos já criptografados; state.json é serializado com criptografia de chaves de destinos. A restauração requer a mesma LLTV_SECRET_KEY.
+- Cadastro de contatos com opt-in e segmentos; campanhas usam somente contatos consentidos e não descadastrados.
+- Descadastramento por endpoint público e palavras STOP, SAIR, PARAR, CANCELAR ou REMOVER recebidas no webhook Meta validado por HMAC. Envios pendentes são cancelados.
+- Worker de lembretes de assinatura para 7, 3, 1, 0 e -1 dia, com deduplicação, contato vinculado à organização, opt-in e modelo Meta aprovado.
+- Verificação de opt-out novamente no momento do processamento da fila.
+- Verificações de organização válida ao abrir chamados administrativos e manutenção dos filtros por tenant na área do cliente.
+
+CONFIGURAÇÃO
+1. Copie .env.example e configure LLTV_SECRET_KEY persistente (64 caracteres hexadecimais).
+2. Configure BACKUP_WEBDAV_URL, BACKUP_WEBDAV_USER e BACKUP_WEBDAV_PASSWORD para um diretório WebDAV HTTPS com permissão de gravação/leitura. O backup diário ocorre enquanto o processo Node estiver ativo.
+3. Abra /seguranca-automacao.html?token=SEU_TOKEN_ADMIN, configure aplicativo TOTP e ative o 2FA. Depois de ativado, as chamadas administrativas exigem x-lltv-otp.
+4. Cadastre contatos apenas com consentimento comprovado. Para lembretes, informe tenantId e cadastre modelo em WhatsApp com purpose=billing_reminder, daysBefore (7,3,1,0,-1) e metaApprovedName exatamente igual ao modelo aprovado na Meta.
+5. Configure WHATSAPP_APP_SECRET e WHATSAPP_WEBHOOK_VERIFY_TOKEN no painel da Meta para validar webhooks e receber pedidos de descadastramento.
+6. Use somente modelos aprovados pela Meta para mensagens iniciadas pela empresa; respeite categorias, janela de atendimento e políticas Meta.
+
+LIMITES IMPORTANTES
+- Backup externo e restauração remota exigem credenciais WebDAV válidas. Sem elas, o sistema não pode provar upload/restauração externa; o endpoint informa erro em vez de simular sucesso.
+- O agendador roda dentro do processo Node. Em hospedagem que suspende o processo, lembretes e backups não executam durante a suspensão. Use instância sempre ativa/worker.
+- A ativação TOTP é feita pelo administrador na primeira configuração. Após ativada, é exigida em todas as rotas protegidas pelo token administrativo.
+- A revisão automatizada não substitui auditoria independente, teste de invasão, teste de carga nem validação de conformidade antes de tratar dados sensíveis em produção.

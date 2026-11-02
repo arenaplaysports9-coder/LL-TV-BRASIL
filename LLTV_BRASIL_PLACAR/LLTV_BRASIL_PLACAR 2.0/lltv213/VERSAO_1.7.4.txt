@@ -1,0 +1,8 @@
+LL TV BRASIL — Atualização 1.7.4
+
+
+ATUALIZAÇÃO COMPLEMENTAR — PLACAR E MULTITRANSMISSÃO
+- Overlay do placar exibido sobre os monitores de pré-visualização e programa quando ativado.
+- Botão ATIVAR/DESATIVAR OVERLAY na área de destinos RTMP.
+- Botões INICIAR A TRANSMISSÃO e PARAR A TRANSMISSÃO também disponíveis logo abaixo de Salvar destino; eles acionam os controles da multitransmissão FFmpeg já existentes.
+- O overlay visual na Central e a página /overlay.html são alimentados pelo placar do painel. A composição do overlay no sinal RTMP gerado diretamente pelo FFmpeg depende de uma entrada de vídeo já composta; estes botões não fazem composição gráfica dentro do FFmpeg.

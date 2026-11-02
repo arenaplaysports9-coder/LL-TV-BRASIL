@@ -1,0 +1,10 @@
+LL TV BRASIL — VERSÃO 2.11.0
+
+- Adicionado Criador de Placar Personalizado com projetos persistentes no state.json.
+- Editor com elementos de texto, placar, cronômetro, equipe e imagem; seleção, arraste, posição, dimensões, cores e fonte.
+- Adicionada saída independente por projeto para Fonte de Navegador do OBS Studio.
+- Central de Transmissão incorporada ao Painel do Placar por iframe autenticado, reutilizando a interface e os controles existentes.
+- Taça das Favelas: estados deixam de ser pré-cadastrados e passam a ser registrados manualmente (nome e UF); cidades e edições vinculadas aos estados cadastrados.
+- Preservados os dados existentes; registros de estados anteriores não são automaticamente convertidos em cadastros manuais.
+
+LIMITAÇÕES TÉCNICAS: o editor personalizado inicial oferece elementos básicos e edição visual; ainda não é um compositor multicamadas avançado. A incorporação da Central reutiliza sua interface existente, não transforma o navegador em mixer de vídeo profissional. Recursos de captura, codificação e gravação continuam dependendo do OBS/FFmpeg e dos dispositivos locais.
