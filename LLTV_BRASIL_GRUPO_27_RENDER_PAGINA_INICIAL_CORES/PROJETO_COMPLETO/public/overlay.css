@@ -43,3 +43,13 @@
 .scorebar .middle{height:100%;align-self:stretch;flex:0 0 108px}
 .scorebar .comp,.scorebar .round{height:100%;align-self:stretch}
 #miniAdded{font-size:9px;font-style:normal;color:#fff;font-weight:800;line-height:1.1}
+
+/* GRUPO 31 — identidade da emissora e escudos como identificação dos times */
+.scorebar .comp{flex:0 0 112px;min-width:112px;padding:0 8px;gap:0;overflow:hidden}
+.scorebar .channel-logo{display:none;width:100%;height:100%;max-width:96px;max-height:68px;object-fit:contain;padding:5px;background:transparent}
+#channelBrandFallback{font-size:10px;font-weight:900;letter-spacing:.8px;text-align:center;white-space:normal;line-height:1.15}
+.scorebar .side #homeName,.scorebar .side #awayName{display:none!important}
+.scorebar .side #homeCrest,.scorebar .side #awayCrest{display:block;flex:0 0 auto;width:58px;height:58px;max-width:22%;padding:5px;object-fit:contain}
+.scorebar .side #homeCrestFallback,.scorebar .side #awayCrestFallback{display:none!important}
+.scorebar .side{justify-content:center;gap:12px}
+@media(max-width:800px){.scorebar .comp{flex-basis:76px;min-width:76px;padding:0 4px}.scorebar .channel-logo{max-width:68px;max-height:54px}.scorebar .side #homeCrest,.scorebar .side #awayCrest{width:38px;height:38px;padding:3px}.scorebar .side{gap:5px}}
