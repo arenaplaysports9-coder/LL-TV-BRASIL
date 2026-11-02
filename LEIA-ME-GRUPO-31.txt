@@ -1,0 +1,19 @@
+LLTV BRASIL PLACAR PRO — GRUPO 31
+
+Atualização integrada sobre o Grupo 30 (que já inclui os ajustes anteriores do Grupo 29).
+
+O que muda:
+- A área dourada à esquerda do placar passa a exibir a logo da emissora enviada pelo campo Logo do canal no Painel Partida. Se não houver imagem, mostra o nome da emissora.
+- O placar principal passa a identificar mandante e visitante pelos respectivos escudos; os textos CASA/FORA e os nomes deixam de ocupar essa área.
+- Os campos existentes de upload de escudo do mandante e visitante continuam sendo usados.
+- O Mini Placar permanece compacto, com siglas, sem escudos, e sincronizado com o placar principal.
+- As cores escolhidas para os times continuam sendo aplicadas automaticamente.
+
+Instalação:
+1. Faça backup do repositório.
+2. Extraia o ZIP.
+3. Envie o CONTEÚDO da pasta para a raiz do repositório GitHub, substituindo os arquivos correspondentes.
+4. Confirme que package.json e server.js estão diretamente na raiz do repositório.
+5. Aguarde o deploy no Render.
+
+Observação: os arquivos de imagem escolhidos no painel são guardados no estado da partida como imagens incorporadas (data URL), conforme a implementação atual do sistema. Em hospedagem Render com disco efêmero, mantenha backup ou configure armazenamento persistente/externo para garantir retenção entre deploys.

@@ -1,0 +1,18 @@
+LLTV BRASIL — GRUPO 30
+CORES DOS TIMES AUTOMÁTICAS NO OVERLAY
+
+ATUALIZAÇÃO:
+- Ao escolher/alterar a cor do mandante no Painel Partida, o fundo correspondente do overlay muda automaticamente.
+- Ao escolher/alterar a cor do visitante, o fundo correspondente muda automaticamente.
+- A atualização utiliza o estado sincronizado já existente; não exige salvar configurações separadamente nem atualizar o OBS manualmente.
+- Com “Cores dos times” ativado, as cores atuais cadastradas em cada equipe têm prioridade sobre valores antigos personalizados.
+- Com “Cores dos times” desativado, o overlay continua usando a cor de fundo personalizada do placar.
+
+INSTALAÇÃO:
+1. Faça backup do projeto atual.
+2. Extraia este ZIP.
+3. Envie o conteúdo para a raiz do repositório GitHub, substituindo os arquivos correspondentes.
+4. Confirme que public/overlay.js foi atualizado.
+5. Aguarde o deploy e teste alterando as duas cores no Painel Partida.
+
+OBS: a mudança foi implementada no código do overlay. O deploy no Render e o teste real dentro do OBS precisam ser feitos no ambiente do projeto.

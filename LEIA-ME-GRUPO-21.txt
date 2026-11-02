@@ -1,0 +1,37 @@
+LLTV BRASIL PLACAR PRO — GRUPO 21
+CONTROLES INDIVIDUAIS DO OVERLAY
+
+Este pacote reúne a base do Placar Pro e as atualizações dos grupos disponíveis nesta sessão, incluindo o Grupo 20 atualizado e o Grupo 21.
+
+NOVIDADES DO GRUPO 21
+- Botões individuais ATIVAR/DESATIVAR na área Controles gerais > Controles de exibição do placar.
+- Controle separado para logo do canal.
+- Controle separado para nome, escudo e placar do mandante e visitante.
+- Controle separado para cronômetro, período, rodada e competição.
+- Controle separado para barra de estatísticas, posse, finalizações, escanteios, faltas e cartões.
+- Controle separado para titulares e reservas de cada equipe.
+- Controle para GC, identificação de jogador e patrocinadores.
+- Alterações sincronizadas pelo Socket.IO com o overlay aberto no navegador/OBS.
+- Controles apenas ocultam ou exibem o elemento; não apagam dados cadastrados.
+
+INSTALAÇÃO
+1. Faça backup da pasta atual do projeto.
+2. Extraia a pasta LLTV_Brasil_Placar_Pro deste ZIP.
+3. Para atualização no GitHub, envie/substitua os arquivos mantendo os caminhos e pastas.
+4. Instale dependências com npm install, se necessário.
+5. Inicie o servidor conforme o procedimento já usado no projeto.
+6. Abra o painel e entre em Controles gerais > Controles de exibição do placar.
+7. Mantenha o overlay aberto no OBS; os comandos serão sincronizados em tempo real.
+
+IMPORTANTE
+- Este pacote não contém credenciais reais do Asaas nem ativa pagamentos sem configuração de API e webhook.
+- Recursos que dependem de credenciais/serviços externos precisam ser configurados no ambiente de hospedagem.
+- Foram executados testes de sintaxe Node.js nos arquivos app.js, overlay.js e server.js e teste de integridade do ZIP. Não foi realizado teste real de transmissão no OBS nem deploy no Render.
+
+
+ATUALIZAÇÃO DO GRUPO 21 — ARBITRAGEM E NARRAÇÃO
+- Adicionado cadastro de árbitro principal, assistentes, quarto árbitro e VAR.
+- Adicionado cadastro de narrador, comentarista, repórter e apresentador.
+- Os dados são salvos no estado da partida e sincronizados com o overlay.
+- Foram adicionados controles independentes para exibir/ocultar arbitragem e equipe de transmissão.
+- Os campos vazios não aparecem no overlay.

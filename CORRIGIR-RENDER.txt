@@ -1,0 +1,20 @@
+GRUPO 28 - PACOTE CORRIGIDO PARA RENDER
+
+IMPORTANTE: este ZIP já coloca package.json e server.js na RAIZ.
+
+GITHUB:
+1. Faça backup do repositório.
+2. Extraia todo o conteúdo deste ZIP.
+3. Envie os arquivos e pastas extraídos diretamente para a RAIZ do repositório GitHub.
+4. Não envie a pasta externa do ZIP como uma subpasta.
+
+RENDER - Settings > Build & Deploy:
+- Root Directory: DEIXE COMPLETAMENTE VAZIO (remova LLTV_BRASIL_GRUPO_27_RENDER_PAGINA_INICIAL_CORES e qualquer outro caminho).
+- Build Command: npm install
+- Start Command: npm start
+
+Se o repositório estiver intencionalmente organizado em uma subpasta chamada PROJETO_COMPLETO, então Root Directory deve ser PROJETO_COMPLETO. NÃO use a pasta LLTV_BRASIL_GRUPO_27_RENDER_PAGINA_INICIAL_CORES, pois package.json não está diretamente nela.
+
+Depois: Save Changes > Manual Deploy > Clear build cache & deploy.
+
+Não apague o disco persistente nem a pasta data.
