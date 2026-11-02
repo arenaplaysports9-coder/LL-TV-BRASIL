@@ -1,0 +1,25 @@
+LLTV BRASIL PLACAR PRO — GRUPO 13
+PAINEL SEPARADO: EQUIPE DE ARBITRAGEM E EQUIPE DE TRANSMISSÃO
+
+O QUE FOI ADICIONADO
+- Nova aba independente “Arbitragem e Transmissão”.
+- Cadastro separado de árbitros/oficiais e profissionais de transmissão.
+- Campos de função, contato, registro/federação, empresa/canal e observações.
+- Botões para cadastrar, editar e excluir profissionais.
+- Botões para aplicar a escala de arbitragem ou transmissão à partida atual.
+- Botões para limpar a escala da partida e copiar a ficha técnica.
+- Resumo da ficha técnica vinculada à partida atual.
+- Dados armazenados no estado do sistema, sem misturar esses cadastros com times e competições.
+
+INSTALAÇÃO
+1. Faça backup do projeto e da pasta data antes de atualizar.
+2. Extraia o ZIP na raiz do repositório, preservando as pastas.
+3. Substitua public/index.html e public/app.js.
+4. Não substitua server.js, package.json, style.css, overlays ou data.
+5. Faça commit/push no GitHub e aguarde o deploy do Render.
+
+OBSERVAÇÕES
+- A escala aplicada fica vinculada aos dados da partida atual no painel.
+- Este grupo não altera o overlay do OBS para exibir automaticamente nomes de árbitros/equipe de transmissão; isso pode ser implementado em um grupo posterior.
+- O salvamento depende do mecanismo de estado existente do projeto e do armazenamento persistente configurado no servidor.
+- Testes estáticos de sintaxe e integridade do ZIP são realizados na montagem; teste visual no navegador, OBS e Render continua necessário.

@@ -1,0 +1,37 @@
+LLTV BRASIL - PLACAR PRO
+GRUPO 11 - PAINEL DE COMPETICOES E CORES SEPARADAS
+
+OBJETIVO
+Adicionar uma Central de Gestao de Competicoes com acesso direto aos modulos existentes e separar claramente as cores principais do placar entre Mandante e Visitante.
+
+RECURSOS
+1. Nova aba "Painel de Competicoes".
+2. Painel central com atalhos para:
+   - Competicoes: cadastro de campeonatos, temporadas, modalidades, categorias, formatos, fases e grupos.
+   - Times: cadastro e gerenciamento das equipes.
+   - Jogos da Rodada: confrontos, rodadas, datas, horarios, estadios e envio ao placar.
+   - Classificacao: tabelas, criterios de desempate e ajustes administrativos.
+3. Os atalhos abrem os modulos existentes; os dados continuam usando a mesma base do Placar Pro, sem criar cadastros duplicados.
+4. Em Personalizar, a cor principal do placar agora fica identificada separadamente:
+   - Mandante: lado esquerdo.
+   - Visitante: lado direito.
+   - Cor de destaque central e fundo do cronometro permanecem independentes.
+5. Os valores de cores sao salvos na configuracao customScoreboard existente e mantem compatibilidade com as configuracoes anteriores.
+
+INSTALACAO NO GITHUB
+1. Faca backup dos arquivos atuais.
+2. Extraia o ZIP mantendo os caminhos das pastas.
+3. Substitua somente:
+   LLTV_Brasil_Placar_Pro/public/index.html
+   LLTV_Brasil_Placar_Pro/public/app.js
+4. Nao apague server.js, package.json, style.css, arquivos de overlay ou a pasta data.
+5. Envie os dois arquivos ao repositorio LL-TV-BRASIL e aguarde o deploy do Render.
+6. Abra o painel, entre em "Painel de Competições" e teste cada atalho. Em Personalizar, escolha duas cores diferentes, salve e confira o placar no OBS.
+
+VERIFICACOES
+- Sintaxe JavaScript: aprovada com node --check.
+- Sintaxe do servidor preservado: aprovada com node --check.
+- ZIP: verificar integridade antes do envio.
+
+LIMITACOES DE TESTE
+Esta entrega foi verificada estaticamente. Nao foi executado teste visual no navegador, OBS ou Render nesta sessao. A aparencia final depende do style.css e do overlay.html que ja estao no repositorio. O painel central e uma central de atalhos para os modulos existentes, nao uma segunda base de dados isolada.

@@ -1,0 +1,49 @@
+LLTV BRASIL PLACAR PRO — GRUPO 15
+APLICATIVO INSTALÁVEL PARA COMPUTADOR E CELULAR + AVISO DE ATUALIZAÇÃO
+
+O QUE ESTE GRUPO ADICIONA
+- Aplicativo web instalável (PWA) para Windows, macOS e Linux compatíveis, Android e iPhone/iPad.
+- Manifesto e ícones próprios LLTV.
+- Service Worker para instalação, cache dos arquivos básicos e página offline informativa.
+- Botão de instalação quando o navegador oferece suporte.
+- Instruções específicas para iPhone/iPad: Safari > Compartilhar > Adicionar à Tela de Início.
+- Aviso dentro do aplicativo quando uma nova versão do Service Worker estiver disponível, com botão ATUALIZAR AGORA.
+- Verificação periódica de atualização a cada cinco minutos enquanto o aplicativo estiver aberto.
+
+ARQUIVOS E DESTINOS
+1) LLTV_Brasil_Placar_Pro/public/index.html       substituir
+2) LLTV_Brasil_Placar_Pro/public/manifest.webmanifest   novo
+3) LLTV_Brasil_Placar_Pro/public/sw.js            novo
+4) LLTV_Brasil_Placar_Pro/public/pwa.js           novo
+5) LLTV_Brasil_Placar_Pro/public/pwa.css          novo
+6) LLTV_Brasil_Placar_Pro/public/offline.html     novo
+7) LLTV_Brasil_Placar_Pro/public/icons/icon-192.png novo
+8) LLTV_Brasil_Placar_Pro/public/icons/icon-512.png novo
+
+INSTALAÇÃO NO GITHUB
+- Faça backup do projeto atual.
+- Extraia o ZIP mantendo as pastas.
+- Envie/substitua os arquivos nos caminhos acima dentro da pasta public.
+- Não apague nem substitua app.js, server.js, package.json, style.css, overlays ou data.
+- Faça commit/push para o repositório existente e aguarde o deploy do Render.
+
+COMO INSTALAR
+COMPUTADOR (Windows/macOS/Linux): abra o endereço HTTPS do sistema no Chrome ou Edge; use o ícone Instalar na barra de endereço ou o botão INSTALAR APLICATIVO mostrado pelo sistema.
+ANDROID: abra o endereço HTTPS no Chrome; toque em INSTALAR APLICATIVO ou no menu do navegador > Instalar app/Adicionar à tela inicial.
+IPHONE/IPAD: abra o endereço HTTPS no Safari; toque em Compartilhar > Adicionar à Tela de Início > Adicionar. O Safari não oferece o mesmo evento de instalação automática dos navegadores Chromium; por isso o painel mostra instruções.
+
+AVISO DE ATUALIZAÇÃO
+Quando um novo service worker for publicado, o aplicativo mostra um aviso na tela inicial com ATUALIZAR AGORA. O navegador verifica atualizações periodicamente enquanto o app está aberto. Para acionar o aviso numa publicação futura, publique uma nova versão do sw.js alterando CACHE_NAME (por exemplo, v1.0.1 para v1.0.2). Depois do deploy, mantenha o app aberto ou reabra-o com internet.
+
+LIMITES IMPORTANTES
+- Isto é um PWA: um único aplicativo instalável pela internet, não um APK Android nem um pacote nativo publicado na Google Play/App Store.
+- Para instalar e receber atualizações, o site precisa estar em HTTPS (Render normalmente fornece HTTPS) ou localhost para testes.
+- A página offline é apenas informativa. O placar ao vivo, sincronização, APIs e OBS continuam precisando de conexão com o servidor.
+- Este grupo implementa aviso de atualização dentro do aplicativo, não notificações push remotas com o app fechado. Push real exige configuração adicional de servidor, chaves VAPID, permissões e infraestrutura.
+- iOS/iPadOS requer instalação manual pelo Safari. O comportamento de PWA varia conforme versão do sistema/navegador.
+- A instalação não substitui o servidor Render nem instala o servidor Node.js no celular/computador.
+
+VERIFICAÇÕES
+- Sintaxe JavaScript do pwa.js: verificar com node --check pwa.js.
+- Integridade do ZIP: validar com unzip -t.
+- Teste real em navegador, Android, iPhone, Render e OBS ainda precisa ser realizado após publicar no ambiente do usuário.

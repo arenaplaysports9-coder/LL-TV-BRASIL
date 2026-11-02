@@ -1,0 +1,52 @@
+LLTV BRASIL PLACAR PRO — GRUPO 19
+ÁREA DO CLIENTE, LOGIN, CADASTRO E RECUPERAÇÃO DE SENHA
+
+ARQUIVOS
+Adicionar mantendo os caminhos:
+- LLTV_Brasil_Placar_Pro/server/customer-auth.js
+- LLTV_Brasil_Placar_Pro/public/area-cliente.html
+- LLTV_Brasil_Placar_Pro/public/area-cliente.css
+- LLTV_Brasil_Placar_Pro/public/area-cliente.js
+
+INTEGRAÇÃO NO SERVER.JS
+Após criar app (Express) e configurar express.static, monte o router:
+const customerAuth = require('./server/customer-auth');
+app.use('/api/customer-auth', customerAuth);
+A montagem deve ocorrer antes de rotas catch-all. Não crie um segundo servidor.
+
+ENDEREÇO
+A página ficará em /area-cliente.html. A página pública pode apontar o botão ACESSAR SISTEMA para /area-cliente.html. O botão interno ACESSAR PAINEL aponta para /index.html.
+
+COMO FUNCIONA
+- Cadastro só é permitido para e-mail que possua licença ativa no billing-orders.json do Grupo 18.
+- Login verifica senha com scrypt e consulta a licença novamente em cada acesso protegido /me.
+- Sessão em cookie HttpOnly, SameSite=Lax, Secure em NODE_ENV=production.
+- Recuperação cria token aleatório com validade de 30 minutos e resposta que não revela se o e-mail existe.
+- Após alteração da senha, sessões anteriores são invalidadas.
+- Senha mínima de 10 caracteres.
+
+IMPORTANTE: AINDA NÃO É UM BLOQUEIO GLOBAL DO PAINEL
+Este módulo fornece autenticação e consulta de licença, mas NÃO protege automaticamente /index.html, APIs antigas, overlays ou fontes OBS. Antes de abrir a aplicação comercialmente, proteja todas as rotas e APIs privadas com middleware de sessão/licença. A página HTML estática pode ser carregada sem login; o conteúdo sensível e as APIs devem exigir autenticação no servidor. Não exponha rotas administrativas do Asaas.
+
+RECUPERAÇÃO POR E-MAIL
+O endpoint /forgot-password cria token, mas o envio real depende de configurar um provedor de e-mail no servidor por meio de app.locals.lltvSendPasswordReset({email, token}). Sem esse callback, nenhum e-mail será enviado. Não exiba token de recuperação na resposta pública. Configure SMTP/API de e-mail e teste entrega, expiração e uso único.
+
+DADOS E SEGURANÇA
+- Compartilha LLTV_BILLING_DATA_DIR com o Grupo 18. Deve apontar para o mesmo disco persistente que contém billing-orders.json.
+- O arquivo customer-auth.json armazena hashes de senha e sessões. Faça backup e limite permissões do disco.
+- Use HTTPS em produção, proteção CSRF adequada, rate limiting nas rotas de login/recuperação, política de senha e monitoramento de tentativas.
+- Cookies Secure só são ativados quando NODE_ENV=production.
+- Não armazene dados de cartão.
+
+TESTES REALIZADOS NESTE PACOTE
+- node --check nos arquivos JavaScript.
+- Conferência de referências básicas da página.
+- Integridade do ZIP.
+
+PENDENTE
+- Montar no server.js do repositório real.
+- Configurar serviço de e-mail.
+- Aplicar middleware de autenticação/licença em TODAS as rotas privadas e APIs.
+- Testar com compra Sandbox Asaas, licença ativa, suspensa, vencida e vitalícia.
+- Testar cookies/HTTPS, recuperação por e-mail, Android/iPhone, navegador e OBS.
+Não migrar para produção antes desses testes e revisão de segurança.

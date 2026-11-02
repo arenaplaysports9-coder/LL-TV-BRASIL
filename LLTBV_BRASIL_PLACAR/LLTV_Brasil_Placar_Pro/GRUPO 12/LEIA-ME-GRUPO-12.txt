@@ -1,0 +1,21 @@
+GRUPO 12 — INTEGRAÇÃO DA CENTRAL DE COMPETIÇÕES
+
+Atualização cumulativa sobre o Grupo 11.
+
+RECURSOS
+1. Cadastro de times: botões para carregar uma equipe como mandante ou visitante diretamente na partida ao vivo, usando escudo e cor cadastrados.
+2. Jogos e rodadas: filtros por competição, rodada, grupo, fase, situação e nome de equipe.
+3. Situação das partidas: alteração rápida entre agendado, em andamento, encerrado, adiado, cancelado e W.O. de cada lado.
+4. Integração com placar: partidas carregadas pelo botão EXIBIR NO PLACAR continuam vinculadas ao registro original; alterações de gols pelo placar principal sincronizam com o jogo selecionado.
+5. Classificação: continua calculada pelos resultados encerrados e critérios já configurados.
+6. Personalização: preserva as cores independentes de mandante e visitante introduzidas no Grupo 11.
+
+INSTALAÇÃO
+Faça backup do repositório e dos dados antes de atualizar. Extraia este ZIP na raiz do repositório LL-TV-BRASIL e substitua somente:
+- LLTV_Brasil_Placar_Pro/public/index.html
+- LLTV_Brasil_Placar_Pro/public/app.js
+Não substitua server.js, package.json, style.css, overlays ou pasta data.
+Depois faça commit/push no GitHub e aguarde o deploy do Render.
+
+TESTES
+Verificação estática de sintaxe JavaScript e integridade do ZIP. Não foi possível validar navegador, OBS, sincronização em rede nem Render neste ambiente. A persistência continua dependendo do armazenamento configurado no servidor.

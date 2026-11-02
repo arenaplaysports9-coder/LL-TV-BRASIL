@@ -1,0 +1,61 @@
+LLTV BRASIL PLACAR PRO — GRUPO 18
+CLIENTES, LICENÇAS, ASSINATURAS E CONTROLE ADMINISTRATIVO
+
+O QUE ESTE GRUPO ENTREGA
+- Vincula o pedido de checkout a nome, e-mail e telefone do cliente.
+- Após webhook oficial PAYMENT_CONFIRMED ou PAYMENT_RECEIVED do Asaas, registra cliente e licença.
+- Inicial: 30 dias; Intermediário: 183 dias; Avançado: 365 dias; Vitalício: sem vencimento.
+- Renova a partir do vencimento vigente quando há nova compra de plano com prazo.
+- Painel administrativo via endpoints para listar pedidos, clientes/licenças, resumo, suspender/reativar/cancelar licença e ajustar vencimento.
+- Protege endpoints administrativos por LLTV_BILLING_ADMIN_TOKEN no cabeçalho x-lltv-admin-token.
+- Webhook idempotente pelo ID do evento.
+
+ARQUIVOS
+Substituir:
+  LLTV_Brasil_Placar_Pro/server/asaas-integration.js
+Substituir também o front-end do Grupo 17 por uma versão que recolha nome/e-mail/telefone no checkout. O arquivo apresentacao.js do Grupo 17 ainda não envia esses campos; a validação do servidor impedirá checkout incompleto. Ajuste a função choosePayment para incluir formulário de nome/e-mail/telefone e enviar {plan, method, name, email, phone}.
+
+MONTAGEM NO SERVER.JS (mantém a mesma instrução do Grupo 17)
+const asaasIntegration = require('./server/asaas-integration');
+app.use('/api/billing', asaasIntegration);
+Montar antes de rotas catch-all. Não criar outro servidor.
+
+VARIÁVEIS NO RENDER
+ASAAS_ENV=sandbox
+ASAAS_API_KEY=CHAVE_SANDBOX
+ASAAS_WEBHOOK_TOKEN=TOKEN_ALEATORIO_FORTE
+LLTV_BILLING_ADMIN_TOKEN=OUTRO_TOKEN_ALEATORIO_FORTE
+LLTV_BILLING_DATA_DIR=/caminho/do/disco-persistente/data (opcional)
+Use disco persistente; os dados ficam em billing-orders.json.
+
+WEBHOOK ASAAS
+URL: https://SEU-DOMINIO/api/billing/webhook
+Header/token: asaas-access-token = ASAAS_WEBHOOK_TOKEN
+Habilite PAYMENT_CONFIRMED e PAYMENT_RECEIVED. Teste primeiro no Sandbox.
+
+ENDPOINTS ADMINISTRATIVOS
+GET /api/billing/admin/summary
+GET /api/billing/admin/orders
+GET /api/billing/admin/customers
+PATCH /api/billing/admin/licenses/:email
+Header obrigatório: x-lltv-admin-token: LLTV_BILLING_ADMIN_TOKEN
+Body para suspender: {"status":"SUSPENSA"}
+Body para reativar: {"status":"ATIVA"}
+Body para cancelar: {"status":"CANCELADA"}
+Body opcional para ajustar vencimento: {"status":"ATIVA","expiresAt":"2027-01-31T23:59:59.000Z"}
+Nunca coloque o token administrativo no HTML/JavaScript público, nem em localStorage. Faça chamadas administrativas somente por interface autenticada no servidor ou ferramenta restrita.
+
+IMPORTANTE — LIMITAÇÃO DE INTEGRAÇÃO
+Este grupo cria o cadastro financeiro e os registros de licença, mas NÃO conecta automaticamente esses registros ao login/painel principal, pois o projeto-base fornecido não contém neste pacote um mecanismo de autenticação de clientes identificado. Antes de bloquear/liberar o acesso ao sistema, integre o middleware de verificação de licença à autenticação real: localizar usuário pelo e-mail verificado e permitir acesso somente se licença.status === ATIVA e (permanent === true ou expiresAt futuro). Não use e-mail digitado sem verificação como prova de identidade. O painel de gestão de licenças ainda precisa de autenticação administrativa própria; o token do endpoint é uma proteção mínima para integração, não substitui login com sessão, 2FA e controle de permissões.
+
+REGRAS COMERCIAIS IMPLEMENTADAS
+Inicial R$ 40,00/30 dias; Intermediário R$ 80,00/183 dias; Avançado R$ 100,00/365 dias; Vitalício R$ 150,00 sem vencimento. A definição de dias para seis meses é aproximada (183 dias); confirme condições contratuais. Vitalício significa sem expiração de licença no sistema, não uma promessa de suporte/serviços além do que estiver nos termos de uso.
+
+SEGURANÇA E TESTES
+- API Key apenas em variável privada no Render.
+- HTTPS obrigatório.
+- Configure armazenamento persistente e backup.
+- Não armazene dados de cartão; checkout permanece hospedado pelo Asaas.
+- O webhook valida token e deduplica event.id.
+- Testes de cobrança, webhook e integração com login real não foram executados neste pacote.
+- Não mudar ASAAS_ENV para production até concluir testes Sandbox e revisão das condições comerciais.

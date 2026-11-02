@@ -1,0 +1,24 @@
+GRUPO 14 — PREENCHIMENTO COMPLETO DAS FAIXAS DO PLACAR
+
+Objetivo
+Preencher integralmente a faixa do mandante e a faixa do visitante com as respectivas cores, eliminando áreas pretas dentro das duas laterais do placar. O centro/cronômetro e as faixas de competição/rodada continuam independentes.
+
+Arquivos para substituir no repositório GitHub
+1. LLTV_Brasil_Placar_Pro/public/overlay.html
+2. LLTV_Brasil_Placar_Pro/public/overlay.css
+
+Como aplicar
+- Faça backup dos dois arquivos atuais.
+- Extraia o ZIP mantendo a estrutura de pastas.
+- Substitua somente os dois arquivos indicados.
+- Não substitua overlay.js, app.js, server.js, package.json ou outros arquivos.
+- Envie as alterações ao mesmo repositório e aguarde o deploy do Render.
+- No OBS, atualize/recarregue a fonte Navegador do overlay.
+
+As cores são lidas das variáveis que o overlay já recebe: customScoreboard.homeBg e customScoreboard.awayBg, com fallback para home.color e away.color. Portanto, continue escolhendo as cores em Personalizar ou no cadastro/seleção dos times.
+
+Verificações
+- Estrutura HTML conferida e classe home adicionada.
+- Regras CSS de preenchimento integral incluídas.
+- Integridade do ZIP verificada.
+- Não foi possível validar visualmente no navegador/OBS nem no Render nesta etapa.

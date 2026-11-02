@@ -1,0 +1,44 @@
+GRUPO 16 — PÁGINA PÚBLICA, PLANOS E ASSISTENTE VIRTUAL
+LLTV BRASIL PLACAR PRO
+
+CONTEÚDO
+- LLTV_Brasil_Placar_Pro/public/apresentacao.html
+- LLTV_Brasil_Placar_Pro/public/apresentacao.css
+- LLTV_Brasil_Placar_Pro/public/apresentacao.js
+
+INSTALAÇÃO
+1. Faça backup do projeto atual.
+2. Extraia o ZIP preservando as pastas.
+3. Envie os três arquivos para os mesmos caminhos dentro de public/ no repositório LL-TV-BRASIL.
+4. Faça commit/push e aguarde o deploy do Render.
+5. A página estará acessível em: https://SEU-DOMINIO/apresentacao.html
+6. O botão ACESSAR SISTEMA abre /index.html, preservando o painel existente.
+
+IMPORTANTE SOBRE A PÁGINA INICIAL
+Este pacote adiciona a página pública em /apresentacao.html sem modificar o servidor nem substituir a rota raiz atual. Para que ela abra diretamente no domínio sem /apresentacao.html, será necessário configurar a rota / no servidor existente para servir public/apresentacao.html. Não altere a rota administrativa /index.html.
+
+PLANOS INFORMADOS
+- Inicial: R$ 40,00 por mês.
+- Intermediário: R$ 80,00 por seis meses.
+- Avançado: R$ 100,00 por ano.
+- Vitalício: R$ 150,00, pagamento único.
+Formas informadas: PIX ou cartão de crédito.
+Os botões de contratação abrem WhatsApp com o plano escolhido. Não há cobrança automática neste pacote.
+
+ASAAS / PAGAMENTOS
+A integração real com Asaas não foi ativada porque exige credenciais/API key, configuração segura no servidor, URLs de retorno/webhook e validação de pagamento. Não coloque chave secreta no JavaScript do navegador. Até essa configuração, a contratação é encaminhada ao WhatsApp e a equipe confirma as instruções de pagamento.
+
+PLANO VITALÍCIO
+A página informa o preço fornecido, mas não promete acesso irrestrito ou atualizações futuras ilimitadas. O escopo e as condições precisam ser formalizados antes da venda.
+
+ASSISTENTE VIRTUAL
+O chat possui respostas automáticas locais baseadas em perguntas frequentes. Não é uma IA generativa conectada a um serviço externo, não consulta cadastro de clientes, não confirma pagamentos e não executa ações administrativas. Quando não souber responder, orienta o contato humano.
+
+WHATSAPP
+(27) 99866-3622 — link configurado: https://wa.me/5527998663622
+
+TESTES EXECUTADOS
+- Verificação sintática de apresentacao.js.
+- Conferência dos arquivos e referências locais.
+- Integridade do ZIP.
+Não foram realizados testes funcionais em navegador, dispositivos móveis, Render ou integração financeira.

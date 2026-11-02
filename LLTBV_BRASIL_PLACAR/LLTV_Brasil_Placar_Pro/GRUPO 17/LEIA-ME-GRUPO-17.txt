@@ -1,0 +1,68 @@
+LLTV BRASIL PLACAR PRO — GRUPO 17
+CHECKOUT HOSPEDADO ASAAS + REGISTRO DE WEBHOOKS
+
+O QUE ESTE GRUPO ENTREGA
+- Os botões dos quatro planos abrem a escolha PIX ou cartão.
+- O front-end solicita ao servidor a criação de um link de pagamento hospedado pelo Asaas.
+- Os valores são definidos exclusivamente no servidor: Inicial R$ 40,00; Intermediário R$ 80,00; Avançado R$ 100,00; Vitalício R$ 150,00.
+- O webhook registra eventos de pagamento com verificação do token `asaas-access-token` e idempotência pelo ID do evento.
+- Uma consulta administrativa protegida lista pedidos e status recebidos.
+- A API Key do Asaas nunca é enviada ao navegador.
+
+ARQUIVOS
+Adicionar:
+  LLTV_Brasil_Placar_Pro/server/asaas-integration.js
+  LLTV_Brasil_Placar_Pro/public/checkout-asaas.css
+Substituir versões do Grupo 16:
+  LLTV_Brasil_Placar_Pro/public/apresentacao.js
+  LLTV_Brasil_Placar_Pro/public/apresentacao.html
+
+INTEGRAÇÃO NO SERVIDOR EXISTENTE
+1. Faça backup do servidor atual.
+2. No arquivo principal server.js, junto às demais declarações require, adicione:
+   const asaasIntegration = require('./server/asaas-integration');
+3. Depois de criar `app` (Express) e antes das rotas genéricas/catch-all, adicione:
+   app.use('/api/billing', asaasIntegration);
+4. O projeto deve usar Node 18+ (fetch global). Não crie outro servidor.
+5. Confirme que a pasta `data` é gravável e persistente. O módulo grava `data/billing-orders.json`.
+
+VARIÁVEIS DE AMBIENTE NO RENDER
+ASAAS_ENV=sandbox
+ASAAS_API_KEY=sua_chave_api_do_sandbox
+ASAAS_WEBHOOK_TOKEN=gere_um_token_aleatorio_com_mais_de_32_caracteres
+LLTV_BILLING_ADMIN_TOKEN=outro_token_aleatorio_forte
+LLTV_BILLING_DATA_DIR=/caminho/do/disco-persistente/data   (opcional; ajuste ao disco real)
+
+Para produção, após testes e homologação:
+ASAAS_ENV=production
+Use a API Key de PRODUÇÃO somente nas variáveis privadas do Render. Nunca cole a chave no GitHub, HTML ou JavaScript público.
+
+CONFIGURAR WEBHOOK NO ASAAS
+URL: https://SEU-DOMINIO/api/billing/webhook
+Versão: v3
+Token de autenticação: exatamente o valor de ASAAS_WEBHOOK_TOKEN
+Ative eventos de cobrança, incluindo PAYMENT_CONFIRMED e PAYMENT_RECEIVED. O endpoint valida o header `asaas-access-token`.
+
+CONSULTA ADMINISTRATIVA
+GET https://SEU-DOMINIO/api/billing/admin/orders
+Header: x-lltv-admin-token: valor de LLTV_BILLING_ADMIN_TOKEN
+Não exponha esse token no navegador. Restrinja o endpoint/admin no ambiente de produção e substitua por autenticação administrativa real antes de uso público amplo.
+
+COMO FUNCIONA
+- Cliente escolhe um plano e PIX ou cartão.
+- O servidor cria um link DETACHED no Asaas, com valor fixo e forma de pagamento escolhida.
+- Cliente conclui o pagamento na página hospedada pelo Asaas.
+- Asaas envia webhook; o módulo registra o evento e atualiza o pedido.
+- O status PAGO_CONFIRMADO é apenas registro financeiro. A ativação automática de conta não foi conectada porque o projeto precisa de cadastro/login de clientes e regra de provisionamento de licenças. Não liberar acesso apenas pelo redirecionamento do navegador.
+
+IMPORTANTE SOBRE OS PLANOS
+Os quatro preços foram configurados como cobranças avulsas de valor fixo. Inicial/Intermediário/Avançado são períodos de acesso anunciados, mas este módulo ainda não gera renovação automática/assinaturas. O Vitalício permanece pagamento único. Defina os termos comerciais e recursos de cada plano antes de produção.
+
+SEGURANÇA E TESTES
+- Usar primeiro o Sandbox do Asaas.
+- Não armazenar dados de cartão no LLTV; o checkout é hospedado pelo Asaas.
+- Não publicar API Key ou tokens no repositório.
+- Configure HTTPS e armazenamento persistente.
+- O webhook valida token e evita processar duas vezes o mesmo event.id.
+- Teste pagamentos PIX e cartão no Sandbox, webhook, eventos repetidos, falhas de rede e persistência após reinício.
+- Teste real no Render/Asaas não foi executado neste pacote. Não considere a integração pronta para produção antes desses testes.
