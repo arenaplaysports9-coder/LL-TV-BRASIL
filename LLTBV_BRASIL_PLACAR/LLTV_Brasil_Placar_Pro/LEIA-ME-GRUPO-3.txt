@@ -1,0 +1,17 @@
+LLTV BRASIL V5.2 – GRUPO 3 (ATUALIZAÇÃO DO OVERLAY)
+
+Este grupo contém somente os arquivos atualizados do overlay e a documentação.
+
+COMO APLICAR:
+1. Extraia o ZIP.
+2. Abra o repositório existente LL-TV-BRASIL no GitHub.
+3. Entre na pasta LLTV_Brasil_Placar_Pro/public/ (ou na pasta equivalente usada no repositório).
+4. Substitua overlay.html, overlay.css e overlay.js pelos arquivos deste grupo.
+5. Atualize também README.md na pasta raiz do projeto, se desejar manter a documentação V5.2.
+6. Faça commit. O Render fará novo deploy se estiver configurado para deploy automático.
+
+IMPORTANTE:
+- Não é um novo repositório.
+- Não substitua server.js, package.json nem a pasta data.
+- A área central do cronômetro e as extremidades laterais de competição/rodada permanecem sem alterações.
+- A correção de escudos quebrados apresenta CASA/FORA como fallback quando a imagem não carrega.
