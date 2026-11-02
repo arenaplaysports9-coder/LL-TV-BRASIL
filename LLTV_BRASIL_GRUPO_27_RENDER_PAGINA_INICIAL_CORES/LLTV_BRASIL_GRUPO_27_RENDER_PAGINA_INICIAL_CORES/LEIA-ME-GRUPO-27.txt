@@ -1,0 +1,29 @@
+LLTV BRASIL PLACAR PRO — GRUPO 27
+PÁGINA INICIAL NO RENDER + CORREÇÃO DAS CORES
+
+ESTE PACOTE CONTÉM O PROJETO COMPLETO baseado no Grupo 25, com a página comercial do Grupo 26 integrada.
+
+CORREÇÕES:
+1. A rota / e /inicio abre public/apresentacao.html (vitrine comercial).
+2. A resposta da página inicial desativa cache para evitar servir uma página antiga após deploy.
+3. Os seletores de cor do mandante e visitante salvam automaticamente ao alterar a cor, sem depender do botão “Salvar identificação”.
+4. As cores são transmitidas pelo Socket.IO e utilizadas pelo overlay.
+5. Mantém os módulos, rotas, área do cliente, checkout/assistente existentes e o mini placar do Grupo 25.
+
+PUBLICAR NO RENDER:
+- Substitua os arquivos do repositório pelo conteúdo de PROJETO_COMPLETO (ou envie o conteúdo dessa pasta para a raiz do repositório).
+- Confirme que package.json e render.yaml estão na raiz do repositório que o Render está usando.
+- Build Command: npm install
+- Start Command: npm start
+- Root Directory: vazio, se package.json estiver na raiz; se estiver dentro de uma subpasta, configure essa subpasta no Render.
+- Faça Manual Deploy -> Clear build cache & deploy.
+- Após deploy, abra https://SEU-SERVICO.onrender.com/ e faça Ctrl+F5.
+
+TESTE:
+- / deve mostrar a página comercial.
+- /index.html abre o painel esportivo.
+- /overlay.html abre o overlay OBS.
+- /health deve responder JSON com ok:true.
+- Mude a cor do mandante/visitante; deve salvar automaticamente e refletir no overlay.
+
+IMPORTANTE: não coloque chaves Asaas ou OpenAI no código. Configure-as nas Environment Variables do Render.
