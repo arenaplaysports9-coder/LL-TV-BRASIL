@@ -1,5 +1,5 @@
 /* LLTV Brasil Placar Pro - service worker */
-const CACHE_NAME = 'lltv-placar-shell-v1.0.0';
+const CACHE_NAME = 'lltv-placar-shell-v1.0.33';
 const APP_SHELL = [
   '/', '/index.html', '/offline.html', '/style.css', '/app.js',
   '/pwa.css', '/pwa.js', '/manifest.webmanifest',
