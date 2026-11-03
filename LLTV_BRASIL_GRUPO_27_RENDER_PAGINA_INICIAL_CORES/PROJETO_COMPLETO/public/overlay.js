@@ -13,7 +13,7 @@ $('lineupHomeTitle').textContent=s.home.name;$('lineupAwayTitle').textContent=s.
 const rf=s.referees||{},bt=s.broadcastTeam||{};const crew=(id,value,label)=>{const el=$(id);if(el)el.textContent=value?label+': '+value:''};crew('refMainOut',rf.main,'Árbitro');crew('refAssistant1Out',rf.assistant1,'Assistente 1');crew('refAssistant2Out',rf.assistant2,'Assistente 2');crew('refFourthOut',rf.fourth,'4º árbitro');crew('refVarOut',rf.var,'VAR');crew('broadcastNarratorOut',bt.narrator,'Narração');crew('broadcastCommentatorOut',bt.commentator,'Comentários');crew('broadcastReporterOut',bt.reporter,'Reportagem');crew('broadcastHostOut',bt.host,'Apresentação');$('refereeOverlay').style.display=features.refereeOverlay!==false&&Object.values(rf).some(Boolean)?'':'none';$('broadcastOverlay').style.display=features.broadcastOverlay!==false&&Object.values(bt).some(Boolean)?'':'none';
 $('sponsor').textContent=[...(s.sponsors||[]),c.text||''].filter(Boolean).join('  •  ');$('sponsor').classList.toggle('hidden',(!(s.sponsors||[]).length&&!c.text)||features.sponsors===false||features.overlay===false);
 // Controles independentes de cada elemento do overlay.
-const show=(id,on)=>{const el=$(id);if(el)el.style.display=on?'':'none'};
+const show=(id,on)=>{const el=$(id);if(el){el.classList.toggle('hidden',!on);el.style.display=on?'':'none'}};
 show('scoreboard',s.visible?.scoreboard!==false && features.scoreboard!==false && c.miniEnabled!==true);$('miniScoreboard').style.display=(s.visible?.scoreboard!==false && c.miniEnabled===true && features.scoreboard!==false)?'flex':'none';
 show('channelLogo',features.channelLogo!==false && !!brand.logo);
 show('homeName',features.homeTeam!==false);show('awayName',features.awayTeam!==false);
@@ -25,11 +25,11 @@ show('awayCrestFallback',features.awayCrest!==false && features.crests!==false &
 show('clock',features.clock!==false);show('period',features.periodDisplay!==false && features.clock!==false);
 show('round',features.roundDisplay!==false && features.roundInfo!==false);
 show('competition',features.competitionInfo!==false);
-show('stats',features.stats!==false);
+show('stats',s.visible?.stats!==false && features.stats!==false);
 const statKeys=['possession','shots','corners','fouls','cards'];document.querySelectorAll('#stats > span').forEach((el,i)=>el.style.display=features[statKeys[i]]===false?'none':'');
-show('gc',features.gc!==false && !!s.visible.lowerThird);
-show('playerId',features.playerId!==false && !!s.visible.playerId);
-show('lineups',features.lineups!==false && (features.homeLineup!==false || features.homeBench!==false || features.awayLineup!==false || features.awayBench!==false));
+show('gc',features.gc!==false && s.visible?.lowerThird===true);
+show('playerId',features.playerId!==false && s.visible?.playerId===true);
+show('lineups',s.visible?.lineups!==false && features.lineups!==false && (features.homeLineup!==false || features.homeBench!==false || features.awayLineup!==false || features.awayBench!==false));
 show('lineupHomeTitle',features.homeLineup!==false || features.homeBench!==false);show('lineupHome',features.homeLineup!==false);show('benchHome',features.homeBench!==false);
 show('lineupAwayTitle',features.awayLineup!==false || features.awayBench!==false);show('lineupAway',features.awayLineup!==false);show('benchAway',features.awayBench!==false);
 const bar=$('scoreboard');bar.classList.remove('pos-top-left','pos-top-right','pos-bottom-center');bar.classList.add(({ 'top-left':'pos-top-left','top-right':'pos-top-right','bottom-center':'pos-bottom-center'})[c.position]||'');}

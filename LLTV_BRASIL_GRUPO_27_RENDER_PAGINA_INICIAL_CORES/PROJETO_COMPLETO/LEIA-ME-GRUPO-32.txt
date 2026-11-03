@@ -1,0 +1,16 @@
+GRUPO 32 — CONTROLE DAS ESCALAÇÕES E NOMES COMPLETOS NO PLACAR
+
+Atualização integrada à base do Grupo 31.
+
+1. Na Central de Transmissão foram adicionados os botões ATIVAR ESCALAÇÕES e DESATIVAR ESCALAÇÕES.
+2. Os botões controlam a exibição conjunta dos painéis de titulares e reservas do mandante e visitante no overlay, em tempo real.
+3. O checkbox Escalações permanece sincronizado com os botões.
+4. No placar principal, os nomes completos das equipes voltam a aparecer em destaque ao lado dos escudos.
+5. Os espaços dos escudos do mandante e visitante foram preservados, com dimensões responsivas.
+6. O Mini Placar continua usando siglas e os mesmos dados sincronizados.
+
+Instalação: extraia o conteúdo deste ZIP e envie os arquivos para a raiz do repositório, substituindo os arquivos correspondentes. Não envie a pasta externa como Root Directory no Render.
+
+OBS: usar Browser Source com a URL /overlay.html. A resolução recomendada é 1920x1080 para o canvas do OBS; o layout do placar é responsivo.
+
+Verificações locais: sintaxe JavaScript e integridade do ZIP. Deploy no Render e teste dentro do OBS devem ser realizados após o envio.

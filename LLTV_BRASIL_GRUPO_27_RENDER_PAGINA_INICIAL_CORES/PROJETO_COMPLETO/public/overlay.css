@@ -53,3 +53,12 @@
 .scorebar .side #homeCrestFallback,.scorebar .side #awayCrestFallback{display:none!important}
 .scorebar .side{justify-content:center;gap:12px}
 @media(max-width:800px){.scorebar .comp{flex-basis:76px;min-width:76px;padding:0 4px}.scorebar .channel-logo{max-width:68px;max-height:54px}.scorebar .side #homeCrest,.scorebar .side #awayCrest{width:38px;height:38px;padding:3px}.scorebar .side{gap:5px}}
+
+
+/* GRUPO 32 — nomes completos em destaque ao lado dos escudos no placar principal */
+.scorebar .side #homeName,.scorebar .side #awayName{display:flex!important;flex:1 1 auto;min-width:0;max-width:none;align-items:center;justify-content:center;white-space:normal;overflow:visible;text-overflow:clip;text-align:center;font-size:clamp(18px,var(--main-name-size,30px),42px)!important;font-weight:900;line-height:1.05;letter-spacing:.2px;padding:0 8px!important;text-transform:uppercase;text-shadow:0 2px 4px #000b}
+.scorebar .side #homeCrest,.scorebar .side #awayCrest{display:block;flex:0 0 auto;width:clamp(42px,var(--main-crest-size,58px),76px);height:clamp(42px,var(--main-crest-size,58px),76px);max-width:24%;object-fit:contain;padding:5px}
+.scorebar .side{min-width:0;gap:10px;justify-content:space-evenly}
+.scorebar .side b{flex:0 0 48px}
+@media(max-width:800px){.scorebar .side #homeName,.scorebar .side #awayName{font-size:clamp(11px,3vw,20px)!important;padding:0 3px!important;line-height:1.0}.scorebar .side #homeCrest,.scorebar .side #awayCrest{width:34px;height:34px;padding:2px}.scorebar .side{gap:3px}.scorebar .side b{flex-basis:30px;min-width:30px}}
+.lineup-transmission-actions{margin-top:12px}

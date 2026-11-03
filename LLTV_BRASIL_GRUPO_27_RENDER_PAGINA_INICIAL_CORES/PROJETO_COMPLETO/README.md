@@ -1,3 +1,5 @@
+GRUPO 32 — CONTROLE DAS ESCALAÇÕES E NOMES COMPLETOS NO PLACAR
+
 # LLTV Brasil – Placar Esportivo PRO v5.0
 
 ## Atualização v5.0
