@@ -41,3 +41,8 @@ Esta atualização parte do ZIP do Grupo 33 recebido nesta conversa e adiciona a
 - `node --check public/noticias.js`
 
 Não foi executado deploy no GitHub/Render nem teste visual em navegador/OBS nesta sessão.
+
+## Atualização visual — Central de Notícias
+Esta revisão corrige também os caminhos dos arquivos CSS e JavaScript para URLs absolutas (`/noticias.css`, `/noticias-admin.js` e `/noticias.js`). Isso é importante porque o painel administrativo é aberto em `/noticias/admin`; caminhos relativos poderiam fazer o navegador procurar os arquivos em `/noticias/` e exibir a página sem o estilo correto.
+
+O visual foi atualizado para a identidade LLTV Brasil: fundo escuro com degradês discretos, detalhes dourados, painéis em cinza-escuro, campos de formulário com foco destacado, botões refinados e melhor adaptação para celulares. As funcionalidades e rotas existentes foram preservadas.
