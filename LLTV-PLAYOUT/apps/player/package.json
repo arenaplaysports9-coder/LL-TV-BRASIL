@@ -1,0 +1,6 @@
+{
+  "name": "lltv-web-player",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web TV player placeholder; HLS playback integration is pending"
+}
